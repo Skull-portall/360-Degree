@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/Logo.jpg">
+    <title>360 Degree Hotel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="public/Logo.jpg" alt="360 Degree Global Ltd" class="logo-img">
+                <h2>360 Degree Hotel</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#rooms" class="nav-link">Rooms</a>
+                <a href="#dining" class="nav-link">Dining</a>
+                <a href="#sports" class="nav-link">Sports</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#nightclub" class="nav-link">Nightclub</a>
+                <a href="#amenities" class="nav-link">Amenities</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to 360 Degree Hotel</h1>
+            <p>Experience luxury and comfort from every angle</p>
+            <button class="cta-btn" onclick="scrollToSection('rooms')">Book Now</button>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Rooms</h2>
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Standard Room">
+                    <div class="room-info">
+                        <h3>Standard Room</h3>
+                        <p>Comfortable accommodation with modern amenities and city view</p>
+                        <div class="price">₦25,000 <span>/night</span></div>
+                        <button class="book-btn" onclick="openBookingModal('Standard Room', 25000)">Book Now</button>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800" alt="VIP Suite">
+                    <div class="room-info">
+                        <h3>VIP Suite</h3>
+                        <p>Luxurious suite with premium facilities and panoramic city view</p>
+                        <div class="price">₦75,000 <span>/night</span></div>
+                        <button class="book-btn" onclick="openBookingModal('VIP Suite', 75000)">Book Now</button>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Presidential Suite">
+                    <div class="room-info">
+                        <h3>Presidential Suite</h3>
+                        <p>Ultimate luxury with private balcony, jacuzzi, and exclusive services</p>
+                        <div class="price">₦150,000 <span>/night</span></div>
+                        <button class="book-btn" onclick="openBookingModal('Presidential Suite', 150000)">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dining Section -->
+    <section id="dining" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Restaurant & Dining</h2>
+            <div class="dining-grid">
+                <div class="food-card">
+                    <img src="images/food.jpg" alt="Continental Breakfast">
+                    <div class="food-info">
+                        <h3>Continental Breakfast</h3>
+                        <p>Fresh pastries, fruits, and premium coffee</p>
+                        <div class="price">₦1,500</div>
+                        <button class="order-btn" onclick="openFoodModal('Continental Breakfast', 1500)">Order Now</button>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Grilled Chicken">
+                    <div class="food-info">
+                        <h3>Grilled Chicken Deluxe</h3>
+                        <p>Perfectly seasoned grilled chicken with sides</p>
+                        <div class="price">₦3,500</div>
+                        <button class="order-btn" onclick="openFoodModal('Grilled Chicken Deluxe', 3500)">Order Now</button>
+                    </div>
+                </div>
+                <div class="food-card">
+                    <img src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seafood Platter">
+                    <div class="food-info">
+                        <h3>Seafood Platter</h3>
+                        <p>Fresh seafood selection with exotic sauces</p>
+                        <div class="price">₦2,300</div>
+                        <button class="order-btn" onclick="openFoodModal('Seafood Platter', 2300)">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sports Section -->
+    <section id="sports" class="section">
+        <div class="container">
+            <h2 class="section-title">Sports & Entertainment</h2>
+            <div class="sports-grid">
+                <div class="sport-card">
+                    <i class="fas fa-futbol sport-icon"></i>
+                    <h3>Football Match Tickets</h3>
+                    <p>Premium seats for local and international matches</p>
+                    <div class="price">₦12,000 <span>/ticket</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Football Match Tickets', 12000)">Book Tickets</button>
+                </div>
+                <div class="sport-card">
+                    <i class="fas fa-basketball-ball sport-icon"></i>
+                    <h3>Basketball Game</h3>
+                    <p>Courtside seats for exciting basketball tournaments</p>
+                    <div class="price">₦10,000 <span>/ticket</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Basketball Game', 10000)">Book Tickets</button>
+                </div>
+                <div class="sport-card">
+                    <i class="fas fa-table-tennis sport-icon"></i>
+                    <h3>Tennis Tournament</h3>
+                    <p>VIP access to professional tennis championships</p>
+                    <div class="price">₦18,000 <span>/ticket</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Tennis Tournament', 18000)">Book Tickets</button>
+                </div>
+                <div class="sport-card">
+                    <i class="fas fa-running sport-icon"></i>
+                    <h3>Soccer Championship</h3>
+                    <p>Premium seats for exciting soccer matches and tournaments</p>
+                    <div class="price">₦15,000 <span>/ticket</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Soccer Championship', 15000)">Book Tickets</button>
+                </div>
+                <div class="sport-card">
+                    <i class="fas fa-circle sport-icon"></i>
+                    <h3>Snooker Tournament</h3>
+                    <p>VIP access to professional snooker championships and matches</p>
+                    <div class="price">₦14,000 <span>/ticket</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Snooker Tournament', 14000)">Book Tickets</button>
+                </div>
+                <div class="sport-card">
+                    <i class="fas fa-volleyball-ball sport-icon"></i>
+                    <h3>Volleyball Championship</h3>
+                    <p>Premium seats for exciting volleyball matches and tournaments</p>
+                    <div class="price">₦11,000 <span>/ticket</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Volleyball Championship', 11000)">Book Tickets</button>
+                </div>
+                <div class="sport-card">
+                    <i class="fas fa-dumbbell sport-icon"></i>
+                    <h3>Gym Access</h3>
+                    <p>Full access to our state-of-the-art fitness center</p>
+                    <div class="price">₦5,000 <span>/day</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Gym Access', 5000)">Book Access</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Hotel Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="images/Event.jpg" alt="Event Center Hall">
+                    <div class="service-info">
+                        <h3>Event Center Hall</h3>
+                        <p>Spacious hall for weddings, conferences, and special events with full catering</p>
+                        <div class="price">₦75,000 <span>/day</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Event Center Hall', 75000)">Book Hall</button>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Salon Services">
+                    <div class="service-info">
+                        <h3>Salon (Unisex)</h3>
+                        <p>Professional hair styling, manicure, pedicure, and beauty treatments</p>
+                        <div class="price">₦25,000 <span>/session</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Salon (Unisex)', 25000)">Book Session</button>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.pexels.com/photos/274192/pexels-photo-274192.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hotel Bar">
+                    <div class="service-info">
+                        <h3>Premium Bar</h3>
+                        <p>Exclusive bar with premium drinks, cocktails, and live entertainment</p>
+                        <div class="price">₦15,000 <span>/person</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Premium Bar', 15000)">Reserve Table</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nightclub Section -->
+    <section id="nightclub" class="section">
+        <div class="container">
+            <h2 class="section-title">Nightclub & Entertainment</h2>
+            <div class="nightclub-grid">
+                <div class="nightclub-card">
+                    <img src="images/Night club.jpg" alt="VIP Nightclub">
+                    <div class="nightclub-info">
+                        <h3>VIP Nightclub Access</h3>
+                        <p>Exclusive access to our premium nightclub with live DJ and premium drinks</p>
+                        <div class="price">₦20,000 <span>/person</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('VIP Nightclub Access', 20000)">Book Entry</button>
+                    </div>
+                </div>
+                <div class="nightclub-card">
+                    <img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Private Booth">
+                    <div class="nightclub-info">
+                        <h3>Private VIP Booth</h3>
+                        <p>Private booth with bottle service and dedicated waitstaff for up to 8 people</p>
+                        <div class="price">₦80,000 <span>/night</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('Private VIP Booth', 80000)">Reserve Booth</button>
+                    </div>
+                </div>
+                <div class="nightclub-card">
+                    <img src="https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Live Music">
+                    <div class="nightclub-info">
+                        <h3>Live Music Events</h3>
+                        <p>Special events featuring live bands and celebrity performances</p>
+                        <div class="price">₦35,000 <span>/ticket</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('Live Music Events', 35000)">Buy Tickets</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Pool & Amenities</h2>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <img src="images/pool 2.jpg" alt="Swimming Pool">
+                    <div class="amenity-info">
+                        <h3>Swimming Pool Access</h3>
+                        <p>Relax in our Olympic-sized swimming pool with poolside service</p>
+                        <div class="price">₦3,000 <span>/day</span></div>
+                        <button class="book-btn" onclick="openPoolModal('Swimming Pool Access', 3000)">Book Access</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About 360 Degree Hotel</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>At 360 Degree Hotel, we provide a complete hospitality experience from every angle. Our commitment to excellence ensures that every guest enjoys luxury, comfort, and exceptional service throughout their stay.</p>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free Wi-Fi</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-car"></i>
+                            <span>Free Parking</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>24/7 Room Service</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-spa"></i>
+                            <span>Spa & Wellness</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+234 801 234 5678</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@360degreehotel.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>123 Paradise Street, Lagos, Nigeria</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="public/Logo.jpg" alt="360 Degree Global Ltd" class="footer-logo-img">
+                        <h3>360 Degree Hotel</h3>
+                    </div>
+                    <p>Experience luxury and comfort from every angle. Your perfect stay awaits at our world-class hotel.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#rooms">Rooms</a></li>
+                        <li><a href="#dining">Dining</a></li>
+                        <li><a href="#sports">Sports</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#nightclub">Nightclub</a></li>
+                        <li><a href="#amenities">Amenities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#rooms">Room Booking</a></li>
+                        <li><a href="#dining">Food Ordering</a></li>
+                        <li><a href="#sports">Event Tickets</a></li>
+                        <li><a href="#services">Event Hall</a></li>
+                        <li><a href="#services">Salon & Bar</a></li>
+                        <li><a href="#nightclub">Nightclub Entry</a></li>
+                        <li><a href="#amenities">Pool Access</a></li>
+                        <li><a href="#contact">Concierge</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> +234 801 234 5678</p>
+                        <p><i class="fas fa-envelope"></i> info@360degreehotel.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Paradise Street, Lagos, Nigeria</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 360 Degree Hotel. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+            <h2>Book Your Room</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Room Type:</label>
+                    <input type="text" id="roomType" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Number of Nights:</label>
+                    <input type="number" id="nights" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Check-in Date:</label>
+                    <input type="date" id="checkinDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Check-out Date:</label>
+                    <input type="date" id="checkoutDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests:</label>
+                    <input type="number" id="guests" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="guestName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="guestPhone" required>
+                </div>
+                <div class="total-price">
+                    <strong>Total: ₦<span id="totalPrice">0</span></strong>
+                </div>
+                <button type="submit" class="submit-btn">Proceed to WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Food Modal -->
+    <div id="foodModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('foodModal')">&times;</span>
+            <h2>Order Food</h2>
+            <form id="foodForm">
+                <div class="form-group">
+                    <label>Food Item:</label>
+                    <input type="text" id="foodItem" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Quantity:</label>
+                    <input type="number" id="foodQuantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Special Instructions:</label>
+                    <textarea id="foodInstructions" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="foodGuestName" required>
+                </div>
+                <div class="form-group">
+                    <label>Room Number:</label>
+                    <input type="text" id="roomNumber" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="foodGuestPhone" required>
+                </div>
+                <div class="total-price">
+                    <strong>Total: ₦<span id="foodTotalPrice">0</span></strong>
+                </div>
+                <button type="submit" class="submit-btn">Order via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sports Modal -->
+    <div id="sportsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('sportsModal')">&times;</span>
+            <h2>Book Sports Activity</h2>
+            <form id="sportsForm">
+                <div class="form-group">
+                    <label>Activity:</label>
+                    <input type="text" id="sportsActivity" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Number of Tickets/Access:</label>
+                    <input type="number" id="sportsQuantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date:</label>
+                    <input type="date" id="sportsDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="sportsGuestName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="sportsGuestPhone" required>
+                </div>
+                <div class="total-price">
+                    <strong>Total: ₦<span id="sportsTotalPrice">0</span></strong>
+                </div>
+                <button type="submit" class="submit-btn">Book via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Services Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('serviceModal')">&times;</span>
+            <h2>Book Service</h2>
+            <form id="serviceForm">
+                <div class="form-group">
+                    <label>Service:</label>
+                    <input type="text" id="serviceType" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Duration/Quantity:</label>
+                    <input type="number" id="serviceDuration" min="1" value="1" required>
+                    <small id="durationLabel">days</small>
+                </div>
+                <div class="form-group">
+                    <label>Number of People:</label>
+                    <input type="number" id="servicePeople" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date:</label>
+                    <input type="date" id="serviceDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Time:</label>
+                    <input type="time" id="serviceTime" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="serviceGuestName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="serviceGuestPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Special Requirements:</label>
+                    <textarea id="serviceRequirements" rows="3" placeholder="Event details, special requests, etc."></textarea>
+                </div>
+                <div class="total-price">
+                    <strong>Total: ₦<span id="serviceTotalPrice">0</span></strong>
+                </div>
+                <button type="submit" class="submit-btn">Book via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Nightclub Modal -->
+    <div id="nightclubModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('nightclubModal')">&times;</span>
+            <h2>Book Nightclub Entry</h2>
+            <form id="nightclubForm">
+                <div class="form-group">
+                    <label>Service:</label>
+                    <input type="text" id="nightclubService" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Number of People:</label>
+                    <input type="number" id="nightclubPeople" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date:</label>
+                    <input type="date" id="nightclubDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Time:</label>
+                    <input type="time" id="nightclubTime" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="nightclubGuestName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="nightclubGuestPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Special Requests:</label>
+                    <textarea id="nightclubRequests" rows="3" placeholder="Birthday celebration, anniversary, etc."></textarea>
+                </div>
+                <div class="total-price">
+                    <strong>Total: ₦<span id="nightclubTotalPrice">0</span></strong>
+                </div>
+                <button type="submit" class="submit-btn">Book via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pool Modal -->
+    <div id="poolModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('poolModal')">&times;</span>
+            <h2>Book Pool Access</h2>
+            <form id="poolForm">
+                <div class="form-group">
+                    <label>Service:</label>
+                    <input type="text" id="poolService" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Number of Days:</label>
+                    <input type="number" id="poolDays" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Number of People:</label>
+                    <input type="number" id="poolPeople" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Date:</label>
+                    <input type="date" id="poolDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="poolGuestName" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <input type="tel" id="poolGuestPhone" required>
+                </div>
+                <div class="total-price">
+                    <strong>Total: ₦<span id="poolTotalPrice">0</span></strong>
+                </div>
+                <button type="submit" class="submit-btn">Book via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
