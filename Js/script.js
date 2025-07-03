@@ -4,6 +4,16 @@
 let currentBookingType = '';
 let currentPrice = 0;
 
+// WhatsApp numbers for different services
+const whatsappNumbers = {
+    rooms: '2349163161616',        // Room bookings
+    food: '2349163161617',         // Food orders
+    sports: '2349163161618',       // Sports & Entertainment
+    services: '2349163161619',     // Event Hall, Salon, Bar
+    nightclub: '2349163161620',    // Nightclub & Pool
+    pool: '2349163161620'          // Pool (same as nightclub)
+};
+
 // Mobile menu toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
@@ -26,8 +36,9 @@ function scrollToSection(sectionId) {
     });
 }
 
-// Modal functions
+// Modal functions - USING EXACT SAME METHOD AS WORKING SECTIONS
 function openBookingModal(roomType, price) {
+    console.log('Opening room booking modal:', roomType, price);
     currentBookingType = 'room';
     currentPrice = price;
     document.getElementById('roomType').value = roomType;
@@ -36,6 +47,7 @@ function openBookingModal(roomType, price) {
 }
 
 function openFoodModal(foodItem, price) {
+    console.log('Opening food modal:', foodItem, price);
     currentBookingType = 'food';
     currentPrice = price;
     document.getElementById('foodItem').value = foodItem;
@@ -43,15 +55,19 @@ function openFoodModal(foodItem, price) {
     calculateFoodTotal();
 }
 
+// FIXED: Using exact same pattern as food and room modals
 function openSportsModal(activity, price) {
+    console.log('🎯 SPORTS BUTTON CLICKED:', activity, 'Price:', price);
     currentBookingType = 'sports';
     currentPrice = price;
     document.getElementById('sportsActivity').value = activity;
     document.getElementById('sportsModal').style.display = 'block';
     calculateSportsTotal();
+    console.log('✅ Sports modal should be visible now');
 }
 
 function openServiceModal(service, price) {
+    console.log('Opening service modal:', service, price);
     currentBookingType = 'service';
     currentPrice = price;
     document.getElementById('serviceType').value = service;
@@ -71,6 +87,7 @@ function openServiceModal(service, price) {
 }
 
 function openNightclubModal(service, price) {
+    console.log('Opening nightclub modal:', service, price);
     currentBookingType = 'nightclub';
     currentPrice = price;
     document.getElementById('nightclubService').value = service;
@@ -79,6 +96,7 @@ function openNightclubModal(service, price) {
 }
 
 function openPoolModal(service, price) {
+    console.log('Opening pool modal:', service, price);
     currentBookingType = 'pool';
     currentPrice = price;
     document.getElementById('poolService').value = service;
@@ -152,6 +170,8 @@ function calculatePoolTotal() {
 
 // Event listeners for quantity changes
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 DOM loaded, setting up ALL event listeners...');
+    
     // Room booking listeners
     const nightsInput = document.getElementById('nights');
     if (nightsInput) {
@@ -198,7 +218,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Form submissions
     setupFormSubmissions();
+    
+    // CRITICAL: Test all sports buttons immediately
+    testSportsButtons();
 });
+
+// CRITICAL: Test function to verify sports buttons work
+function testSportsButtons() {
+    console.log('🔍 Testing all sports buttons...');
+    
+    // Find all sports buttons and test them
+    const sportsSection = document.getElementById('sports');
+    if (sportsSection) {
+        const sportsButtons = sportsSection.querySelectorAll('.book-btn');
+        console.log(`Found ${sportsButtons.length} sports buttons`);
+        
+        sportsButtons.forEach((button, index) => {
+            console.log(`Button ${index + 1}:`, button.textContent, 'onclick:', button.getAttribute('onclick'));
+        });
+    } else {
+        console.error('❌ Sports section not found!');
+    }
+    
+    // Test if modal exists
+    const sportsModal = document.getElementById('sportsModal');
+    if (sportsModal) {
+        console.log('✅ Sports modal found');
+    } else {
+        console.error('❌ Sports modal not found!');
+    }
+}
 
 function setupFormSubmissions() {
     // Room booking form
@@ -293,7 +342,7 @@ Please make payment and send receipt via WhatsApp to confirm your booking.
 
 Thank you for choosing 360 Degree Hotel!`;
 
-    sendToWhatsApp(message);
+    sendToWhatsApp(message, 'rooms');
 }
 
 function handleFoodOrder() {
@@ -330,7 +379,7 @@ Please make payment and send receipt via WhatsApp. Your order will be prepared a
 
 Thank you for dining with us!`;
 
-    sendToWhatsApp(message);
+    sendToWhatsApp(message, 'food');
 }
 
 function handleSportsBooking() {
@@ -365,7 +414,7 @@ Please make payment and send receipt via WhatsApp to receive your tickets/access
 
 Thank you for choosing our sports services!`;
 
-    sendToWhatsApp(message);
+    sendToWhatsApp(message, 'sports');
 }
 
 function handleServiceBooking() {
@@ -415,7 +464,7 @@ Please make payment and send receipt via WhatsApp to confirm your service bookin
 
 Thank you for choosing our premium services!`;
 
-    sendToWhatsApp(message);
+    sendToWhatsApp(message, 'services');
 }
 
 function handleNightclubBooking() {
@@ -454,7 +503,7 @@ Please make payment and send receipt via WhatsApp to confirm your nightclub rese
 
 Thank you for choosing our nightclub services!`;
 
-    sendToWhatsApp(message);
+    sendToWhatsApp(message, 'nightclub');
 }
 
 function handlePoolBooking() {
@@ -491,12 +540,12 @@ Please make payment and send receipt via WhatsApp to receive your pool access pa
 
 Thank you for choosing our pool facilities!`;
 
-    sendToWhatsApp(message);
+    sendToWhatsApp(message, 'pool');
 }
 
-function sendToWhatsApp(message) {
-    // Hotel's WhatsApp number (replace with actual number)
-    const phoneNumber = '2349163161616'; // Replace with your hotel's WhatsApp number
+function sendToWhatsApp(message, serviceType) {
+    // Get the appropriate WhatsApp number for the service type
+    const phoneNumber = whatsappNumbers[serviceType] || whatsappNumbers.rooms;
     
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
@@ -510,11 +559,20 @@ function sendToWhatsApp(message) {
         document.getElementById(modalId).style.display = 'none';
     });
     
-    // Show success message
-    showSuccessMessage();
+    // Show success message with service-specific info
+    showSuccessMessage(serviceType);
 }
 
-function showSuccessMessage() {
+function showSuccessMessage(serviceType) {
+    const serviceNames = {
+        rooms: 'Room Booking',
+        food: 'Food Order',
+        sports: 'Sports Booking',
+        services: 'Service Booking',
+        nightclub: 'Nightclub Booking',
+        pool: 'Pool Booking'
+    };
+
     // Create and show a success notification
     const notification = document.createElement('div');
     notification.style.cssText = `
@@ -529,18 +587,19 @@ function showSuccessMessage() {
         font-weight: 600;
         box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
         animation: slideIn 0.3s ease;
+        max-width: 300px;
     `;
     notification.innerHTML = `
         <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
-        Redirecting to WhatsApp...
+        ${serviceNames[serviceType]} - Redirecting to WhatsApp...
     `;
     
     document.body.appendChild(notification);
     
-    // Remove notification after 3 seconds
+    // Remove notification after 4 seconds
     setTimeout(() => {
         notification.remove();
-    }, 3000);
+    }, 4000);
 }
 
 // Add CSS animation for notification
