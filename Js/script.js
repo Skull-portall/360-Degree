@@ -36,6 +36,14 @@ if (hamburger && navMenu) {
             hamburger.classList.remove('active');
         });
     });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
 }
 
 // Smooth scrolling function
@@ -208,7 +216,7 @@ function resumeAutoSlide(galleryId) {
 
 // Google Maps Direction Function
 function openDirections() {
-    const hotelAddress = "123 Paradise Street, Victoria Island, Lagos, Nigeria";
+    const hotelAddress = "360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel";
     const encodedAddress = encodeURIComponent(hotelAddress);
     const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
     window.open(mapsUrl, '_blank');
@@ -1015,4 +1023,83 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         });
     });
+});
+
+// Handle form validation
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields.');
+            }
+        });
+    });
+});
+
+// Enhanced accessibility for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    // Add keyboard support for gallery navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            const activeGallery = document.querySelector('.image-gallery:hover');
+            if (activeGallery) {
+                const galleryId = activeGallery.getAttribute('data-gallery');
+                if (galleryId) {
+                    const direction = e.key === 'ArrowLeft' ? -1 : 1;
+                    changeImage(galleryId, direction);
+                }
+            }
+        }
+        
+        // Close modals with Escape key
+        if (e.key === 'Escape') {
+            const openModal = document.querySelector('.modal[style*="block"]');
+            if (openModal) {
+                openModal.style.display = 'none';
+            }
+        }
+    });
+    
+    // Add touch support for gallery navigation
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleGallerySwipe(e.target);
+    });
+    
+    function handleGallerySwipe(target) {
+        const gallery = target.closest('.image-gallery');
+        if (!gallery) return;
+        
+        const galleryId = gallery.getAttribute('data-gallery');
+        if (!galleryId) return;
+        
+        const swipeDistance = touchEndX - touchStartX;
+        const minSwipeDistance = 50;
+        
+        if (Math.abs(swipeDistance) > minSwipeDistance) {
+            const direction = swipeDistance > 0 ? -1 : 1;
+            changeImage(galleryId, direction);
+        }
+    }
 });

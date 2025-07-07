@@ -13,7 +13,7 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <img src="images/Logo.jpg" alt="360 Degree Hotel" class="logo-img">
-                <h2>360° HOTEL</h2>
+                <h2>360° Global Estate Ltd.</h2>
             </div>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#hero" class="nav-link">Home</a></li>
@@ -27,12 +27,6 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#location" class="nav-link">Location</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li>
-                    <!-- <div class="service-status-nav">
-                        <div class="service-light-nav"></div>
-                        <span>24/7 Service</span>
-                    </div> -->
-                </li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
@@ -45,7 +39,7 @@
     <!-- Hero Section -->
     <section id="hero" class="hero">
         <div class="hero-content">
-            <h1>Welcome to 360 Degree Hotel</h1>
+            <h1>Welcome  360° Global Estate Ltd.</h1>
             <p>Experience luxury hospitality with world-class amenities and exceptional service</p>
             <button class="cta-btn" onclick="scrollToSection('rooms')">Book Your Stay</button>
         </div>
@@ -56,14 +50,13 @@
         <div class="container">
             <h2 class="section-title">Luxury Accommodations</h2>
             <div class="rooms-grid">
-                <!-- Deluxe Room -->
+                <!-- Standard Room -->
                 <div class="room-card">
                     <div class="image-gallery" data-gallery="deluxe-room">
                         <div class="gallery-container">
-                            <img src="/images/Standartd Room.jpg" alt="Deluxe Room" class="gallery-image active" data-description="Spacious deluxe room with modern amenities and city view">
-                            <img src="/images/Standartd Room.jpg" alt="Deluxe Room Bathroom" class="gallery-image" data-description="Luxurious bathroom with marble finishes and premium fixtures">
-                            <img src="/images/Standartd Room.jpg
-                            " alt="Deluxe Room View" class="gallery-image" data-description="Stunning city view from the deluxe room balcony">
+                            <img src="images/Standartd Room.jpg" alt="Standard Room" class="gallery-image active" data-description="Spacious standard room with modern amenities and city view">
+                            <img src="images/Standartd Room.jpg" alt="Standard Room Bathroom" class="gallery-image" data-description="Luxurious bathroom with marble finishes and premium fixtures">
+                            <img src="images/Standartd Room.jpg" alt="Standard Room View" class="gallery-image" data-description="Stunning city view from the standard room balcony">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('deluxe-room', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -80,59 +73,25 @@
                             <span class="dot" onclick="currentImage('deluxe-room', 3)"></span>
                         </div>
                         <div class="image-description">
-                            <span class="description-text">Spacious deluxe room with modern amenities and city view</span>
+                            <span class="description-text">Spacious standard room with modern amenities and city view</span>
                         </div>
                     </div>
                     <div class="room-info">
                         <h3>Standard Room</h3>
                         <p>Spacious room with modern amenities, city view, and premium comfort for the perfect stay.</p>
-                        <p>without Access to Sport Center</p>
+                        <p>Without Access to Sport Center</p>
                         <div class="price">₦15,000 <span>per night</span></div>
-                        <button class="book-btn" onclick="openBookingModal('Deluxe Room', 15000)">Book Now</button>
+                        <button class="book-btn" onclick="openBookingModal('Standard Room', 15000)">Book Now</button>
                     </div>
                 </div>
 
-                <!-- Executive Suite -->
-                <!-- <div class="room-card">
-                    <div class="image-gallery" data-gallery="executive-suite">
-                        <div class="gallery-container">
-                            <img src="https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Executive Suite" class="gallery-image active" data-description="Elegant executive suite with separate living area and work space">
-                            <img src="https://images.pexels.com/photos/1743227/pexels-photo-1743227.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Executive Suite Living" class="gallery-image" data-description="Comfortable living area with premium furniture and entertainment system">
-                            <img src="https://images.pexels.com/photos/1743366/pexels-photo-1743366.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Executive Suite Bedroom" class="gallery-image" data-description="Master bedroom with king-size bed and luxury linens">
-                        </div>
-                        <button class="gallery-btn prev-btn" onclick="changeImage('executive-suite', -1)">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="gallery-btn next-btn" onclick="changeImage('executive-suite', 1)">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                        <div class="gallery-counter">
-                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
-                        </div>
-                        <div class="gallery-dots">
-                            <span class="dot active" onclick="currentImage('executive-suite', 1)"></span>
-                            <span class="dot" onclick="currentImage('executive-suite', 2)"></span>
-                            <span class="dot" onclick="currentImage('executive-suite', 3)"></span>
-                        </div>
-                        <div class="image-description">
-                            <span class="description-text">Elegant executive suite with separate living area and work space</span>
-                        </div>
-                    </div>
-                    <div class="room-info">
-                        <h3>Executive Suite</h3>
-                        <p>Luxurious suite with separate living area, work space, and premium amenities for business travelers.</p>
-                        <div class="price">₦45,000 <span>per night</span></div>
-                        <button class="book-btn" onclick="openBookingModal('Executive Suite', 45000)">Book Now</button>
-                    </div>
-                </div> -->
-
-                <!-- Presidential Suite -->
+                <!-- Apartment -->
                 <div class="room-card">
                     <div class="image-gallery" data-gallery="presidential-suite">
                         <div class="gallery-container">
-                            <img src="/images/Presdential Room.jpg" alt="Presidential Suite" class="gallery-image active" data-description="Opulent presidential suite with panoramic city views and luxury amenities">
-                            <img src="/images/Presdential Room.jpg" alt="Presidential Suite Dining" class="gallery-image" data-description="Private dining area with crystal chandelier and fine dining setup">
-                            <img src="/images/Presdential Room.jpg" alt="Presidential Suite Spa" class="gallery-image" data-description="Private spa bathroom with jacuzzi and premium marble finishes">
+                            <img src="images/Presdential Room.jpg" alt="Apartment" class="gallery-image active" data-description="Opulent apartment with panoramic city views and luxury amenities">
+                            <img src="images/Presdential Room.jpg" alt="Apartment Dining" class="gallery-image" data-description="Private dining area with crystal chandelier and fine dining setup">
+                            <img src="images/Presdential Room.jpg" alt="Apartment Spa" class="gallery-image" data-description="Private spa bathroom with jacuzzi and premium marble finishes">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('presidential-suite', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -149,15 +108,15 @@
                             <span class="dot" onclick="currentImage('presidential-suite', 3)"></span>
                         </div>
                         <div class="image-description">
-                            <span class="description-text">Opulent presidential suite with panoramic city views and luxury amenities</span>
+                            <span class="description-text">Opulent apartment with panoramic city views and luxury amenities</span>
                         </div>
                     </div>
                     <div class="room-info">
-                        <h3>Appartment</h3>
+                        <h3>Apartment</h3>
                         <p>The ultimate luxury experience with panoramic views, private dining, and exclusive amenities.</p>
-                        <p>Acces to Sport Wothout Complementry</p>
+                        <p>Access to Sport Without Complimentary</p>
                         <div class="price">₦25,000 <span>per night</span></div>
-                        <button class="book-btn" onclick="openBookingModal('Presidential Suite', 25000)">Book Now</button>
+                        <button class="book-btn" onclick="openBookingModal('Apartment', 25000)">Book Now</button>
                     </div>
                 </div>
             </div>
@@ -174,10 +133,10 @@
                 <div class="kitchen-showcase">
                     <div class="image-gallery" data-gallery="kitchen-overview">
                         <div class="gallery-container">
-                            <img src="/images/chek 2.jpg" alt="Professional Kitchen" class="gallery-image active" data-description="State-of-the-art professional kitchen with modern equipment and expert chefs">
-                            <img src="/images/chek 1.jpg" alt="Chef Preparation" class="gallery-image" data-description="Master chefs preparing gourmet dishes with fresh, premium ingredients">
-                            <img src="/images/chek 2.jpg" alt="Food Plating" class="gallery-image" data-description="Artistic food presentation and plating by our culinary experts">
-                            <img src="/images/chek 1.jpg" alt="Kitchen Team" class="gallery-image" data-description="Professional kitchen team working together to deliver exceptional dining experiences">
+                            <img src="images/chek 2.jpg" alt="Professional Kitchen" class="gallery-image active" data-description="State-of-the-art professional kitchen with modern equipment and expert chefs">
+                            <img src="images/chek 1.jpg" alt="Chef Preparation" class="gallery-image" data-description="Master chefs preparing gourmet dishes with fresh, premium ingredients">
+                            <img src="images/chek 2.jpg" alt="Food Plating" class="gallery-image" data-description="Artistic food presentation and plating by our culinary experts">
+                            <img src="images/chek 1.jpg" alt="Kitchen Team" class="gallery-image" data-description="Professional kitchen team working together to deliver exceptional dining experiences">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('kitchen-overview', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -492,9 +451,9 @@
                 <div class="service-card">
                     <div class="image-gallery" data-gallery="event-hall">
                         <div class="gallery-container">
-                            <img src="/images/event 1.jpg" alt="Event Hall" class="gallery-image active" data-description="Elegant event hall perfect for weddings, conferences, and special occasions">
-                            <img src="/images/event 2.jpg" alt="Wedding Setup" class="gallery-image" data-description="Beautiful wedding setup with premium decorations and lighting">
-                            <img src="/images/Event.jpg" alt="Conference Setup" class="gallery-image" data-description="Professional conference setup with modern AV equipment">
+                            <img src="images/event 1.jpg" alt="Event Hall" class="gallery-image active" data-description="Elegant event hall perfect for weddings, conferences, and special occasions">
+                            <img src="images/event 2.jpg" alt="Wedding Setup" class="gallery-image" data-description="Beautiful wedding setup with premium decorations and lighting">
+                            <img src="images/Event.jpg" alt="Conference Setup" class="gallery-image" data-description="Professional conference setup with modern AV equipment">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('event-hall', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -526,9 +485,9 @@
                 <div class="service-card">
                     <div class="image-gallery" data-gallery="salon">
                         <div class="gallery-container">
-                            <img src="/images/Saloon 3.jpg" alt="Salon" class="gallery-image active" data-description="Modern unisex salon with professional stylists and premium treatments">
-                            <img src="/images/saloon 2.jpg" alt="Hair Styling" class="gallery-image" data-description="Expert hair styling and coloring services for all hair types">
-                            <img src="/images/Sloon 4.jpg" alt="Spa Treatment" class="gallery-image" data-description="Relaxing spa treatments and beauty services">
+                            <img src="images/Saloon 3.jpg" alt="Salon" class="gallery-image active" data-description="Modern unisex salon with professional stylists and premium treatments">
+                            <img src="images/saloon 2.jpg" alt="Hair Styling" class="gallery-image" data-description="Expert hair styling and coloring services for all hair types">
+                            <img src="images/Sloon 4.jpg" alt="Spa Treatment" class="gallery-image" data-description="Relaxing spa treatments and beauty services">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('salon', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -556,7 +515,7 @@
                     </div>
                 </div>
 
-                <!-- Premium Bar
+                <!-- Premium Bar -->
                 <div class="service-card">
                     <div class="image-gallery" data-gallery="premium-bar">
                         <div class="gallery-container">
@@ -591,7 +550,7 @@
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- Nightclub Section -->
     <section id="nightclub" class="section bg-light">
@@ -602,8 +561,8 @@
                 <div class="nightclub-card">
                     <div class="image-gallery" data-gallery="vip-lounge">
                         <div class="gallery-container">
-                            <img src="/images/Night club.jpg" alt="VIP Lounge" class="gallery-image active" data-description="Exclusive VIP lounge with premium seating and bottle service">
-                            <img src="/images/night life.jpg" alt="VIP Seating" class="gallery-image" data-description="Luxurious VIP seating area with personalized service">
+                            <img src="images/Night club.jpg" alt="VIP Lounge" class="gallery-image active" data-description="Exclusive VIP lounge with premium seating and bottle service">
+                            <img src="images/night life.jpg" alt="VIP Seating" class="gallery-image" data-description="Luxurious VIP seating area with personalized service">
                             <img src="https://images.pexels.com/photos/2747451/pexels-photo-2747451.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bottle Service" class="gallery-image" data-description="Premium bottle service with top-shelf spirits">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('vip-lounge', -1)">
@@ -712,9 +671,9 @@
                 <div class="amenity-card">
                     <div class="image-gallery" data-gallery="swimming-pool">
                         <div class="gallery-container">
-                            <img src="/images/pool 2.jpg" alt="Swimming Pool" class="gallery-image active" data-description="Luxurious outdoor swimming pool with poolside service">
-                            <img src="/images/about.jpg" alt="Pool Deck" class="gallery-image" data-description="Spacious pool deck with comfortable loungers and umbrellas">
-                            <img src="/images/Hero.jpg" alt="Pool Bar" class="gallery-image" data-description="Poolside bar serving refreshing drinks and light snacks">
+                            <img src="images/pool 2.jpg" alt="Swimming Pool" class="gallery-image active" data-description="Luxurious outdoor swimming pool with poolside service">
+                            <img src="images/about.jpg" alt="Pool Deck" class="gallery-image" data-description="Spacious pool deck with comfortable loungers and umbrellas">
+                            <img src="images/Hero.jpg" alt="Pool Bar" class="gallery-image" data-description="Poolside bar serving refreshing drinks and light snacks">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('swimming-pool', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -829,7 +788,7 @@
                         <h3>Find Us</h3>
                         <div class="address-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel.</span>
+                            <span>360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel.</span>
                         </div>
                         <div class="address-item">
                             <i class="fas fa-phone"></i>
@@ -854,7 +813,7 @@
                 <div class="map-container">
                     <div class="interactive-map">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.7891234567!2d3.4205678!3d6.4281234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjUnNDEuMiJOIDPCsDI1JzE0LjAiRQ!5e0!3m2!1sen!2sng!4v1234567890123!5m2!1sen!2sng" 
+                            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d19227.819741523406!2d7.895253365518696!3d8.842286887515161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s360Degree%20Global%20Estate%20Second%20gate%20Nassarawa%20State%20university%20keffi%2C%20Behind%20Princess%C2%A0Sarah%C2%A0Hotel.!5e0!3m2!1sen!2sng!4v1751844007546!5m2!1sen!2sng" 
                             width="100%" 
                             height="400" 
                             style="border:0; border-radius: 15px;" 
@@ -899,11 +858,11 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>+234 916 316 1616</span>
+                    <span>+234 9018422692</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>info@360degreehotel.com</span>
+                    <span>360Degreeglobalestateltd@gmail.com</span>
                 </div>
                 <div class="contact-item">
                     <i class="fab fa-whatsapp"></i>
@@ -953,7 +912,7 @@
                 <div class="footer-section">
                     <h4>Contact Info</h4>
                     <div class="contact-details">
-                        <p><i class="fas fa-map-marker-alt"></i>360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel.</p>
+                        <p><i class="fas fa-map-marker-alt"></i>360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel.</p>
                         <p><i class="fas fa-phone"></i> +234 9018422692</p>
                         <p><i class="fas fa-envelope"></i> 360Degreeglobalestateltd@gmail.com</p>
                         <p><i class="fas fa-clock"></i> 24/7 Service Available</p>
