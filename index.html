@@ -84,14 +84,48 @@
                         <button class="book-btn" onclick="openBookingModal('Standard Room', 15000)">Book Now</button>
                     </div>
                 </div>
+                 <!-- P parkage -->
+                <div class="room-card">
+                    <div class="image-gallery" data-gallery="deluxe-room">
+                        <div class="gallery-container">
+                            <img src="images/p pakage 1.jpg" alt="Standard Room" class="gallery-image active" data-description="Spacious standard room with modern amenities and city view">
+                            <img src="images/p pakage 2.jpg" alt="Standard Room Bathroom" class="gallery-image" data-description="Luxurious bathroom with marble finishes and premium fixtures">
+                            <img src="images/p pakage 3.jpg" alt="Standard Room View" class="gallery-image" data-description="Stunning city view from the standard room balcony">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('deluxe-room', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('deluxe-room', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('deluxe-room', 1)"></span>
+                            <span class="dot" onclick="currentImage('deluxe-room', 2)"></span>
+                            <span class="dot" onclick="currentImage('deluxe-room', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Spacious standard room with modern amenities and city view</span>
+                        </div>
+                    </div>
+                    <div class="room-info">
+                        <h3>Preciou Package</h3>
+                        <p>Spacious room with modern amenities, city view, and premium comfort for the perfect stay.</p>
+                        <p>Acces to sport & Complementary</p>
+                        <div class="price">₦20,000 <span>per night</span></div>
+                        <button class="book-btn" onclick="openBookingModal('Standard Room', 20000)">Book Now</button>
+                    </div>
+                </div>
 
                 <!-- Apartment -->
                 <div class="room-card">
                     <div class="image-gallery" data-gallery="presidential-suite">
                         <div class="gallery-container">
                             <img src="images/Presdential Room.jpg" alt="Apartment" class="gallery-image active" data-description="Opulent apartment with panoramic city views and luxury amenities">
-                            <img src="images/Presdential Room.jpg" alt="Apartment Dining" class="gallery-image" data-description="Private dining area with crystal chandelier and fine dining setup">
-                            <img src="images/Presdential Room.jpg" alt="Apartment Spa" class="gallery-image" data-description="Private spa bathroom with jacuzzi and premium marble finishes">
+                            <img src="images/partment  22.jpg" alt="Apartment Dining" class="gallery-image" data-description="Private dining area with crystal chandelier and fine dining setup">
+                            <img src="images/partmentt 3.jpg" alt="Apartment Spa" class="gallery-image" data-description="Private spa bathroom with jacuzzi and premium marble finishes">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('presidential-suite', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -134,8 +168,8 @@
                     <div class="image-gallery" data-gallery="kitchen-overview">
                         <div class="gallery-container">
                             <img src="images/chek 2.jpg" alt="Professional Kitchen" class="gallery-image active" data-description="State-of-the-art professional kitchen with modern equipment and expert chefs">
-                            <img src="images/chek 1.jpg" alt="Chef Preparation" class="gallery-image" data-description="Master chefs preparing gourmet dishes with fresh, premium ingredients">
-                            <img src="images/chek 2.jpg" alt="Food Plating" class="gallery-image" data-description="Artistic food presentation and plating by our culinary experts">
+                            <img src="images/ch  3.jpg" alt="Chef Preparation" class="gallery-image" data-description="Master chefs preparing gourmet dishes with fresh, premium ingredients">
+                            <img src="images/chek 4.jpg" alt="Food Plating" class="gallery-image" data-description="Artistic food presentation and plating by our culinary experts">
                             <img src="images/chek 1.jpg" alt="Kitchen Team" class="gallery-image" data-description="Professional kitchen team working together to deliver exceptional dining experiences">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('kitchen-overview', -1)">
@@ -212,8 +246,8 @@
                     <div class="food-info">
                         <h3>Continental Breakfast</h3>
                         <p>Start your day with fresh pastries, seasonal fruits, premium coffee, and healthy options.</p>
-                        <div class="price">₦8,500 <span>per person</span></div>
-                        <button class="order-btn" onclick="openFoodModal('Continental Breakfast', 8500)">Order Now</button>
+                        <div class="price">₦1,500 <span>per person</span></div>
+                        <button class="order-btn" onclick="openFoodModal('Continental Breakfast', 1500)">Order Now</button>
                     </div>
                 </div>
 
@@ -246,12 +280,12 @@
                     <div class="food-info">
                         <h3>Gourmet Lunch</h3>
                         <p>Savor our chef's special lunch menu featuring international and local delicacies.</p>
-                        <div class="price">₦15,000 <span>per person</span></div>
-                        <button class="order-btn" onclick="openFoodModal('Gourmet Lunch', 15000)">Order Now</button>
+                        <div class="price">₦5,000 <span>per person</span></div>
+                        <button class="order-btn" onclick="openFoodModal('Gourmet Lunch', 5000)">Order Now</button>
                     </div>
                 </div>
 
-                <!-- Fine Dining Dinner -->
+                <!-- Fine Dining Dinner
                 <div class="food-card">
                     <div class="image-gallery" data-gallery="fine-dining">
                         <div class="gallery-container">
@@ -283,9 +317,9 @@
                         <div class="price">₦35,000 <span>per person</span></div>
                         <button class="order-btn" onclick="openFoodModal('Fine Dining Dinner', 35000)">Order Now</button>
                     </div>
-                </div>
+                </div> -->
 
-                <!-- Room Service -->
+                <!-- Room Service
                 <div class="food-card">
                     <div class="image-gallery" data-gallery="room-service">
                         <div class="gallery-container">
@@ -317,7 +351,7 @@
                         <div class="price">₦12,000 <span>per order</span></div>
                         <button class="order-btn" onclick="openFoodModal('24/7 Room Service', 12000)">Order Now</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -383,7 +417,7 @@
                     <div class="sport-icon">
                         <i class="fas fa-futbol"></i>
                     </div>
-                    <h3>Football Field</h3>
+                    <h3>Football/Soccer</h3>
                     <p>Professional-grade football field with premium turf and lighting for day and night games.</p>
                     <div class="price">₦1,500 <span>per hour</span></div>
                     <button class="book-btn" onclick="openSportsModal('Football Field', 1500)">Book Now</button>
@@ -405,8 +439,8 @@
                     </div>
                     <h3>Table Tennis</h3>
                     <p>Multiple table tennis tables in air-conditioned environment with professional equipment.</p>
-                    <div class="price">₦1,000 <span>per hour</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Table Tennis', 1000)">Book Now</button>
+                    <div class="price">₦500 <span>per hour</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Table Tennis', 500)">Book Now</button>
                 </div>
 
                 <div class="sport-card">
@@ -415,8 +449,8 @@
                     </div>
                     <h3>Fitness Center</h3>
                     <p>State-of-the-art gym with modern equipment, personal trainers, and wellness programs.</p>
-                    <div class="price">₦2,000 <span>per session</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Fitness Center', 2000)">Book Now</button>
+                    <div class="price">₦1,500 <span>per session</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Fitness Center', 1500)">Book Now</button>
                 </div>
 
                 <div class="sport-card">
@@ -435,8 +469,8 @@
                     </div>
                     <h3>Chess & Board Games</h3>
                     <p>Quiet area for chess, checkers, and various board games in a relaxing environment.</p>
-                    <div class="price">₦3,000 <span>per hour</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Chess & Board Games', 3000)">Book Now</button>
+                    <div class="price">₦1,000 <span>per hour</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Chess & Board Games', 1000)">Book Now</button>
                 </div>
             </div>
         </div>
@@ -515,7 +549,7 @@
                     </div>
                 </div>
 
-                <!-- Premium Bar -->
+                <!-- Premium Bar
                 <div class="service-card">
                     <div class="image-gallery" data-gallery="premium-bar">
                         <div class="gallery-container">
@@ -547,7 +581,7 @@
                         <div class="price">₦18,000 <span>per hour</span></div>
                         <button class="book-btn" onclick="openServiceModal('Premium Bar', 18000)">Book Now</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -586,8 +620,8 @@
                     <div class="nightclub-info">
                         <h3>VIP Lounge Experience</h3>
                         <p>Exclusive VIP area with premium bottle service, private seating, and personalized attention.</p>
-                        <div class="price">₦5,000 <span>per person</span></div>
-                        <button class="book-btn" onclick="openNightclubModal('VIP Lounge Experience', 5000)">Book Now</button>
+                        <div class="price">₦1,500 <span>per person</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('VIP Lounge Experience', 1500)">Book Now</button>
                     </div>
                 </div>
 
@@ -620,13 +654,13 @@
                     <div class="nightclub-info">
                         <h3>Main Dance Floor</h3>
                         <p>High-energy dance floor with professional DJs, premium sound system, and spectacular lighting.</p>
-                        <div class="price">₦25,000 <span>per person</span></div>
-                        <button class="book-btn" onclick="openNightclubModal('Main Dance Floor', 25000)">Book Now</button>
+                        <div class="price">₦1,500 <span>per person</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('Main Dance Floor', 1500)">Book Now</button>
                     </div>
                 </div>
 
                 <!-- Private Party Room -->
-                <div class="nightclub-card">
+                <!-- <div class="nightclub-card">
                     <div class="image-gallery" data-gallery="private-party">
                         <div class="gallery-container">
                             <img src="https://images.pexels.com/photos/2747455/pexels-photo-2747455.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Private Party" class="gallery-image active" data-description="Exclusive private party room for intimate celebrations">
@@ -651,13 +685,13 @@
                             <span class="description-text">Exclusive private party room for intimate celebrations</span>
                         </div>
                     </div>
-                    <div class="nightclub-info">
+                     <div class="nightclub-info">
                         <h3>Private Party Room</h3>
                         <p>Exclusive private space for intimate parties, birthdays, and special celebrations.</p>
                         <div class="price">₦75,000 <span>per person</span></div>
                         <button class="book-btn" onclick="openNightclubModal('Private Party Room', 75000)">Book Now</button>
-                    </div>
-                </div>
+                    </div> 
+                </div> -->
             </div>
         </div>
     </section>
@@ -696,8 +730,8 @@
                     <div class="amenity-info">
                         <h3>Swimming Pool</h3>
                         <p>Relax by our beautiful outdoor pool with poolside service, comfortable loungers, and refreshing drinks.</p>
-                        <div class="price">₦1,500 <span>per day</span></div>
-                        <button class="book-btn" onclick="openPoolModal('Swimming Pool Access', 1500)">Book Access</button>
+                        <div class="price">₦2,000 <span>per day</span></div>
+                        <button class="book-btn" onclick="openPoolModal('Swimming Pool Access', 2000)">Book Access</button>
                     </div>
                 </div>
 
@@ -705,9 +739,9 @@
                 <div class="amenity-card">
                     <div class="image-gallery" data-gallery="spa-wellness">
                         <div class="gallery-container">
-                            <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Spa" class="gallery-image active" data-description="Tranquil spa environment with professional massage and wellness treatments">
-                            <img src="https://images.pexels.com/photos/3757943/pexels-photo-3757943.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Massage Room" class="gallery-image" data-description="Private massage rooms with experienced therapists">
-                            <img src="https://images.pexels.com/photos/3757944/pexels-photo-3757944.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wellness Center" class="gallery-image" data-description="Complete wellness center with sauna and relaxation areas">
+                            <img src="/images/featnees 1.jpg" alt="Spa" class="gallery-image active" data-description="Tranquil spa environment with professional massage and wellness treatments">
+                            <img src="/images/featnees 2.jpg" alt="Massage Room" class="gallery-image" data-description="Private massage rooms with experienced therapists">
+                            <img src="/images/featness 3.jpg" alt="Wellness Center" class="gallery-image" data-description="Complete wellness center with sauna and relaxation areas">
                         </div>
                         <button class="gallery-btn prev-btn" onclick="changeImage('spa-wellness', -1)">
                             <i class="fas fa-chevron-left"></i>
@@ -730,8 +764,8 @@
                     <div class="amenity-info">
                         <h3>Spa & Wellness Center</h3>
                         <p>Rejuvenate your body and mind with our comprehensive spa services, massages, and wellness treatments.</p>
-                        <div class="price">₦35,000 <span>per session</span></div>
-                        <button class="book-btn" onclick="openServiceModal('Spa & Wellness Center', 35000)">Book Session</button>
+                        <div class="price">₦1,500 <span>per session</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Spa & Wellness Center', 1500)">Book Session</button>
                     </div>
                 </div>
             </div>

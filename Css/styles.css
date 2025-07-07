@@ -306,7 +306,7 @@ body {
 
 .kitchen-showcase {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: fr fr;
     gap: 3rem;
     align-items: center;
     background: white;
@@ -317,7 +317,7 @@ body {
 
 .kitchen-showcase .image-gallery {
     height: 400px;
-    border-radius: 0;
+    border-radius: 0.5rem;
 }
 
 .kitchen-info {
