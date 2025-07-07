@@ -1,8 +1,12 @@
-// 360 Degree Hotel booking system JavaScript
+// 360 Degree Hotel booking system JavaScript with Image Gallery and Gate Tickets
 
 // Global variables
 let currentBookingType = '';
 let currentPrice = 0;
+
+// Gallery management
+const galleries = {};
+const autoSlideIntervals = {};
 
 // WhatsApp numbers for different services
 const whatsappNumbers = {
@@ -11,109 +15,337 @@ const whatsappNumbers = {
     sports: '2349163161618',       // Sports & Entertainment
     services: '2349163161619',     // Event Hall, Salon, Bar
     nightclub: '2349163161620',    // Nightclub & Pool
-    pool: '2349163161620'          // Pool (same as nightclub)
+    pool: '2349163161620',         // Pool (same as nightclub)
+    gateTickets: '2349163161621'   // Gate tickets
 };
 
 // Mobile menu toggle
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
     });
-});
 
-// Smooth scrolling function
-function scrollToSection(sectionId) {
-    document.getElementById(sectionId).scrollIntoView({
-        behavior: 'smooth'
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
     });
 }
 
-// Modal functions - USING EXACT SAME METHOD AS WORKING SECTIONS
+// Smooth scrolling function
+function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+        element.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Image Gallery Functions
+function initializeGalleries() {
+    console.log('🖼️ Initializing image galleries...');
+    
+    const galleryElements = document.querySelectorAll('.image-gallery');
+    
+    galleryElements.forEach(gallery => {
+        const galleryId = gallery.getAttribute('data-gallery');
+        const images = gallery.querySelectorAll('.gallery-image');
+        const dots = gallery.querySelectorAll('.dot');
+        const currentSlideSpan = gallery.querySelector('.current-slide');
+        const totalSlidesSpan = gallery.querySelector('.total-slides');
+        const descriptionElement = gallery.querySelector('.description-text');
+        
+        if (galleryId && images.length > 0) {
+            galleries[galleryId] = {
+                currentIndex: 0,
+                totalImages: images.length,
+                images: images,
+                dots: dots,
+                currentSlideSpan: currentSlideSpan,
+                totalSlidesSpan: totalSlidesSpan,
+                descriptionElement: descriptionElement,
+                gallery: gallery
+            };
+            
+            // Set total slides
+            if (totalSlidesSpan) {
+                totalSlidesSpan.textContent = images.length;
+            }
+            
+            // Set initial description
+            updateImageDescription(galleryId);
+            
+            // Start auto-slide for this gallery
+            startAutoSlide(galleryId);
+            
+            console.log(`✅ Gallery "${galleryId}" initialized with ${images.length} images`);
+        }
+    });
+    
+    console.log(`🎯 Total galleries initialized: ${Object.keys(galleries).length}`);
+}
+
+function updateImageDescription(galleryId) {
+    if (!galleries[galleryId]) return;
+    
+    const gallery = galleries[galleryId];
+    const currentImage = gallery.images[gallery.currentIndex];
+    const description = currentImage.getAttribute('data-description');
+    
+    if (gallery.descriptionElement && description) {
+        gallery.descriptionElement.textContent = description;
+    }
+}
+
+function changeImage(galleryId, direction) {
+    if (!galleries[galleryId]) return;
+    
+    const gallery = galleries[galleryId];
+    
+    // Remove active class from current image and dot
+    gallery.images[gallery.currentIndex].classList.remove('active');
+    if (gallery.dots[gallery.currentIndex]) {
+        gallery.dots[gallery.currentIndex].classList.remove('active');
+    }
+    
+    // Calculate new index
+    gallery.currentIndex += direction;
+    
+    // Handle wrap around
+    if (gallery.currentIndex >= gallery.totalImages) {
+        gallery.currentIndex = 0;
+    } else if (gallery.currentIndex < 0) {
+        gallery.currentIndex = gallery.totalImages - 1;
+    }
+    
+    // Add active class to new image and dot
+    gallery.images[gallery.currentIndex].classList.add('active');
+    if (gallery.dots[gallery.currentIndex]) {
+        gallery.dots[gallery.currentIndex].classList.add('active');
+    }
+    
+    // Update counter
+    if (gallery.currentSlideSpan) {
+        gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
+    }
+    
+    // Update description
+    updateImageDescription(galleryId);
+    
+    // Restart auto-slide
+    restartAutoSlide(galleryId);
+}
+
+function currentImage(galleryId, imageIndex) {
+    if (!galleries[galleryId]) return;
+    
+    const gallery = galleries[galleryId];
+    const newIndex = imageIndex - 1; // Convert to 0-based index
+    
+    if (newIndex >= 0 && newIndex < gallery.totalImages) {
+        // Remove active class from current image and dot
+        gallery.images[gallery.currentIndex].classList.remove('active');
+        if (gallery.dots[gallery.currentIndex]) {
+            gallery.dots[gallery.currentIndex].classList.remove('active');
+        }
+        
+        // Set new index
+        gallery.currentIndex = newIndex;
+        
+        // Add active class to new image and dot
+        gallery.images[gallery.currentIndex].classList.add('active');
+        if (gallery.dots[gallery.currentIndex]) {
+            gallery.dots[gallery.currentIndex].classList.add('active');
+        }
+        
+        // Update counter
+        if (gallery.currentSlideSpan) {
+            gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
+        }
+        
+        // Update description
+        updateImageDescription(galleryId);
+        
+        // Restart auto-slide
+        restartAutoSlide(galleryId);
+    }
+}
+
+function startAutoSlide(galleryId) {
+    if (!galleries[galleryId]) return;
+    
+    // Clear existing interval if any
+    if (autoSlideIntervals[galleryId]) {
+        clearInterval(autoSlideIntervals[galleryId]);
+    }
+    
+    // Start new interval (change image every 3 seconds)
+    autoSlideIntervals[galleryId] = setInterval(() => {
+        changeImage(galleryId, 1);
+    }, 3000);
+}
+
+function restartAutoSlide(galleryId) {
+    startAutoSlide(galleryId);
+}
+
+function pauseAutoSlide(galleryId) {
+    if (autoSlideIntervals[galleryId]) {
+        clearInterval(autoSlideIntervals[galleryId]);
+    }
+}
+
+function resumeAutoSlide(galleryId) {
+    startAutoSlide(galleryId);
+}
+
+// Google Maps Direction Function
+function openDirections() {
+    const hotelAddress = "123 Paradise Street, Victoria Island, Lagos, Nigeria";
+    const encodedAddress = encodeURIComponent(hotelAddress);
+    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+    window.open(mapsUrl, '_blank');
+}
+
+// Modal functions
 function openBookingModal(roomType, price) {
     console.log('Opening room booking modal:', roomType, price);
     currentBookingType = 'room';
     currentPrice = price;
-    document.getElementById('roomType').value = roomType;
-    document.getElementById('bookingModal').style.display = 'block';
-    calculateRoomTotal();
+    const roomTypeInput = document.getElementById('roomType');
+    if (roomTypeInput) {
+        roomTypeInput.value = roomType;
+    }
+    const modal = document.getElementById('bookingModal');
+    if (modal) {
+        modal.style.display = 'block';
+        calculateRoomTotal();
+    }
 }
 
 function openFoodModal(foodItem, price) {
     console.log('Opening food modal:', foodItem, price);
     currentBookingType = 'food';
     currentPrice = price;
-    document.getElementById('foodItem').value = foodItem;
-    document.getElementById('foodModal').style.display = 'block';
-    calculateFoodTotal();
+    const foodItemInput = document.getElementById('foodItem');
+    if (foodItemInput) {
+        foodItemInput.value = foodItem;
+    }
+    const modal = document.getElementById('foodModal');
+    if (modal) {
+        modal.style.display = 'block';
+        calculateFoodTotal();
+    }
 }
 
-// FIXED: Using exact same pattern as food and room modals
+function openGateTicketModal(ticketType, price, accessType) {
+    console.log('Opening gate ticket modal:', ticketType, price, accessType);
+    currentBookingType = 'gateTicket';
+    currentPrice = price;
+    const ticketTypeInput = document.getElementById('gateTicketType');
+    if (ticketTypeInput) {
+        ticketTypeInput.value = ticketType;
+    }
+    const modal = document.getElementById('gateTicketModal');
+    if (modal) {
+        modal.style.display = 'block';
+        calculateGateTicketTotal();
+    }
+}
+
 function openSportsModal(activity, price) {
-    console.log('🎯 SPORTS BUTTON CLICKED:', activity, 'Price:', price);
+    console.log('Opening sports modal:', activity, price);
     currentBookingType = 'sports';
     currentPrice = price;
-    document.getElementById('sportsActivity').value = activity;
-    document.getElementById('sportsModal').style.display = 'block';
-    calculateSportsTotal();
-    console.log('✅ Sports modal should be visible now');
+    const activityInput = document.getElementById('sportsActivity');
+    if (activityInput) {
+        activityInput.value = activity;
+    }
+    const modal = document.getElementById('sportsModal');
+    if (modal) {
+        modal.style.display = 'block';
+        calculateSportsTotal();
+    }
 }
 
 function openServiceModal(service, price) {
     console.log('Opening service modal:', service, price);
     currentBookingType = 'service';
     currentPrice = price;
-    document.getElementById('serviceType').value = service;
-    document.getElementById('serviceModal').style.display = 'block';
-    
-    // Update duration label based on service type
-    const durationLabel = document.getElementById('durationLabel');
-    if (service === 'Event Center Hall') {
-        durationLabel.textContent = 'days';
-    } else if (service === 'Salon (Unisex)') {
-        durationLabel.textContent = 'sessions';
-    } else if (service === 'Premium Bar') {
-        durationLabel.textContent = 'hours';
+    const serviceInput = document.getElementById('serviceType');
+    if (serviceInput) {
+        serviceInput.value = service;
     }
-    
-    calculateServiceTotal();
+    const modal = document.getElementById('serviceModal');
+    if (modal) {
+        modal.style.display = 'block';
+        
+        // Update duration label based on service type
+        const durationLabel = document.getElementById('durationLabel');
+        if (durationLabel) {
+            if (service === 'Event Center Hall') {
+                durationLabel.textContent = 'days';
+            } else if (service === 'Salon (Unisex)') {
+                durationLabel.textContent = 'sessions';
+            } else if (service === 'Premium Bar') {
+                durationLabel.textContent = 'hours';
+            }
+        }
+        
+        calculateServiceTotal();
+    }
 }
 
 function openNightclubModal(service, price) {
     console.log('Opening nightclub modal:', service, price);
     currentBookingType = 'nightclub';
     currentPrice = price;
-    document.getElementById('nightclubService').value = service;
-    document.getElementById('nightclubModal').style.display = 'block';
-    calculateNightclubTotal();
+    const serviceInput = document.getElementById('nightclubService');
+    if (serviceInput) {
+        serviceInput.value = service;
+    }
+    const modal = document.getElementById('nightclubModal');
+    if (modal) {
+        modal.style.display = 'block';
+        calculateNightclubTotal();
+    }
 }
 
 function openPoolModal(service, price) {
     console.log('Opening pool modal:', service, price);
     currentBookingType = 'pool';
     currentPrice = price;
-    document.getElementById('poolService').value = service;
-    document.getElementById('poolModal').style.display = 'block';
-    calculatePoolTotal();
+    const serviceInput = document.getElementById('poolService');
+    if (serviceInput) {
+        serviceInput.value = service;
+    }
+    const modal = document.getElementById('poolModal');
+    if (modal) {
+        modal.style.display = 'block';
+        calculatePoolTotal();
+    }
 }
 
 function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 // Close modal when clicking outside
 window.onclick = function(event) {
-    const modals = ['bookingModal', 'foodModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
+    const modals = ['bookingModal', 'foodModal', 'gateTicketModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
     modals.forEach(modalId => {
         const modal = document.getElementById(modalId);
-        if (event.target === modal) {
+        if (modal && event.target === modal) {
             modal.style.display = 'none';
         }
     });
@@ -121,56 +353,112 @@ window.onclick = function(event) {
 
 // Calculate totals
 function calculateRoomTotal() {
-    const nights = document.getElementById('nights').value || 1;
-    const total = currentPrice * nights;
-    document.getElementById('totalPrice').textContent = total.toLocaleString();
+    const nightsInput = document.getElementById('nights');
+    const totalPriceElement = document.getElementById('totalPrice');
+    if (nightsInput && totalPriceElement) {
+        const nights = nightsInput.value || 1;
+        const total = currentPrice * nights;
+        totalPriceElement.textContent = total.toLocaleString();
+    }
 }
 
 function calculateFoodTotal() {
-    const quantity = document.getElementById('foodQuantity').value || 1;
-    const total = currentPrice * quantity;
-    document.getElementById('foodTotalPrice').textContent = total.toLocaleString();
+    const quantityInput = document.getElementById('foodQuantity');
+    const totalPriceElement = document.getElementById('foodTotalPrice');
+    if (quantityInput && totalPriceElement) {
+        const quantity = quantityInput.value || 1;
+        const total = currentPrice * quantity;
+        totalPriceElement.textContent = total.toLocaleString();
+    }
+}
+
+function calculateGateTicketTotal() {
+    const daysInput = document.getElementById('gateTicketDays');
+    const peopleInput = document.getElementById('gateTicketPeople');
+    const totalPriceElement = document.getElementById('gateTicketTotalPrice');
+    if (daysInput && peopleInput && totalPriceElement) {
+        const days = daysInput.value || 1;
+        const people = peopleInput.value || 1;
+        const total = currentPrice * days * people;
+        totalPriceElement.textContent = total.toLocaleString();
+    }
 }
 
 function calculateSportsTotal() {
-    const quantity = document.getElementById('sportsQuantity').value || 1;
-    const total = currentPrice * quantity;
-    document.getElementById('sportsTotalPrice').textContent = total.toLocaleString();
+    const quantityInput = document.getElementById('sportsQuantity');
+    const totalPriceElement = document.getElementById('sportsTotalPrice');
+    if (quantityInput && totalPriceElement) {
+        const quantity = quantityInput.value || 1;
+        const total = currentPrice * quantity;
+        totalPriceElement.textContent = total.toLocaleString();
+    }
 }
 
 function calculateServiceTotal() {
-    const duration = document.getElementById('serviceDuration').value || 1;
-    const people = document.getElementById('servicePeople').value || 1;
-    const service = document.getElementById('serviceType').value;
+    const durationInput = document.getElementById('serviceDuration');
+    const peopleInput = document.getElementById('servicePeople');
+    const serviceTypeInput = document.getElementById('serviceType');
+    const totalPriceElement = document.getElementById('serviceTotalPrice');
     
-    let total;
-    if (service === 'Event Center Hall') {
-        // Event hall is per day, not per person
-        total = currentPrice * duration;
-    } else {
-        // Salon and Bar are per person
-        total = currentPrice * duration * people;
+    if (durationInput && peopleInput && serviceTypeInput && totalPriceElement) {
+        const duration = durationInput.value || 1;
+        const people = peopleInput.value || 1;
+        const service = serviceTypeInput.value;
+        
+        let total;
+        if (service === 'Event Center Hall') {
+            // Event hall is per day, not per person
+            total = currentPrice * duration;
+        } else {
+            // Salon and Bar are per person
+            total = currentPrice * duration * people;
+        }
+        
+        totalPriceElement.textContent = total.toLocaleString();
     }
-    
-    document.getElementById('serviceTotalPrice').textContent = total.toLocaleString();
 }
 
 function calculateNightclubTotal() {
-    const people = document.getElementById('nightclubPeople').value || 1;
-    const total = currentPrice * people;
-    document.getElementById('nightclubTotalPrice').textContent = total.toLocaleString();
+    const peopleInput = document.getElementById('nightclubPeople');
+    const totalPriceElement = document.getElementById('nightclubTotalPrice');
+    if (peopleInput && totalPriceElement) {
+        const people = peopleInput.value || 1;
+        const total = currentPrice * people;
+        totalPriceElement.textContent = total.toLocaleString();
+    }
 }
 
 function calculatePoolTotal() {
-    const days = document.getElementById('poolDays').value || 1;
-    const people = document.getElementById('poolPeople').value || 1;
-    const total = currentPrice * days * people;
-    document.getElementById('poolTotalPrice').textContent = total.toLocaleString();
+    const daysInput = document.getElementById('poolDays');
+    const peopleInput = document.getElementById('poolPeople');
+    const totalPriceElement = document.getElementById('poolTotalPrice');
+    if (daysInput && peopleInput && totalPriceElement) {
+        const days = daysInput.value || 1;
+        const people = peopleInput.value || 1;
+        const total = currentPrice * days * people;
+        totalPriceElement.textContent = total.toLocaleString();
+    }
 }
 
 // Event listeners for quantity changes
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 DOM loaded, setting up ALL event listeners...');
+    
+    // Initialize image galleries first
+    initializeGalleries();
+    
+    // Add hover pause/resume for galleries
+    Object.keys(galleries).forEach(galleryId => {
+        const gallery = galleries[galleryId].gallery;
+        
+        gallery.addEventListener('mouseenter', () => {
+            pauseAutoSlide(galleryId);
+        });
+        
+        gallery.addEventListener('mouseleave', () => {
+            resumeAutoSlide(galleryId);
+        });
+    });
     
     // Room booking listeners
     const nightsInput = document.getElementById('nights');
@@ -182,6 +470,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const foodQuantityInput = document.getElementById('foodQuantity');
     if (foodQuantityInput) {
         foodQuantityInput.addEventListener('input', calculateFoodTotal);
+    }
+
+    // Gate ticket listeners
+    const gateTicketDaysInput = document.getElementById('gateTicketDays');
+    const gateTicketPeopleInput = document.getElementById('gateTicketPeople');
+    if (gateTicketDaysInput) {
+        gateTicketDaysInput.addEventListener('input', calculateGateTicketTotal);
+    }
+    if (gateTicketPeopleInput) {
+        gateTicketPeopleInput.addEventListener('input', calculateGateTicketTotal);
     }
 
     // Sports booking listeners
@@ -219,35 +517,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form submissions
     setupFormSubmissions();
     
-    // CRITICAL: Test all sports buttons immediately
-    testSportsButtons();
+    // Set minimum date to today for all date inputs
+    const today = new Date().toISOString().split('T')[0];
+    const dateInputs = document.querySelectorAll('input[type="date"]');
+    dateInputs.forEach(input => {
+        input.min = today;
+    });
 });
-
-// CRITICAL: Test function to verify sports buttons work
-function testSportsButtons() {
-    console.log('🔍 Testing all sports buttons...');
-    
-    // Find all sports buttons and test them
-    const sportsSection = document.getElementById('sports');
-    if (sportsSection) {
-        const sportsButtons = sportsSection.querySelectorAll('.book-btn');
-        console.log(`Found ${sportsButtons.length} sports buttons`);
-        
-        sportsButtons.forEach((button, index) => {
-            console.log(`Button ${index + 1}:`, button.textContent, 'onclick:', button.getAttribute('onclick'));
-        });
-    } else {
-        console.error('❌ Sports section not found!');
-    }
-    
-    // Test if modal exists
-    const sportsModal = document.getElementById('sportsModal');
-    if (sportsModal) {
-        console.log('✅ Sports modal found');
-    } else {
-        console.error('❌ Sports modal not found!');
-    }
-}
 
 function setupFormSubmissions() {
     // Room booking form
@@ -265,6 +541,15 @@ function setupFormSubmissions() {
         foodForm.addEventListener('submit', function(e) {
             e.preventDefault();
             handleFoodOrder();
+        });
+    }
+
+    // Gate ticket form
+    const gateTicketForm = document.getElementById('gateTicketForm');
+    if (gateTicketForm) {
+        gateTicketForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleGateTicketPurchase();
         });
     }
 
@@ -382,6 +667,47 @@ Thank you for dining with us!`;
     sendToWhatsApp(message, 'food');
 }
 
+function handleGateTicketPurchase() {
+    const ticketType = document.getElementById('gateTicketType').value;
+    const days = document.getElementById('gateTicketDays').value;
+    const people = document.getElementById('gateTicketPeople').value;
+    const date = document.getElementById('gateTicketDate').value;
+    const guestName = document.getElementById('gateTicketGuestName').value;
+    const guestPhone = document.getElementById('gateTicketGuestPhone').value;
+    const requirements = document.getElementById('gateTicketRequirements').value;
+    const total = document.getElementById('gateTicketTotalPrice').textContent;
+
+    const message = `🎫 *360 DEGREE HOTEL - GATE ENTRY TICKET*
+
+👤 *Customer Details:*
+Name: ${guestName}
+Phone: ${guestPhone}
+
+🎯 *Ticket Details:*
+Ticket Type: ${ticketType}
+Number of Days: ${days}
+Number of People: ${people}
+Entry Date: ${date}
+Special Requirements: ${requirements || 'None'}
+
+💰 *Total Amount: ₦${total}*
+
+💳 *Payment Details:*
+Bank: First Bank Nigeria
+Account Name: 360 Degree Hotel Ltd
+Account Number: 3014567890
+Sort Code: 011
+
+📋 *Instructions:*
+Please make payment and send receipt via WhatsApp to receive your gate entry ticket.
+
+⚠️ *Important:* Keep your gate ticket receipt as proof of entry to the hotel premises.
+
+Thank you for choosing 360 Degree Hotel!`;
+
+    sendToWhatsApp(message, 'gateTickets');
+}
+
 function handleSportsBooking() {
     const activity = document.getElementById('sportsActivity').value;
     const quantity = document.getElementById('sportsQuantity').value;
@@ -410,7 +736,7 @@ Account Number: 3014567890
 Sort Code: 011
 
 📋 *Instructions:*
-Please make payment and send receipt via WhatsApp to receive your tickets/access pass.
+Please make payment and send receipt via WhatsApp to receive your booking confirmation.
 
 Thank you for choosing our sports services!`;
 
@@ -554,9 +880,12 @@ function sendToWhatsApp(message, serviceType) {
     window.open(whatsappUrl, '_blank');
     
     // Close the modal after sending
-    const modals = ['bookingModal', 'foodModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
+    const modals = ['bookingModal', 'foodModal', 'gateTicketModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
     modals.forEach(modalId => {
-        document.getElementById(modalId).style.display = 'none';
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+        }
     });
     
     // Show success message with service-specific info
@@ -567,6 +896,7 @@ function showSuccessMessage(serviceType) {
     const serviceNames = {
         rooms: 'Room Booking',
         food: 'Food Order',
+        gateTickets: 'Gate Entry Ticket Purchase',
         sports: 'Sports Booking',
         services: 'Service Booking',
         nightclub: 'Nightclub Booking',
@@ -618,24 +948,15 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Set minimum date to today for all date inputs
-document.addEventListener('DOMContentLoaded', function() {
-    const today = new Date().toISOString().split('T')[0];
-    const dateInputs = document.querySelectorAll('input[type="date"]');
-    dateInputs.forEach(input => {
-        input.min = today;
-    });
-});
-
-// Navbar scroll effect
+// Enhanced Navbar scroll effect
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    if (navbar) {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     }
 });
 
@@ -656,7 +977,7 @@ const observer = new IntersectionObserver(function(entries) {
 
 // Observe all cards for animation
 document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.room-card, .food-card, .sport-card, .service-card, .nightclub-card, .amenity-card');
+    const cards = document.querySelectorAll('.room-card, .food-card, .sport-card, .service-card, .nightclub-card, .amenity-card, .gate-ticket-card');
     cards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';

@@ -3,29 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>360 Degree Hotel</title>
+    <title>360 Degree Hotel - Luxury Hospitality Experience</title>
     <link rel="stylesheet" href="Css/styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="images/Logo.jpg" alt="360 Degree Global Ltd" class="logo-img">
-                <h2>360 Degree Global Estate ltd.</h2>
+                <img src="images/Logo.jpg" alt="360 Degree Hotel" class="logo-img">
+                <h2>360° HOTEL</h2>
             </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#rooms" class="nav-link">Rooms</a>
-                <a href="#dining" class="nav-link">Dining</a>
-                <a href="#sports" class="nav-link">Sports</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#nightclub" class="nav-link">Nightclub</a>
-                <a href="#amenities" class="nav-link">Amenities</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#rooms" class="nav-link">Rooms</a></li>
+                <li><a href="#dining" class="nav-link">Dining</a></li>
+                <li><a href="#gate-tickets" class="nav-link">Entry</a></li>
+                <li><a href="#sports" class="nav-link">Sports</a></li>
+                <!-- <li><a href="#services" class="nav-link">Services</a></li> -->
+                <li><a href="#nightclub" class="nav-link">Nightclub</a></li>
+                <!-- <li><a href="#amenities" class="nav-link">Amenities</a></li> -->
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#location" class="nav-link">Location</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li>
+                    <!-- <div class="service-status-nav">
+                        <div class="service-light-nav"></div>
+                        <span>24/7 Service</span>
+                    </div> -->
+                </li>
+            </ul>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -35,45 +43,120 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="hero" class="hero">
         <div class="hero-content">
             <h1>Welcome to 360 Degree Hotel</h1>
-            <p>Experience luxury and comfort from every angle</p>
-            <button class="cta-btn" onclick="scrollToSection('rooms')">Book Now</button>
+            <p>Experience luxury hospitality with world-class amenities and exceptional service</p>
+            <button class="cta-btn" onclick="scrollToSection('rooms')">Book Your Stay</button>
         </div>
     </section>
 
     <!-- Rooms Section -->
     <section id="rooms" class="section">
         <div class="container">
-            <h2 class="section-title">Our Rooms</h2>
+            <h2 class="section-title">Luxury Accommodations</h2>
             <div class="rooms-grid">
+                <!-- Deluxe Room -->
                 <div class="room-card">
-                    <img src="images/Standartd Room.jpg" alt="Standard Room">
+                    <div class="image-gallery" data-gallery="deluxe-room">
+                        <div class="gallery-container">
+                            <img src="/images/Standartd Room.jpg" alt="Deluxe Room" class="gallery-image active" data-description="Spacious deluxe room with modern amenities and city view">
+                            <img src="/images/Standartd Room.jpg" alt="Deluxe Room Bathroom" class="gallery-image" data-description="Luxurious bathroom with marble finishes and premium fixtures">
+                            <img src="/images/Standartd Room.jpg
+                            " alt="Deluxe Room View" class="gallery-image" data-description="Stunning city view from the deluxe room balcony">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('deluxe-room', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('deluxe-room', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('deluxe-room', 1)"></span>
+                            <span class="dot" onclick="currentImage('deluxe-room', 2)"></span>
+                            <span class="dot" onclick="currentImage('deluxe-room', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Spacious deluxe room with modern amenities and city view</span>
+                        </div>
+                    </div>
                     <div class="room-info">
                         <h3>Standard Room</h3>
-                        <p>Comfortable accommodation with modern amenities and city view</p>
-                        <p>Without Acces to Sport Center</p>
-                        <div class="price">₦15,000 <span>/night</span></div>
-                        <button class="book-btn" onclick="openBookingModal('Standard Room', 15000)">Book Now</button>
+                        <p>Spacious room with modern amenities, city view, and premium comfort for the perfect stay.</p>
+                        <p>without Access to Sport Center</p>
+                        <div class="price">₦15,000 <span>per night</span></div>
+                        <button class="book-btn" onclick="openBookingModal('Deluxe Room', 15000)">Book Now</button>
                     </div>
                 </div>
+
+                <!-- Executive Suite -->
                 <!-- <div class="room-card">
-                    <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800" alt="VIP Suite">
+                    <div class="image-gallery" data-gallery="executive-suite">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Executive Suite" class="gallery-image active" data-description="Elegant executive suite with separate living area and work space">
+                            <img src="https://images.pexels.com/photos/1743227/pexels-photo-1743227.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Executive Suite Living" class="gallery-image" data-description="Comfortable living area with premium furniture and entertainment system">
+                            <img src="https://images.pexels.com/photos/1743366/pexels-photo-1743366.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Executive Suite Bedroom" class="gallery-image" data-description="Master bedroom with king-size bed and luxury linens">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('executive-suite', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('executive-suite', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('executive-suite', 1)"></span>
+                            <span class="dot" onclick="currentImage('executive-suite', 2)"></span>
+                            <span class="dot" onclick="currentImage('executive-suite', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Elegant executive suite with separate living area and work space</span>
+                        </div>
+                    </div>
                     <div class="room-info">
-                        <h3>VIP Suite</h3>
-                        <p>Luxurious suite with premium facilities and panoramic city view</p>
-                        <div class="price">₦75,000 <span>/night</span></div>
-                        <button class="book-btn" onclick="openBookingModal('VIP Suite', 75000)">Book Now</button>
+                        <h3>Executive Suite</h3>
+                        <p>Luxurious suite with separate living area, work space, and premium amenities for business travelers.</p>
+                        <div class="price">₦45,000 <span>per night</span></div>
+                        <button class="book-btn" onclick="openBookingModal('Executive Suite', 45000)">Book Now</button>
                     </div>
                 </div> -->
+
+                <!-- Presidential Suite -->
                 <div class="room-card">
-                    <img src="images/Presdential Room.jpg" alt="Presidential Suite">
+                    <div class="image-gallery" data-gallery="presidential-suite">
+                        <div class="gallery-container">
+                            <img src="/images/Presdential Room.jpg" alt="Presidential Suite" class="gallery-image active" data-description="Opulent presidential suite with panoramic city views and luxury amenities">
+                            <img src="/images/Presdential Room.jpg" alt="Presidential Suite Dining" class="gallery-image" data-description="Private dining area with crystal chandelier and fine dining setup">
+                            <img src="/images/Presdential Room.jpg" alt="Presidential Suite Spa" class="gallery-image" data-description="Private spa bathroom with jacuzzi and premium marble finishes">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('presidential-suite', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('presidential-suite', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('presidential-suite', 1)"></span>
+                            <span class="dot" onclick="currentImage('presidential-suite', 2)"></span>
+                            <span class="dot" onclick="currentImage('presidential-suite', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Opulent presidential suite with panoramic city views and luxury amenities</span>
+                        </div>
+                    </div>
                     <div class="room-info">
                         <h3>Appartment</h3>
-                        <p>Ultimate luxury with private balcony, jacuzzi, and exclusive services</p>
-                        <p>Acces to Sport without Complementry</p>
-                        <div class="price">₦25,000 <span>/night</span></div>
+                        <p>The ultimate luxury experience with panoramic views, private dining, and exclusive amenities.</p>
+                        <p>Acces to Sport Wothout Complementry</p>
+                        <div class="price">₦25,000 <span>per night</span></div>
                         <button class="book-btn" onclick="openBookingModal('Presidential Suite', 25000)">Book Now</button>
                     </div>
                 </div>
@@ -84,33 +167,248 @@
     <!-- Dining Section -->
     <section id="dining" class="section bg-light">
         <div class="container">
-            <h2 class="section-title">Restaurant & Dining</h2>
+            <h2 class="section-title">Culinary Excellence</h2>
+            
+            <!-- Kitchen Overview -->
+            <div class="kitchen-overview">
+                <div class="kitchen-showcase">
+                    <div class="image-gallery" data-gallery="kitchen-overview">
+                        <div class="gallery-container">
+                            <img src="/images/chek 2.jpg" alt="Professional Kitchen" class="gallery-image active" data-description="State-of-the-art professional kitchen with modern equipment and expert chefs">
+                            <img src="/images/chek 1.jpg" alt="Chef Preparation" class="gallery-image" data-description="Master chefs preparing gourmet dishes with fresh, premium ingredients">
+                            <img src="/images/chek 2.jpg" alt="Food Plating" class="gallery-image" data-description="Artistic food presentation and plating by our culinary experts">
+                            <img src="/images/chek 1.jpg" alt="Kitchen Team" class="gallery-image" data-description="Professional kitchen team working together to deliver exceptional dining experiences">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('kitchen-overview', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('kitchen-overview', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">4</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('kitchen-overview', 1)"></span>
+                            <span class="dot" onclick="currentImage('kitchen-overview', 2)"></span>
+                            <span class="dot" onclick="currentImage('kitchen-overview', 3)"></span>
+                            <span class="dot" onclick="currentImage('kitchen-overview', 4)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">State-of-the-art professional kitchen with modern equipment and expert chefs</span>
+                        </div>
+                    </div>
+                    <div class="kitchen-info">
+                        <h3><i class="fas fa-utensils"></i>Our Kitchen Excellence</h3>
+                        <p>Experience culinary artistry at its finest. Our world-class kitchen features state-of-the-art equipment and a team of master chefs dedicated to creating exceptional dining experiences. From farm-to-table ingredients to innovative cooking techniques, every dish is crafted with passion and precision.</p>
+                        <div class="kitchen-features">
+                            <div class="feature-item">
+                                <i class="fas fa-award"></i>
+                                <span>Award-Winning Chefs</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-leaf"></i>
+                                <span>Fresh Ingredients</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-fire"></i>
+                                <span>Modern Equipment</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-clock"></i>
+                                <span>24/7 Room Service</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="dining-grid">
+                <!-- Continental Breakfast -->
                 <div class="food-card">
-                    <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Continental Breakfast">
+                    <div class="image-gallery" data-gallery="continental-breakfast">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Continental Breakfast" class="gallery-image active" data-description="Fresh continental breakfast with pastries, fruits, and premium coffee">
+                            <img src="https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fresh Pastries" class="gallery-image" data-description="Freshly baked croissants and pastries made daily by our bakers">
+                            <img src="https://images.pexels.com/photos/1640775/pexels-photo-1640775.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Coffee Selection" class="gallery-image" data-description="Premium coffee selection and fresh fruit arrangements">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('continental-breakfast', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('continental-breakfast', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('continental-breakfast', 1)"></span>
+                            <span class="dot" onclick="currentImage('continental-breakfast', 2)"></span>
+                            <span class="dot" onclick="currentImage('continental-breakfast', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Fresh continental breakfast with pastries, fruits, and premium coffee</span>
+                        </div>
+                    </div>
                     <div class="food-info">
                         <h3>Continental Breakfast</h3>
-                        <p>Fresh pastries, fruits, and premium coffee</p>
-                        <div class="price">₦8,500</div>
+                        <p>Start your day with fresh pastries, seasonal fruits, premium coffee, and healthy options.</p>
+                        <div class="price">₦8,500 <span>per person</span></div>
                         <button class="order-btn" onclick="openFoodModal('Continental Breakfast', 8500)">Order Now</button>
                     </div>
                 </div>
+
+                <!-- Gourmet Lunch -->
                 <div class="food-card">
-                    <img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Grilled Chicken">
+                    <div class="image-gallery" data-gallery="gourmet-lunch">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Gourmet Lunch" class="gallery-image active" data-description="Exquisite gourmet lunch featuring international and local cuisine">
+                            <img src="https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Main Course" class="gallery-image" data-description="Perfectly prepared main course with artistic presentation">
+                            <img src="https://images.pexels.com/photos/1640776/pexels-photo-1640776.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Appetizers" class="gallery-image" data-description="Delicious appetizers and side dishes to complement your meal">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('gourmet-lunch', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('gourmet-lunch', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('gourmet-lunch', 1)"></span>
+                            <span class="dot" onclick="currentImage('gourmet-lunch', 2)"></span>
+                            <span class="dot" onclick="currentImage('gourmet-lunch', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Exquisite gourmet lunch featuring international and local cuisine</span>
+                        </div>
+                    </div>
                     <div class="food-info">
-                        <h3>Grilled Chicken Deluxe</h3>
-                        <p>Perfectly seasoned grilled chicken with sides</p>
-                        <div class="price">₦15,000</div>
-                        <button class="order-btn" onclick="openFoodModal('Grilled Chicken Deluxe', 15000)">Order Now</button>
+                        <h3>Gourmet Lunch</h3>
+                        <p>Savor our chef's special lunch menu featuring international and local delicacies.</p>
+                        <div class="price">₦15,000 <span>per person</span></div>
+                        <button class="order-btn" onclick="openFoodModal('Gourmet Lunch', 15000)">Order Now</button>
                     </div>
                 </div>
+
+                <!-- Fine Dining Dinner -->
                 <div class="food-card">
-                    <img src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seafood Platter">
+                    <div class="image-gallery" data-gallery="fine-dining">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/1640778/pexels-photo-1640778.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fine Dining" class="gallery-image active" data-description="Elegant fine dining experience with premium ingredients and wine pairing">
+                            <img src="https://images.pexels.com/photos/1640779/pexels-photo-1640779.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wine Pairing" class="gallery-image" data-description="Carefully selected wine pairings to complement each course">
+                            <img src="https://images.pexels.com/photos/1640780/pexels-photo-1640780.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dessert Course" class="gallery-image" data-description="Artisanal desserts crafted by our pastry chef">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('fine-dining', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('fine-dining', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('fine-dining', 1)"></span>
+                            <span class="dot" onclick="currentImage('fine-dining', 2)"></span>
+                            <span class="dot" onclick="currentImage('fine-dining', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Elegant fine dining experience with premium ingredients and wine pairing</span>
+                        </div>
+                    </div>
                     <div class="food-info">
-                        <h3>Seafood Platter</h3>
-                        <p>Fresh seafood selection with exotic sauces</p>
-                        <div class="price">₦22,000</div>
-                        <button class="order-btn" onclick="openFoodModal('Seafood Platter', 22000)">Order Now</button>
+                        <h3>Fine Dining Dinner</h3>
+                        <p>An exquisite multi-course dinner experience with wine pairing and premium ingredients.</p>
+                        <div class="price">₦35,000 <span>per person</span></div>
+                        <button class="order-btn" onclick="openFoodModal('Fine Dining Dinner', 35000)">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Room Service -->
+                <div class="food-card">
+                    <div class="image-gallery" data-gallery="room-service">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/1640781/pexels-photo-1640781.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Room Service" class="gallery-image active" data-description="24/7 room service delivering gourmet meals to your room">
+                            <img src="https://images.pexels.com/photos/1640782/pexels-photo-1640782.jpeg?auto=compress&cs=tinysrgb&w=800" alt="In-Room Dining" class="gallery-image" data-description="Elegant in-room dining setup with premium tableware">
+                            <img src="https://images.pexels.com/photos/1640783/pexels-photo-1640783.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Late Night Menu" class="gallery-image" data-description="Special late-night menu available for your convenience">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('room-service', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('room-service', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('room-service', 1)"></span>
+                            <span class="dot" onclick="currentImage('room-service', 2)"></span>
+                            <span class="dot" onclick="currentImage('room-service', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">24/7 room service delivering gourmet meals to your room</span>
+                        </div>
+                    </div>
+                    <div class="food-info">
+                        <h3>24/7 Room Service</h3>
+                        <p>Enjoy gourmet meals in the comfort of your room with our round-the-clock room service.</p>
+                        <div class="price">₦12,000 <span>per order</span></div>
+                        <button class="order-btn" onclick="openFoodModal('24/7 Room Service', 12000)">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gate Tickets Section -->
+    <section id="gate-tickets" class="section">
+        <div class="container">
+            <h2 class="section-title">Hotel Gate Entry</h2>
+            
+            <div class="gate-notice">
+                <div class="notice-content">
+                    <div class="notice-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notice-text">
+                        <h3>Gate Entry Requirement</h3>
+                        <p>All visitors must purchase a gate entry ticket to access the hotel premises. This ensures security and helps us provide the best service to our guests. Your gate ticket serves as your access pass to all hotel facilities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gate-tickets-grid">
+                <div class="gate-ticket-card">
+                    <div class="ticket-header">
+                        <div class="ticket-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <h3>Hotel Gate Entry Ticket</h3>
+                    </div>
+                    <div class="ticket-info">
+                        <p>Secure your access to 360 Degree Hotel with our gate entry ticket. This ticket grants you entry to the hotel premises and access to all public areas including lobby, restaurants, and common facilities.</p>
+                        
+                        <div class="access-includes">
+                            <h4>Entry Includes:</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Hotel premises access</li>
+                                <li><i class="fas fa-check"></i> Sports & Entertainment</li>
+                                <li><i class="fas fa-check"></i> Lobby and reception areas</li>
+                                <li><i class="fas fa-check"></i> Restaurant and dining areas</li>
+                                <li><i class="fas fa-check"></i> Common facilities access</li>
+                                <li><i class="fas fa-check"></i> Parking area access</li>
+                                <li><i class="fas fa-check"></i> Garden and outdoor spaces</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="price special-price">
+                            ₦1,000 <span>per person/day</span>
+                            <small>Valid for 24 hours from time of entry</small>
+                        </div>
+                        <button class="book-btn" onclick="openGateTicketModal('Hotel Gate Entry Ticket', 1000, 'general')">Purchase Ticket</button>
                     </div>
                 </div>
             </div>
@@ -118,129 +416,287 @@
     </section>
 
     <!-- Sports Section -->
-    <section id="sports" class="section">
+    <section id="sports" class="section bg-light">
         <div class="container">
             <h2 class="section-title">Sports & Entertainment</h2>
             <div class="sports-grid">
                 <div class="sport-card">
-                    <i class="fas fa-futbol sport-icon"></i>
-                    <h3>Football Match Tickets</h3>
-                    <p>Premium seats for local and international matches</p>
-                    <div class="price">₦12,000 <span>/ticket</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Football Match Tickets', 12000)">Book Tickets</button>
+                    <div class="sport-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3>Football Field</h3>
+                    <p>Professional-grade football field with premium turf and lighting for day and night games.</p>
+                    <div class="price">₦15,000 <span>per hour</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Football Field', 15000)">Book Now</button>
                 </div>
+
                 <div class="sport-card">
-                    <i class="fas fa-basketball-ball sport-icon"></i>
-                    <h3>Basketball Game</h3>
-                    <p>Courtside seats for exciting basketball tournaments</p>
-                    <div class="price">₦10,000 <span>/ticket</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Basketball Game', 10000)">Book Tickets</button>
+                    <div class="sport-icon">
+                        <i class="fas fa-basketball-ball"></i>
+                    </div>
+                    <h3>Basketball Court</h3>
+                    <p>Indoor basketball court with professional flooring and adjustable hoops for all skill levels.</p>
+                    <div class="price">₦10,000 <span>per hour</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Basketball Court', 10000)">Book Now</button>
                 </div>
+
                 <div class="sport-card">
-                    <i class="fas fa-table-tennis sport-icon"></i>
-                    <h3>Tennis Tournament</h3>
-                    <p>VIP access to professional tennis championships</p>
-                    <div class="price">₦18,000 <span>/ticket</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Tennis Tournament', 18000)">Book Tickets</button>
+                    <div class="sport-icon">
+                        <i class="fas fa-table-tennis"></i>
+                    </div>
+                    <h3>Table Tennis</h3>
+                    <p>Multiple table tennis tables in air-conditioned environment with professional equipment.</p>
+                    <div class="price">₦5,000 <span>per hour</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Table Tennis', 5000)">Book Now</button>
                 </div>
+
                 <div class="sport-card">
-                    <i class="fas fa-running sport-icon"></i>
-                    <h3>Soccer Championship</h3>
-                    <p>Premium seats for exciting soccer matches and tournaments</p>
-                    <div class="price">₦15,000 <span>/ticket</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Soccer Championship', 15000)">Book Tickets</button>
+                    <div class="sport-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Fitness Center</h3>
+                    <p>State-of-the-art gym with modern equipment, personal trainers, and wellness programs.</p>
+                    <div class="price">₦8,000 <span>per session</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Fitness Center', 8000)">Book Now</button>
                 </div>
+
                 <div class="sport-card">
-                    <i class="fas fa-circle sport-icon"></i>
-                    <h3>Snooker Tournament</h3>
-                    <p>VIP access to professional snooker championships and matches</p>
-                    <div class="price">₦14,000 <span>/ticket</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Snooker Tournament', 14000)">Book Tickets</button>
+                    <div class="sport-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Gaming Lounge</h3>
+                    <p>Premium gaming setup with latest consoles, PC gaming stations, and comfortable seating.</p>
+                    <div class="price">₦6,000 <span>per hour</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Gaming Lounge', 6000)">Book Now</button>
                 </div>
+
                 <div class="sport-card">
-                    <i class="fas fa-volleyball-ball sport-icon"></i>
-                    <h3>Volleyball Championship</h3>
-                    <p>Premium seats for exciting volleyball matches and tournaments</p>
-                    <div class="price">₦11,000 <span>/ticket</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Volleyball Championship', 11000)">Book Tickets</button>
-                </div>
-                <div class="sport-card">
-                    <i class="fas fa-dumbbell sport-icon"></i>
-                    <h3>Gym Access</h3>
-                    <p>Full access to our state-of-the-art fitness center</p>
-                    <div class="price">₦5,000 <span>/day</span></div>
-                    <button class="book-btn" onclick="openSportsModal('Gym Access', 5000)">Book Access</button>
+                    <div class="sport-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3>Chess & Board Games</h3>
+                    <p>Quiet area for chess, checkers, and various board games in a relaxing environment.</p>
+                    <div class="price">₦3,000 <span>per hour</span></div>
+                    <button class="book-btn" onclick="openSportsModal('Chess & Board Games', 3000)">Book Now</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="section bg-light">
+    <section id="services" class="section">
         <div class="container">
-            <h2 class="section-title">Hotel Services</h2>
+            <h2 class="section-title">Premium Services</h2>
             <div class="services-grid">
+                <!-- Event Center Hall -->
                 <div class="service-card">
-                    <img src="images/Event.jpg" alt="Event Center Hall">
+                    <div class="image-gallery" data-gallery="event-hall">
+                        <div class="gallery-container">
+                            <img src="/images/event 1.jpg" alt="Event Hall" class="gallery-image active" data-description="Elegant event hall perfect for weddings, conferences, and special occasions">
+                            <img src="/images/event 2.jpg" alt="Wedding Setup" class="gallery-image" data-description="Beautiful wedding setup with premium decorations and lighting">
+                            <img src="/images/Event.jpg" alt="Conference Setup" class="gallery-image" data-description="Professional conference setup with modern AV equipment">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('event-hall', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('event-hall', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('event-hall', 1)"></span>
+                            <span class="dot" onclick="currentImage('event-hall', 2)"></span>
+                            <span class="dot" onclick="currentImage('event-hall', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Elegant event hall perfect for weddings, conferences, and special occasions</span>
+                        </div>
+                    </div>
                     <div class="service-info">
                         <h3>Event Center Hall</h3>
-                        <p>Spacious hall for weddings, conferences, and special events with full catering</p>
-                        <div class="price">₦200,000 <span>/day</span></div>
-                        <button class="book-btn" onclick="openServiceModal('Event Center Hall', 200000)">Book Hall</button>
+                        <p>Spacious event hall perfect for weddings, conferences, and special celebrations with full catering service.</p>
+                        <div class="price">₦70,000 <span>per day</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Event Center Hall', 70000)">Book Now</button>
                     </div>
                 </div>
+
+                <!-- Salon -->
                 <div class="service-card">
-                    <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Salon Services">
+                    <div class="image-gallery" data-gallery="salon">
+                        <div class="gallery-container">
+                            <img src="/images/Saloon 3.jpg" alt="Salon" class="gallery-image active" data-description="Modern unisex salon with professional stylists and premium treatments">
+                            <img src="/images/saloon 2.jpg" alt="Hair Styling" class="gallery-image" data-description="Expert hair styling and coloring services for all hair types">
+                            <img src="/images/Sloon 4.jpg" alt="Spa Treatment" class="gallery-image" data-description="Relaxing spa treatments and beauty services">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('salon', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('salon', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('salon', 1)"></span>
+                            <span class="dot" onclick="currentImage('salon', 2)"></span>
+                            <span class="dot" onclick="currentImage('salon', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Modern unisex salon with professional stylists and premium treatments</span>
+                        </div>
+                    </div>
                     <div class="service-info">
                         <h3>Salon (Unisex)</h3>
-                        <p>Professional hair styling, manicure, pedicure, and beauty treatments</p>
-                        <div class="price">₦25,000 <span>/session</span></div>
-                        <button class="book-btn" onclick="openServiceModal('Salon (Unisex)', 25000)">Book Session</button>
+                        <p>Professional hair styling, beauty treatments, and spa services for both men and women.</p>
+                        <div class="price">₦5,000 <span>per session</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Salon (Unisex)', 5000)">Book Now</button>
                     </div>
                 </div>
+
+                <!-- Premium Bar
                 <div class="service-card">
-                    <img src="https://images.pexels.com/photos/274192/pexels-photo-274192.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hotel Bar">
+                    <div class="image-gallery" data-gallery="premium-bar">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/274192/pexels-photo-274192.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Premium Bar" class="gallery-image active" data-description="Sophisticated premium bar with extensive wine and cocktail selection">
+                            <img src="https://images.pexels.com/photos/274193/pexels-photo-274193.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cocktail Service" class="gallery-image" data-description="Expert mixologists crafting signature cocktails and premium drinks">
+                            <img src="https://images.pexels.com/photos/274194/pexels-photo-274194.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wine Collection" class="gallery-image" data-description="Extensive wine collection from around the world">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('premium-bar', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('premium-bar', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('premium-bar', 1)"></span>
+                            <span class="dot" onclick="currentImage('premium-bar', 2)"></span>
+                            <span class="dot" onclick="currentImage('premium-bar', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Sophisticated premium bar with extensive wine and cocktail selection</span>
+                        </div>
+                    </div>
                     <div class="service-info">
                         <h3>Premium Bar</h3>
-                        <p>Exclusive bar with premium drinks, cocktails, and live entertainment</p>
-                        <div class="price">₦15,000 <span>/person</span></div>
-                        <button class="book-btn" onclick="openServiceModal('Premium Bar', 15000)">Reserve Table</button>
+                        <p>Sophisticated bar experience with premium spirits, wines, and expertly crafted cocktails.</p>
+                        <div class="price">₦18,000 <span>per hour</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Premium Bar', 18000)">Book Now</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Nightclub Section -->
-    <section id="nightclub" class="section">
+    <section id="nightclub" class="section bg-light">
         <div class="container">
-            <h2 class="section-title">Nightclub & Entertainment</h2>
+            <h2 class="section-title">Nightclub Experience</h2>
             <div class="nightclub-grid">
+                <!-- VIP Lounge -->
                 <div class="nightclub-card">
-                    <img src="images/regular at night.jpg" alt="VIP Nightclub">
+                    <div class="image-gallery" data-gallery="vip-lounge">
+                        <div class="gallery-container">
+                            <img src="/images/Night club.jpg" alt="VIP Lounge" class="gallery-image active" data-description="Exclusive VIP lounge with premium seating and bottle service">
+                            <img src="/images/night life.jpg" alt="VIP Seating" class="gallery-image" data-description="Luxurious VIP seating area with personalized service">
+                            <img src="https://images.pexels.com/photos/2747451/pexels-photo-2747451.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bottle Service" class="gallery-image" data-description="Premium bottle service with top-shelf spirits">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('vip-lounge', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('vip-lounge', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('vip-lounge', 1)"></span>
+                            <span class="dot" onclick="currentImage('vip-lounge', 2)"></span>
+                            <span class="dot" onclick="currentImage('vip-lounge', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Exclusive VIP lounge with premium seating and bottle service</span>
+                        </div>
+                    </div>
                     <div class="nightclub-info">
-                        <h3>Regular Nightclub Access</h3>
-                        <p>Exclusive access to our premium nightclub with live DJ and premium drinks</p>
-                        <div class="price">₦20,000 <span>/person</span></div>
-                        <button class="book-btn" onclick="openNightclubModal('Regular Nightclub Access', 20000)">Book Entry</button>
+                        <h3>VIP Lounge Experience</h3>
+                        <p>Exclusive VIP area with premium bottle service, private seating, and personalized attention.</p>
+                        <div class="price">₦5,000 <span>per person</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('VIP Lounge Experience', 5000)">Book Now</button>
                     </div>
                 </div>
+
+                <!-- Dance Floor -->
                 <div class="nightclub-card">
-                    <img src="images/vip at night.jpg" alt="Private Booth">
+                    <div class="image-gallery" data-gallery="dance-floor">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/2747452/pexels-photo-2747452.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dance Floor" class="gallery-image active" data-description="Energetic dance floor with professional DJ and lighting system">
+                            <img src="https://images.pexels.com/photos/2747453/pexels-photo-2747453.jpeg?auto=compress&cs=tinysrgb&w=800" alt="DJ Booth" class="gallery-image" data-description="Professional DJ booth with state-of-the-art sound system">
+                            <img src="https://images.pexels.com/photos/2747454/pexels-photo-2747454.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Light Show" class="gallery-image" data-description="Spectacular light show and visual effects">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('dance-floor', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('dance-floor', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('dance-floor', 1)"></span>
+                            <span class="dot" onclick="currentImage('dance-floor', 2)"></span>
+                            <span class="dot" onclick="currentImage('dance-floor', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Energetic dance floor with professional DJ and lighting system</span>
+                        </div>
+                    </div>
                     <div class="nightclub-info">
-                        <h3>Private VIP Booth</h3>
-                        <p>Private booth with bottle service and dedicated waitstaff for up to 8 people</p>
-                        <div class="price">₦80,000 <span>/night</span></div>
-                        <button class="book-btn" onclick="openNightclubModal('Private VIP Booth', 80000)">Reserve Booth</button>
+                        <h3>Main Dance Floor</h3>
+                        <p>High-energy dance floor with professional DJs, premium sound system, and spectacular lighting.</p>
+                        <div class="price">₦25,000 <span>per person</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('Main Dance Floor', 25000)">Book Now</button>
                     </div>
                 </div>
+
+                <!-- Private Party Room -->
                 <div class="nightclub-card">
-                    <img src="images/Night club.jpg" alt="Live Music">
+                    <div class="image-gallery" data-gallery="private-party">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/2747455/pexels-photo-2747455.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Private Party" class="gallery-image active" data-description="Exclusive private party room for intimate celebrations">
+                            <img src="https://images.pexels.com/photos/2747456/pexels-photo-2747456.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Party Setup" class="gallery-image" data-description="Customizable party setup with premium amenities">
+                            <img src="https://images.pexels.com/photos/2747457/pexels-photo-2747457.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Celebration" class="gallery-image" data-description="Perfect venue for birthday parties and special celebrations">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('private-party', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('private-party', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('private-party', 1)"></span>
+                            <span class="dot" onclick="currentImage('private-party', 2)"></span>
+                            <span class="dot" onclick="currentImage('private-party', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Exclusive private party room for intimate celebrations</span>
+                        </div>
+                    </div>
                     <div class="nightclub-info">
-                        <h3>Live Music Events</h3>
-                        <p>Special events featuring live bands and celebrity performances</p>
-                        <div class="price">₦35,000 <span>/ticket</span></div>
-                        <button class="book-btn" onclick="openNightclubModal('Live Music Events', 35000)">Buy Tickets</button>
+                        <h3>Private Party Room</h3>
+                        <p>Exclusive private space for intimate parties, birthdays, and special celebrations.</p>
+                        <div class="price">₦75,000 <span>per person</span></div>
+                        <button class="book-btn" onclick="openNightclubModal('Private Party Room', 75000)">Book Now</button>
                     </div>
                 </div>
             </div>
@@ -248,17 +704,75 @@
     </section>
 
     <!-- Amenities Section -->
-    <section id="amenities" class="section bg-light">
+    <section id="amenities" class="section">
         <div class="container">
-            <h2 class="section-title">Pool & Amenities</h2>
+            <h2 class="section-title">Hotel Amenities</h2>
             <div class="amenities-grid">
+                <!-- Swimming Pool -->
                 <div class="amenity-card">
-                    <img src="images/pool 2.jpg" alt="Swimming Pool">
+                    <div class="image-gallery" data-gallery="swimming-pool">
+                        <div class="gallery-container">
+                            <img src="/images/pool 2.jpg" alt="Swimming Pool" class="gallery-image active" data-description="Luxurious outdoor swimming pool with poolside service">
+                            <img src="/images/about.jpg" alt="Pool Deck" class="gallery-image" data-description="Spacious pool deck with comfortable loungers and umbrellas">
+                            <img src="/images/Hero.jpg" alt="Pool Bar" class="gallery-image" data-description="Poolside bar serving refreshing drinks and light snacks">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('swimming-pool', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('swimming-pool', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('swimming-pool', 1)"></span>
+                            <span class="dot" onclick="currentImage('swimming-pool', 2)"></span>
+                            <span class="dot" onclick="currentImage('swimming-pool', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Luxurious outdoor swimming pool with poolside service</span>
+                        </div>
+                    </div>
                     <div class="amenity-info">
-                        <h3>Swimming Pool Access</h3>
-                        <p>Relax in our Olympic-sized swimming pool with poolside service</p>
-                        <div class="price">₦3,000 <span>/day</span></div>
-                        <button class="book-btn" onclick="openPoolModal('Swimming Pool Access', 3000)">Book Access</button>
+                        <h3>Swimming Pool</h3>
+                        <p>Relax by our beautiful outdoor pool with poolside service, comfortable loungers, and refreshing drinks.</p>
+                        <div class="price">₦8,000 <span>per day</span></div>
+                        <button class="book-btn" onclick="openPoolModal('Swimming Pool Access', 8000)">Book Access</button>
+                    </div>
+                </div>
+
+                <!-- Spa & Wellness -->
+                <div class="amenity-card">
+                    <div class="image-gallery" data-gallery="spa-wellness">
+                        <div class="gallery-container">
+                            <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Spa" class="gallery-image active" data-description="Tranquil spa environment with professional massage and wellness treatments">
+                            <img src="https://images.pexels.com/photos/3757943/pexels-photo-3757943.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Massage Room" class="gallery-image" data-description="Private massage rooms with experienced therapists">
+                            <img src="https://images.pexels.com/photos/3757944/pexels-photo-3757944.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wellness Center" class="gallery-image" data-description="Complete wellness center with sauna and relaxation areas">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('spa-wellness', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('spa-wellness', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('spa-wellness', 1)"></span>
+                            <span class="dot" onclick="currentImage('spa-wellness', 2)"></span>
+                            <span class="dot" onclick="currentImage('spa-wellness', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Tranquil spa environment with professional massage and wellness treatments</span>
+                        </div>
+                    </div>
+                    <div class="amenity-info">
+                        <h3>Spa & Wellness Center</h3>
+                        <p>Rejuvenate your body and mind with our comprehensive spa services, massages, and wellness treatments.</p>
+                        <div class="price">₦35,000 <span>per session</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Spa & Wellness Center', 35000)">Book Session</button>
                     </div>
                 </div>
             </div>
@@ -266,28 +780,111 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
+    <section id="about" class="section bg-light">
         <div class="container">
             <h2 class="section-title">About 360 Degree Hotel</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>At 360 Degree Hotel, we provide a complete hospitality experience from every angle. Our commitment to excellence ensures that every guest enjoys luxury, comfort, and exceptional service throughout their stay.</p>
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <i class="fas fa-wifi"></i>
-                            <span>Free Wi-Fi</span>
+                    <p>360 Degree Hotel represents the pinnacle of luxury hospitality, offering an unparalleled experience that encompasses every aspect of premium accommodation and entertainment. Our commitment to excellence is reflected in every detail, from our elegantly appointed rooms to our world-class amenities.</p>
+                    <p>Located in the heart of Lagos, we provide a complete hospitality ecosystem featuring luxury accommodations, fine dining, sports facilities, entertainment venues, and comprehensive wellness services. Our 24/7 service ensures that every guest receives exceptional care at any hour.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-star"></i>
+                        <span>5-Star Luxury</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Premium Service</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-utensils"></i>
+                        <span>Fine Dining</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>Sports Facilities</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-music"></i>
+                        <span>Entertainment</span>
+                    </div>
+                    <div class="service-status">
+                        <h4>24/7 Service Available</h4>
+                        <div class="service-light"></div>
+                        <p>Round-the-clock service for all your needs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Location</h2>
+            <div class="location-content">
+                <div class="location-info">
+                    <div class="location-details">
+                        <h3>Find Us</h3>
+                        <div class="address-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Paradise Street, Victoria Island, Lagos, Nigeria</span>
                         </div>
-                        <div class="feature-item">
+                        <div class="address-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+234 916 316 1616</span>
+                        </div>
+                        <div class="address-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@360degreehotel.com</span>
+                        </div>
+                        <div class="address-item">
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 Reception & Service</span>
+                        </div>
+                    </div>
+                    <div class="directions-btn">
+                        <button class="get-directions" onclick="openDirections()">
+                            <i class="fas fa-directions"></i>
+                            Get Directions
+                        </button>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div class="interactive-map">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.7891234567!2d3.4205678!3d6.4281234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMjUnNDEuMiJOIDPCsDI1JzE0LjAiRQ!5e0!3m2!1sen!2sng!4v1234567890123!5m2!1sen!2sng" 
+                            width="100%" 
+                            height="400" 
+                            style="border:0; border-radius: 15px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <div class="map-overlay">
+                            <div class="hotel-marker">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>360 Degree Hotel</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-features">
+                        <div class="feature-tag">
                             <i class="fas fa-car"></i>
                             <span>Free Parking</span>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-concierge-bell"></i>
-                            <span>24/7 Room Service</span>
+                        <div class="feature-tag">
+                            <i class="fas fa-plane"></i>
+                            <span>Airport Shuttle</span>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-spa"></i>
-                            <span>Spa & Wellness</span>
+                        <div class="feature-tag">
+                            <i class="fas fa-subway"></i>
+                            <span>Metro Access</span>
+                        </div>
+                        <div class="feature-tag">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Shopping Nearby</span>
                         </div>
                     </div>
                 </div>
@@ -302,15 +899,15 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>+234 801 234 5678</span>
+                    <span>+234 916 316 1616</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
                     <span>info@360degreehotel.com</span>
                 </div>
                 <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>123 Paradise Street, Lagos, Nigeria</span>
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp Booking</span>
                 </div>
             </div>
         </div>
@@ -322,53 +919,49 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="images/Logo.jpg" alt="360 Degree Global Ltd" class="footer-logo-img">
-                        <h3>360 Degree Hotel</h3>
+                        <img src="images/Logo.jpg" alt="360 Degree Hotel" class="footer-logo-img">
+                        <h3>360° HOTEL</h3>
                     </div>
-                    <p>Experience luxury and comfort from every angle. Your perfect stay awaits at our world-class hotel.</p>
+                    <p>Experience luxury hospitality with world-class amenities and exceptional service. Your comfort is our priority.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
                         <li><a href="#rooms">Rooms</a></li>
                         <li><a href="#dining">Dining</a></li>
                         <li><a href="#sports">Sports</a></li>
                         <li><a href="#services">Services</a></li>
-                        <li><a href="#nightclub">Nightclub</a></li>
                         <li><a href="#amenities">Amenities</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="#rooms">Room Booking</a></li>
-                        <li><a href="#dining">Food Ordering</a></li>
-                        <li><a href="#sports">Event Tickets</a></li>
+                        <li><a href="#gate-tickets">Gate Entry</a></li>
+                        <li><a href="#nightclub">Nightclub</a></li>
+                        <li><a href="#amenities">Swimming Pool</a></li>
                         <li><a href="#services">Event Hall</a></li>
-                        <li><a href="#services">Salon & Bar</a></li>
-                        <li><a href="#nightclub">Nightclub Entry</a></li>
-                        <li><a href="#amenities">Pool Access</a></li>
-                        <li><a href="#contact">Concierge</a></li>
+                        <li><a href="#services">Spa & Wellness</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Contact Info</h4>
                     <div class="contact-details">
-                        <p><i class="fas fa-phone"></i> +234 801 234 5678</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Paradise Street, Victoria Island, Lagos</p>
+                        <p><i class="fas fa-phone"></i> +234 916 316 1616</p>
                         <p><i class="fas fa-envelope"></i> info@360degreehotel.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Paradise Street, Lagos, Nigeria</p>
+                        <p><i class="fas fa-clock"></i> 24/7 Service Available</p>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 360 Degree Hotel. All rights reserved. | Privacy Policy | Terms of Service</p>
+                <p>&copy; 2024 360 Degree Hotel. All rights reserved. | Luxury Hospitality Experience</p>
             </div>
         </div>
     </footer>
@@ -377,40 +970,40 @@
     <div id="bookingModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('bookingModal')">&times;</span>
-            <h2>Book Your Room</h2>
+            <h2>Room Booking</h2>
             <form id="bookingForm">
                 <div class="form-group">
-                    <label>Room Type:</label>
+                    <label for="roomType">Room Type:</label>
                     <input type="text" id="roomType" readonly>
                 </div>
                 <div class="form-group">
-                    <label>Number of Nights:</label>
+                    <label for="nights">Number of Nights:</label>
                     <input type="number" id="nights" min="1" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Check-in Date:</label>
+                    <label for="checkinDate">Check-in Date:</label>
                     <input type="date" id="checkinDate" required>
                 </div>
                 <div class="form-group">
-                    <label>Check-out Date:</label>
+                    <label for="checkoutDate">Check-out Date:</label>
                     <input type="date" id="checkoutDate" required>
                 </div>
                 <div class="form-group">
-                    <label>Number of Guests:</label>
-                    <input type="number" id="guests" min="1" value="1" required>
+                    <label for="guests">Number of Guests:</label>
+                    <input type="number" id="guests" min="1" max="4" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Your Name:</label>
+                    <label for="guestName">Guest Name:</label>
                     <input type="text" id="guestName" required>
                 </div>
                 <div class="form-group">
-                    <label>Phone Number:</label>
+                    <label for="guestPhone">Phone Number:</label>
                     <input type="tel" id="guestPhone" required>
                 </div>
                 <div class="total-price">
-                    <strong>Total: ₦<span id="totalPrice">0</span></strong>
+                    Total: ₦<span id="totalPrice">0</span>
                 </div>
-                <button type="submit" class="submit-btn">Proceed to WhatsApp</button>
+                <button type="submit" class="submit-btn">Book via WhatsApp</button>
             </form>
         </div>
     </div>
@@ -419,36 +1012,78 @@
     <div id="foodModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('foodModal')">&times;</span>
-            <h2>Order Food</h2>
+            <h2>Food Order</h2>
             <form id="foodForm">
                 <div class="form-group">
-                    <label>Food Item:</label>
+                    <label for="foodItem">Food Item:</label>
                     <input type="text" id="foodItem" readonly>
                 </div>
                 <div class="form-group">
-                    <label>Quantity:</label>
+                    <label for="foodQuantity">Quantity:</label>
                     <input type="number" id="foodQuantity" min="1" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Special Instructions:</label>
-                    <textarea id="foodInstructions" rows="3"></textarea>
+                    <label for="foodInstructions">Special Instructions:</label>
+                    <textarea id="foodInstructions" rows="3" placeholder="Any special dietary requirements or preferences..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Your Name:</label>
+                    <label for="foodGuestName">Guest Name:</label>
                     <input type="text" id="foodGuestName" required>
                 </div>
                 <div class="form-group">
-                    <label>Room Number:</label>
-                    <input type="text" id="roomNumber" required>
+                    <label for="roomNumber">Room Number:</label>
+                    <input type="text" id="roomNumber" placeholder="For room service delivery">
                 </div>
                 <div class="form-group">
-                    <label>Phone Number:</label>
+                    <label for="foodGuestPhone">Phone Number:</label>
                     <input type="tel" id="foodGuestPhone" required>
                 </div>
                 <div class="total-price">
-                    <strong>Total: ₦<span id="foodTotalPrice">0</span></strong>
+                    Total: ₦<span id="foodTotalPrice">0</span>
                 </div>
                 <button type="submit" class="submit-btn">Order via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Gate Ticket Modal -->
+    <div id="gateTicketModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('gateTicketModal')">&times;</span>
+            <h2>Gate Entry Ticket</h2>
+            <form id="gateTicketForm">
+                <div class="form-group">
+                    <label for="gateTicketType">Ticket Type:</label>
+                    <input type="text" id="gateTicketType" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="gateTicketDays">Number of Days:</label>
+                    <input type="number" id="gateTicketDays" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateTicketPeople">Number of People:</label>
+                    <input type="number" id="gateTicketPeople" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateTicketDate">Entry Date:</label>
+                    <input type="date" id="gateTicketDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateTicketGuestName">Guest Name:</label>
+                    <input type="text" id="gateTicketGuestName" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateTicketGuestPhone">Phone Number:</label>
+                    <input type="tel" id="gateTicketGuestPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateTicketRequirements">Special Requirements:</label>
+                    <textarea id="gateTicketRequirements" rows="3" placeholder="Any special requirements or notes..."></textarea>
+                </div>
+                <div class="total-price">
+                    Total: ₦<span id="gateTicketTotalPrice">0</span>
+                </div>
+                <button type="submit" class="submit-btn">Purchase via WhatsApp</button>
             </form>
         </div>
     </div>
@@ -457,77 +1092,76 @@
     <div id="sportsModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('sportsModal')">&times;</span>
-            <h2>Book Sports Activity</h2>
+            <h2>Sports Booking</h2>
             <form id="sportsForm">
                 <div class="form-group">
-                    <label>Activity:</label>
+                    <label for="sportsActivity">Activity:</label>
                     <input type="text" id="sportsActivity" readonly>
                 </div>
                 <div class="form-group">
-                    <label>Number of Tickets/Access:</label>
+                    <label for="sportsQuantity">Hours/Sessions:</label>
                     <input type="number" id="sportsQuantity" min="1" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Preferred Date:</label>
+                    <label for="sportsDate">Preferred Date:</label>
                     <input type="date" id="sportsDate" required>
                 </div>
                 <div class="form-group">
-                    <label>Your Name:</label>
+                    <label for="sportsGuestName">Guest Name:</label>
                     <input type="text" id="sportsGuestName" required>
                 </div>
                 <div class="form-group">
-                    <label>Phone Number:</label>
+                    <label for="sportsGuestPhone">Phone Number:</label>
                     <input type="tel" id="sportsGuestPhone" required>
                 </div>
                 <div class="total-price">
-                    <strong>Total: ₦<span id="sportsTotalPrice">0</span></strong>
+                    Total: ₦<span id="sportsTotalPrice">0</span>
                 </div>
                 <button type="submit" class="submit-btn">Book via WhatsApp</button>
             </form>
         </div>
     </div>
 
-    <!-- Services Modal -->
+    <!-- Service Modal -->
     <div id="serviceModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('serviceModal')">&times;</span>
-            <h2>Book Service</h2>
+            <h2>Service Booking</h2>
             <form id="serviceForm">
                 <div class="form-group">
-                    <label>Service:</label>
+                    <label for="serviceType">Service:</label>
                     <input type="text" id="serviceType" readonly>
                 </div>
                 <div class="form-group">
-                    <label>Duration/Quantity:</label>
+                    <label for="serviceDuration">Duration (<span id="durationLabel">hours</span>):</label>
                     <input type="number" id="serviceDuration" min="1" value="1" required>
-                    <small id="durationLabel">days</small>
                 </div>
                 <div class="form-group">
-                    <label>Number of People:</label>
+                    <label for="servicePeople">Number of People:</label>
                     <input type="number" id="servicePeople" min="1" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Preferred Date:</label>
+                    <label for="serviceDate">Preferred Date:</label>
                     <input type="date" id="serviceDate" required>
                 </div>
                 <div class="form-group">
-                    <label>Preferred Time:</label>
+                    <label for="serviceTime">Preferred Time:</label>
                     <input type="time" id="serviceTime" required>
                 </div>
                 <div class="form-group">
-                    <label>Your Name:</label>
+                    <label for="serviceGuestName">Guest Name:</label>
                     <input type="text" id="serviceGuestName" required>
                 </div>
                 <div class="form-group">
-                    <label>Phone Number:</label>
+                    <label for="serviceGuestPhone">Phone Number:</label>
                     <input type="tel" id="serviceGuestPhone" required>
                 </div>
                 <div class="form-group">
-                    <label>Special Requirements:</label>
-                    <textarea id="serviceRequirements" rows="3" placeholder="Event details, special requests, etc."></textarea>
+                    <label for="serviceRequirements">Special Requirements:</label>
+                    <textarea id="serviceRequirements" rows="3" placeholder="Any special requirements or preferences..."></textarea>
                 </div>
                 <div class="total-price">
-                    <strong>Total: ₦<span id="serviceTotalPrice">0</span></strong>
+                    Total: ₦<span id="serviceTotalPrice">0</span>
                 </div>
                 <button type="submit" class="submit-btn">Book via WhatsApp</button>
             </form>
@@ -538,38 +1172,38 @@
     <div id="nightclubModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('nightclubModal')">&times;</span>
-            <h2>Book Nightclub Entry</h2>
+            <h2>Nightclub Booking</h2>
             <form id="nightclubForm">
                 <div class="form-group">
-                    <label>Service:</label>
+                    <label for="nightclubService">Service:</label>
                     <input type="text" id="nightclubService" readonly>
                 </div>
                 <div class="form-group">
-                    <label>Number of People:</label>
+                    <label for="nightclubPeople">Number of People:</label>
                     <input type="number" id="nightclubPeople" min="1" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Preferred Date:</label>
+                    <label for="nightclubDate">Preferred Date:</label>
                     <input type="date" id="nightclubDate" required>
                 </div>
                 <div class="form-group">
-                    <label>Preferred Time:</label>
-                    <input type="time" id="nightclubTime" required>
+                    <label for="nightclubTime">Preferred Time:</label>
+                    <input type="time" id="nightclubTime" value="20:00" required>
                 </div>
                 <div class="form-group">
-                    <label>Your Name:</label>
+                    <label for="nightclubGuestName">Guest Name:</label>
                     <input type="text" id="nightclubGuestName" required>
                 </div>
                 <div class="form-group">
-                    <label>Phone Number:</label>
+                    <label for="nightclubGuestPhone">Phone Number:</label>
                     <input type="tel" id="nightclubGuestPhone" required>
                 </div>
                 <div class="form-group">
-                    <label>Special Requests:</label>
-                    <textarea id="nightclubRequests" rows="3" placeholder="Birthday celebration, anniversary, etc."></textarea>
+                    <label for="nightclubRequests">Special Requests:</label>
+                    <textarea id="nightclubRequests" rows="3" placeholder="Any special requests or preferences..."></textarea>
                 </div>
                 <div class="total-price">
-                    <strong>Total: ₦<span id="nightclubTotalPrice">0</span></strong>
+                    Total: ₦<span id="nightclubTotalPrice">0</span>
                 </div>
                 <button type="submit" class="submit-btn">Book via WhatsApp</button>
             </form>
@@ -580,34 +1214,34 @@
     <div id="poolModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('poolModal')">&times;</span>
-            <h2>Book Pool Access</h2>
+            <h2>Pool Access Booking</h2>
             <form id="poolForm">
                 <div class="form-group">
-                    <label>Service:</label>
+                    <label for="poolService">Service:</label>
                     <input type="text" id="poolService" readonly>
                 </div>
                 <div class="form-group">
-                    <label>Number of Days:</label>
+                    <label for="poolDays">Number of Days:</label>
                     <input type="number" id="poolDays" min="1" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Number of People:</label>
+                    <label for="poolPeople">Number of People:</label>
                     <input type="number" id="poolPeople" min="1" value="1" required>
                 </div>
                 <div class="form-group">
-                    <label>Preferred Date:</label>
+                    <label for="poolDate">Preferred Date:</label>
                     <input type="date" id="poolDate" required>
                 </div>
                 <div class="form-group">
-                    <label>Your Name:</label>
+                    <label for="poolGuestName">Guest Name:</label>
                     <input type="text" id="poolGuestName" required>
                 </div>
                 <div class="form-group">
-                    <label>Phone Number:</label>
+                    <label for="poolGuestPhone">Phone Number:</label>
                     <input type="tel" id="poolGuestPhone" required>
                 </div>
                 <div class="total-price">
-                    <strong>Total: ₦<span id="poolTotalPrice">0</span></strong>
+                    Total: ₦<span id="poolTotalPrice">0</span>
                 </div>
                 <button type="submit" class="submit-btn">Book via WhatsApp</button>
             </form>
