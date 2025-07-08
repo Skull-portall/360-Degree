@@ -8,6 +8,29 @@ let currentPrice = 0;
 const galleries = {};
 const autoSlideIntervals = {};
 
+function createOrderAndSendWhatsApp(orderData, messageCategory, messageContent) {
+    fetch('https://three60hotel.onrender.com/api/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to create order');
+            return response.json();
+        })
+        .then(data => {
+            console.log('✅ Order created:', data);
+            sendToWhatsApp(messageContent, messageCategory);
+        })
+        .catch(error => {
+            console.error('❌ Error creating order:', error);
+            alert('An error occurred while placing your order. Please try again.');
+        });
+}
+
+
 // WhatsApp numbers for different services
 const whatsappNumbers = {
     rooms: '2349163161616',        // Room bookings
@@ -59,9 +82,9 @@ function scrollToSection(sectionId) {
 // Image Gallery Functions
 function initializeGalleries() {
     console.log('🖼️ Initializing image galleries...');
-    
+
     const galleryElements = document.querySelectorAll('.image-gallery');
-    
+
     galleryElements.forEach(gallery => {
         const galleryId = gallery.getAttribute('data-gallery');
         const images = gallery.querySelectorAll('.gallery-image');
@@ -69,7 +92,7 @@ function initializeGalleries() {
         const currentSlideSpan = gallery.querySelector('.current-slide');
         const totalSlidesSpan = gallery.querySelector('.total-slides');
         const descriptionElement = gallery.querySelector('.description-text');
-        
+
         if (galleryId && images.length > 0) {
             galleries[galleryId] = {
                 currentIndex: 0,
@@ -81,32 +104,32 @@ function initializeGalleries() {
                 descriptionElement: descriptionElement,
                 gallery: gallery
             };
-            
+
             // Set total slides
             if (totalSlidesSpan) {
                 totalSlidesSpan.textContent = images.length;
             }
-            
+
             // Set initial description
             updateImageDescription(galleryId);
-            
+
             // Start auto-slide for this gallery
             startAutoSlide(galleryId);
-            
+
             console.log(`✅ Gallery "${galleryId}" initialized with ${images.length} images`);
         }
     });
-    
+
     console.log(`🎯 Total galleries initialized: ${Object.keys(galleries).length}`);
 }
 
 function updateImageDescription(galleryId) {
     if (!galleries[galleryId]) return;
-    
+
     const gallery = galleries[galleryId];
     const currentImage = gallery.images[gallery.currentIndex];
     const description = currentImage.getAttribute('data-description');
-    
+
     if (gallery.descriptionElement && description) {
         gallery.descriptionElement.textContent = description;
     }
@@ -114,73 +137,73 @@ function updateImageDescription(galleryId) {
 
 function changeImage(galleryId, direction) {
     if (!galleries[galleryId]) return;
-    
+
     const gallery = galleries[galleryId];
-    
+
     // Remove active class from current image and dot
     gallery.images[gallery.currentIndex].classList.remove('active');
     if (gallery.dots[gallery.currentIndex]) {
         gallery.dots[gallery.currentIndex].classList.remove('active');
     }
-    
+
     // Calculate new index
     gallery.currentIndex += direction;
-    
+
     // Handle wrap around
     if (gallery.currentIndex >= gallery.totalImages) {
         gallery.currentIndex = 0;
     } else if (gallery.currentIndex < 0) {
         gallery.currentIndex = gallery.totalImages - 1;
     }
-    
+
     // Add active class to new image and dot
     gallery.images[gallery.currentIndex].classList.add('active');
     if (gallery.dots[gallery.currentIndex]) {
         gallery.dots[gallery.currentIndex].classList.add('active');
     }
-    
+
     // Update counter
     if (gallery.currentSlideSpan) {
         gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
     }
-    
+
     // Update description
     updateImageDescription(galleryId);
-    
+
     // Restart auto-slide
     restartAutoSlide(galleryId);
 }
 
 function currentImage(galleryId, imageIndex) {
     if (!galleries[galleryId]) return;
-    
+
     const gallery = galleries[galleryId];
     const newIndex = imageIndex - 1; // Convert to 0-based index
-    
+
     if (newIndex >= 0 && newIndex < gallery.totalImages) {
         // Remove active class from current image and dot
         gallery.images[gallery.currentIndex].classList.remove('active');
         if (gallery.dots[gallery.currentIndex]) {
             gallery.dots[gallery.currentIndex].classList.remove('active');
         }
-        
+
         // Set new index
         gallery.currentIndex = newIndex;
-        
+
         // Add active class to new image and dot
         gallery.images[gallery.currentIndex].classList.add('active');
         if (gallery.dots[gallery.currentIndex]) {
             gallery.dots[gallery.currentIndex].classList.add('active');
         }
-        
+
         // Update counter
         if (gallery.currentSlideSpan) {
             gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
         }
-        
+
         // Update description
         updateImageDescription(galleryId);
-        
+
         // Restart auto-slide
         restartAutoSlide(galleryId);
     }
@@ -188,12 +211,12 @@ function currentImage(galleryId, imageIndex) {
 
 function startAutoSlide(galleryId) {
     if (!galleries[galleryId]) return;
-    
+
     // Clear existing interval if any
     if (autoSlideIntervals[galleryId]) {
         clearInterval(autoSlideIntervals[galleryId]);
     }
-    
+
     // Start new interval (change image every 3 seconds)
     autoSlideIntervals[galleryId] = setInterval(() => {
         changeImage(galleryId, 1);
@@ -294,7 +317,7 @@ function openServiceModal(service, price) {
     const modal = document.getElementById('serviceModal');
     if (modal) {
         modal.style.display = 'block';
-        
+
         // Update duration label based on service type
         const durationLabel = document.getElementById('durationLabel');
         if (durationLabel) {
@@ -306,7 +329,7 @@ function openServiceModal(service, price) {
                 durationLabel.textContent = 'hours';
             }
         }
-        
+
         calculateServiceTotal();
     }
 }
@@ -349,7 +372,7 @@ function closeModal(modalId) {
 }
 
 // Close modal when clicking outside
-window.onclick = function(event) {
+window.onclick = function (event) {
     const modals = ['bookingModal', 'foodModal', 'gateTicketModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
     modals.forEach(modalId => {
         const modal = document.getElementById(modalId);
@@ -407,12 +430,12 @@ function calculateServiceTotal() {
     const peopleInput = document.getElementById('servicePeople');
     const serviceTypeInput = document.getElementById('serviceType');
     const totalPriceElement = document.getElementById('serviceTotalPrice');
-    
+
     if (durationInput && peopleInput && serviceTypeInput && totalPriceElement) {
         const duration = durationInput.value || 1;
         const people = peopleInput.value || 1;
         const service = serviceTypeInput.value;
-        
+
         let total;
         if (service === 'Event Center Hall') {
             // Event hall is per day, not per person
@@ -421,7 +444,7 @@ function calculateServiceTotal() {
             // Salon and Bar are per person
             total = currentPrice * duration * people;
         }
-        
+
         totalPriceElement.textContent = total.toLocaleString();
     }
 }
@@ -449,25 +472,25 @@ function calculatePoolTotal() {
 }
 
 // Event listeners for quantity changes
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('🚀 DOM loaded, setting up ALL event listeners...');
-    
+
     // Initialize image galleries first
     initializeGalleries();
-    
+
     // Add hover pause/resume for galleries
     Object.keys(galleries).forEach(galleryId => {
         const gallery = galleries[galleryId].gallery;
-        
+
         gallery.addEventListener('mouseenter', () => {
             pauseAutoSlide(galleryId);
         });
-        
+
         gallery.addEventListener('mouseleave', () => {
             resumeAutoSlide(galleryId);
         });
     });
-    
+
     // Room booking listeners
     const nightsInput = document.getElementById('nights');
     if (nightsInput) {
@@ -524,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Form submissions
     setupFormSubmissions();
-    
+
     // Set minimum date to today for all date inputs
     const today = new Date().toISOString().split('T')[0];
     const dateInputs = document.querySelectorAll('input[type="date"]');
@@ -537,7 +560,7 @@ function setupFormSubmissions() {
     // Room booking form
     const bookingForm = document.getElementById('bookingForm');
     if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
+        bookingForm.addEventListener('submit', function (e) {
             e.preventDefault();
             handleRoomBooking();
         });
@@ -546,7 +569,7 @@ function setupFormSubmissions() {
     // Food ordering form
     const foodForm = document.getElementById('foodForm');
     if (foodForm) {
-        foodForm.addEventListener('submit', function(e) {
+        foodForm.addEventListener('submit', function (e) {
             e.preventDefault();
             handleFoodOrder();
         });
@@ -555,7 +578,7 @@ function setupFormSubmissions() {
     // Gate ticket form
     const gateTicketForm = document.getElementById('gateTicketForm');
     if (gateTicketForm) {
-        gateTicketForm.addEventListener('submit', function(e) {
+        gateTicketForm.addEventListener('submit', function (e) {
             e.preventDefault();
             handleGateTicketPurchase();
         });
@@ -564,7 +587,7 @@ function setupFormSubmissions() {
     // Sports booking form
     const sportsForm = document.getElementById('sportsForm');
     if (sportsForm) {
-        sportsForm.addEventListener('submit', function(e) {
+        sportsForm.addEventListener('submit', function (e) {
             e.preventDefault();
             handleSportsBooking();
         });
@@ -573,7 +596,7 @@ function setupFormSubmissions() {
     // Service booking form
     const serviceForm = document.getElementById('serviceForm');
     if (serviceForm) {
-        serviceForm.addEventListener('submit', function(e) {
+        serviceForm.addEventListener('submit', function (e) {
             e.preventDefault();
             handleServiceBooking();
         });
@@ -582,7 +605,7 @@ function setupFormSubmissions() {
     // Nightclub booking form
     const nightclubForm = document.getElementById('nightclubForm');
     if (nightclubForm) {
-        nightclubForm.addEventListener('submit', function(e) {
+        nightclubForm.addEventListener('submit', function (e) {
             e.preventDefault();
             handleNightclubBooking();
         });
@@ -591,7 +614,7 @@ function setupFormSubmissions() {
     // Pool booking form
     const poolForm = document.getElementById('poolForm');
     if (poolForm) {
-        poolForm.addEventListener('submit', function(e) {
+        poolForm.addEventListener('submit', function (e) {
             e.preventDefault();
             handlePoolBooking();
         });
@@ -608,6 +631,23 @@ function handleRoomBooking() {
     const guestName = document.getElementById('guestName').value;
     const guestPhone = document.getElementById('guestPhone').value;
     const total = document.getElementById('totalPrice').textContent;
+
+    const orderData = {
+        customer: guestName,
+        phone: guestPhone,
+        service: 'rooms',
+        serviceName: roomType,
+        amount: total,
+        date: new Date().toISOString().split('T')[0],
+        status: 'pending',
+        details: {
+            nights: parseInt(nights),
+            checkin: checkinDate,
+            checkout: checkoutDate,
+            guests: parseInt(guests)
+        }
+    };
+
 
     const message = `🏨 *360 DEGREE HOTEL - ROOM BOOKING*
 
@@ -634,8 +674,9 @@ Sort Code: 011
 Please make payment and send receipt via WhatsApp to confirm your booking.
 
 Thank you for choosing 360 Degree Hotel!`;
+    createOrderAndSendWhatsApp(orderData, 'rooms', message);
 
-    sendToWhatsApp(message, 'rooms');
+    // sendToWhatsApp(message, 'rooms');
 }
 
 function handleFoodOrder() {
@@ -646,6 +687,21 @@ function handleFoodOrder() {
     const roomNumber = document.getElementById('roomNumber').value;
     const guestPhone = document.getElementById('foodGuestPhone').value;
     const total = document.getElementById('foodTotalPrice').textContent;
+
+    const orderData = {
+        customer: guestName,
+        phone: guestPhone,
+        service: 'food',
+        serviceName: foodItem,
+        amount: total,
+        date: new Date().toISOString().split('T')[0],
+        status: 'pending',
+        details: {
+            quantity,
+            instructions: instructions || 'None',
+            roomNumber
+        }
+    };
 
     const message = `🍽️ *360 DEGREE HOTEL - FOOD ORDER*
 
@@ -672,7 +728,7 @@ Please make payment and send receipt via WhatsApp. Your order will be prepared a
 
 Thank you for dining with us!`;
 
-    sendToWhatsApp(message, 'food');
+    createOrderAndSendWhatsApp(orderData, 'food', message);
 }
 
 function handleGateTicketPurchase() {
@@ -684,7 +740,20 @@ function handleGateTicketPurchase() {
     const guestPhone = document.getElementById('gateTicketGuestPhone').value;
     const requirements = document.getElementById('gateTicketRequirements').value;
     const total = document.getElementById('gateTicketTotalPrice').textContent;
-
+    const orderData = {
+        customer: guestName,
+        phone: guestPhone,
+        service: "gateTicket",
+        serviceName: ticketType,
+        amount: 1000,
+        date: date,
+        status: "pending",
+        details: {
+            days,
+            people,
+            requirements
+        }
+    };
     const message = `🎫 *360 DEGREE HOTEL - GATE ENTRY TICKET*
 
 👤 *Customer Details:*
@@ -713,7 +782,7 @@ Please make payment and send receipt via WhatsApp to receive your gate entry tic
 
 Thank you for choosing 360 Degree Hotel!`;
 
-    sendToWhatsApp(message, 'gateTickets');
+    createOrderAndSendWhatsApp(orderData, 'gateTickets', message);
 }
 
 function handleSportsBooking() {
@@ -724,6 +793,20 @@ function handleSportsBooking() {
     const guestPhone = document.getElementById('sportsGuestPhone').value;
     const total = document.getElementById('sportsTotalPrice').textContent;
 
+    const orderData = {
+        customer: guestName,
+        phone: guestPhone,
+        service: "sports",
+        serviceName: activity,
+        amount: total,
+        date: date,
+        status: "pending",
+        details: {
+            quantity,
+            activity,
+            PreferredDate: date
+        }
+    };
     const message = `⚽ *360 DEGREE HOTEL - SPORTS BOOKING*
 
 👤 *Customer Details:*
@@ -748,7 +831,7 @@ Please make payment and send receipt via WhatsApp to receive your booking confir
 
 Thank you for choosing our sports services!`;
 
-    sendToWhatsApp(message, 'sports');
+    createOrderAndSendWhatsApp(orderData, 'sports', message);
 }
 
 function handleServiceBooking() {
@@ -770,6 +853,22 @@ function handleServiceBooking() {
     } else if (service === 'Premium Bar') {
         durationText = `Hours: ${duration}`;
     }
+
+    const orderData = {
+        customer: guestName,
+        phone: guestPhone,
+        service: "services",
+        serviceName: service,
+        amount: total,
+        date: date,
+        status: "pending",
+        details: {
+            duration,
+            people,
+            time,
+            requirements
+        }
+    };
 
     const message = `🏢 *360 DEGREE HOTEL - SERVICE BOOKING*
 
@@ -798,7 +897,7 @@ Please make payment and send receipt via WhatsApp to confirm your service bookin
 
 Thank you for choosing our premium services!`;
 
-    sendToWhatsApp(message, 'services');
+    createOrderAndSendWhatsApp(orderData, 'services', message);
 }
 
 function handleNightclubBooking() {
@@ -810,7 +909,20 @@ function handleNightclubBooking() {
     const guestPhone = document.getElementById('nightclubGuestPhone').value;
     const requests = document.getElementById('nightclubRequests').value;
     const total = document.getElementById('nightclubTotalPrice').textContent;
-
+    const orderData = {
+        customer: guestName,
+        phone: guestPhone,
+        service: "nightclub",
+        serviceName: service,
+        amount: total,
+        date: date,
+        status: "pending",
+        details: {
+            people,
+            time,
+            requests
+        }
+    };
     const message = `🎉 *360 DEGREE HOTEL - NIGHTCLUB BOOKING*
 
 👤 *Customer Details:*
@@ -837,7 +949,7 @@ Please make payment and send receipt via WhatsApp to confirm your nightclub rese
 
 Thank you for choosing our nightclub services!`;
 
-    sendToWhatsApp(message, 'nightclub');
+    createOrderAndSendWhatsApp(orderData, 'nightclub', message);
 }
 
 function handlePoolBooking() {
@@ -848,7 +960,19 @@ function handlePoolBooking() {
     const guestName = document.getElementById('poolGuestName').value;
     const guestPhone = document.getElementById('poolGuestPhone').value;
     const total = document.getElementById('poolTotalPrice').textContent;
-
+    const orderData = {
+        customer: guestName,
+        phone: guestPhone,
+        service: "pool",
+        serviceName: service,
+        amount: total,
+        date: date,
+        status: "pending",
+        details: {
+            days,
+            people
+        }
+    };
     const message = `🏊‍♂️ *360 DEGREE HOTEL - POOL ACCESS*
 
 👤 *Customer Details:*
@@ -874,19 +998,19 @@ Please make payment and send receipt via WhatsApp to receive your pool access pa
 
 Thank you for choosing our pool facilities!`;
 
-    sendToWhatsApp(message, 'pool');
+    createOrderAndSendWhatsApp(orderData, 'pool', message);
 }
 
 function sendToWhatsApp(message, serviceType) {
     // Get the appropriate WhatsApp number for the service type
     const phoneNumber = whatsappNumbers[serviceType] || whatsappNumbers.rooms;
-    
+
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
+
     // Open WhatsApp in a new tab
     window.open(whatsappUrl, '_blank');
-    
+
     // Close the modal after sending
     const modals = ['bookingModal', 'foodModal', 'gateTicketModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
     modals.forEach(modalId => {
@@ -895,7 +1019,7 @@ function sendToWhatsApp(message, serviceType) {
             modal.style.display = 'none';
         }
     });
-    
+
     // Show success message with service-specific info
     showSuccessMessage(serviceType);
 }
@@ -931,9 +1055,9 @@ function showSuccessMessage(serviceType) {
         <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
         ${serviceNames[serviceType]} - Redirecting to WhatsApp...
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Remove notification after 4 seconds
     setTimeout(() => {
         notification.remove();
@@ -957,7 +1081,7 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Enhanced Navbar scroll effect
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
     const navbar = document.querySelector('.navbar');
     if (navbar) {
         if (window.scrollY > 100) {
@@ -974,7 +1098,7 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver(function(entries) {
+const observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
@@ -984,7 +1108,7 @@ const observer = new IntersectionObserver(function(entries) {
 }, observerOptions);
 
 // Observe all cards for animation
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.room-card, .food-card, .sport-card, .service-card, .nightclub-card, .amenity-card, .gate-ticket-card');
     cards.forEach(card => {
         card.style.opacity = '0';
@@ -1009,14 +1133,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Add loading animation to buttons
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const buttons = document.querySelectorAll('.book-btn, .order-btn, .cta-btn');
     buttons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const originalText = this.textContent;
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
             this.disabled = true;
-            
+
             setTimeout(() => {
                 this.textContent = originalText;
                 this.disabled = false;
@@ -1026,13 +1150,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Handle form validation
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             const requiredFields = form.querySelectorAll('[required]');
             let isValid = true;
-            
+
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
                     isValid = false;
@@ -1041,7 +1165,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     field.style.borderColor = '#e0e0e0';
                 }
             });
-            
+
             if (!isValid) {
                 e.preventDefault();
                 alert('Please fill in all required fields.');
@@ -1051,9 +1175,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Enhanced accessibility for mobile
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Add keyboard support for gallery navigation
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
             const activeGallery = document.querySelector('.image-gallery:hover');
             if (activeGallery) {
@@ -1064,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-        
+
         // Close modals with Escape key
         if (e.key === 'Escape') {
             const openModal = document.querySelector('.modal[style*="block"]');
@@ -1073,30 +1197,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     // Add touch support for gallery navigation
     let touchStartX = 0;
     let touchEndX = 0;
-    
-    document.addEventListener('touchstart', function(e) {
+
+    document.addEventListener('touchstart', function (e) {
         touchStartX = e.changedTouches[0].screenX;
     });
-    
-    document.addEventListener('touchend', function(e) {
+
+    document.addEventListener('touchend', function (e) {
         touchEndX = e.changedTouches[0].screenX;
         handleGallerySwipe(e.target);
     });
-    
+
     function handleGallerySwipe(target) {
         const gallery = target.closest('.image-gallery');
         if (!gallery) return;
-        
+
         const galleryId = gallery.getAttribute('data-gallery');
         if (!galleryId) return;
-        
+
         const swipeDistance = touchEndX - touchStartX;
         const minSwipeDistance = 50;
-        
+
         if (Math.abs(swipeDistance) > minSwipeDistance) {
             const direction = swipeDistance > 0 ? -1 : 1;
             changeImage(galleryId, direction);
