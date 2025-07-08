@@ -7,7 +7,7 @@ let ordersData = [
         customer: 'John Doe',
         phone: '+234 901 234 5678',
         service: 'rooms',
-        serviceName: 'Standard Room',
+        serviceName: 'Deluxe Room',
         amount: 15000,
         date: '2024-01-15',
         status: 'pending',
@@ -23,7 +23,7 @@ let ordersData = [
         customer: 'Jane Smith',
         phone: '+234 902 345 6789',
         service: 'food',
-        serviceName: 'Jollof Rice with Salad',
+        serviceName: 'Gourmet Lunch',
         amount: 15000,
         date: '2024-01-15',
         status: 'confirmed',
@@ -93,6 +93,9 @@ const serviceNames = {
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication
+    checkAuthentication();
+    
     initializeDashboard();
     updateStats();
     renderOrdersTable();
@@ -101,10 +104,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set default dates
     const today = new Date().toISOString().split('T')[0];
     const firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
-    document.getElementById('startDate').value = firstDay;
-    document.getElementById('endDate').value = today;
+    const startDateEl = document.getElementById('startDate');
+    const endDateEl = document.getElementById('endDate');
+    if (startDateEl) startDateEl.value = firstDay;
+    if (endDateEl) endDateEl.value = today;
 });
 
+function checkAuthentication() {
+    const session = getSession();
+    
+    if (!session || !isSessionValid(session)) {
+        // Redirect to login if not authenticated
+        console.log('❌ No valid session found, redirecting to login');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 100);
+        return;
+    }
+    
+    console.log('✅ User authenticated:', session.username);
+}
+
+function getSession() {
+    try {
+        const sessionData = localStorage.getItem('hotel_admin_session');
+        return sessionData ? JSON.parse(sessionData) : null;
+    } catch (error) {
+        console.error('Error reading session:', error);
+        return null;
+    }
+}
+
+function isSessionValid(session) {
+    if (!session || !session.expiresAt) {
+        return false;
+    }
+    
+    return Date.now() < session.expiresAt;
+}
 function initializeDashboard() {
     console.log('🚀 Dashboard initialized');
     
@@ -495,8 +532,23 @@ function refreshData() {
 function logout() {
     if (confirm('Are you sure you want to logout?')) {
         showToast('Logging out...', 'info');
+        
+        // Clear session
+        try {
+            localStorage.removeItem('hotel_admin_session');
+            console.log('🗑️ Session cleared on logout');
+        } catch (error) {
+            console.error('❌ Error clearing session:', error);
+        }
+        
         setTimeout(() => {
-            window.location.href = '../index.html';
+            try {
+                window.location.href = 'login.html';
+            } catch (error) {
+                console.error('❌ Redirect failed:', error);
+                // Fallback: reload the page
+                window.location.reload();
+            }
         }, 1000);
     }
 }
