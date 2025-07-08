@@ -11,12 +11,12 @@ const autoSlideIntervals = {};
 // WhatsApp numbers for different services
 const whatsappNumbers = {
     rooms: '2349163161616',        // Room bookings
-    food: '2349163161617',         // Food orders
-    sports: '2349163161618',       // Sports & Entertainment
-    services: '2349163161619',     // Event Hall, Salon, Bar
-    nightclub: '2349163161620',    // Nightclub & Pool
-    pool: '2349163161620',         // Pool (same as nightclub)
-    gateTickets: '2349163161621'   // Gate tickets
+    food: '2349163161616',         // Food orders
+    sports: '2349163161616',       // Sports & Entertainment
+    services: '2349163161616',     // Event Hall, Salon, Bar
+    nightclub: '2349163161616',    // Nightclub & Pool
+    pool: '2349163161616',         // Pool (same as nightclub)
+    gateTickets: '2349163161616'   // Gate tickets
 };
 
 // Mobile menu toggle
