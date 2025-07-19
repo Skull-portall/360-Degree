@@ -47,7 +47,7 @@ class HotelShoppingCart {
                 <div class="cart-header">
                     <div class="cart-title">
                         <i class="fas fa-shopping-cart"></i>
-                        <span>Shopping Cart</span>
+                        <span>360° Global Estate Ltd. Cart</span>
                         <span id="cartItemCount" class="cart-badge" style="display: none;">0</span>
                     </div>
                     <button id="cartClose" class="cart-close">
