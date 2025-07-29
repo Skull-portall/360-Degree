@@ -775,6 +775,10 @@ body {
 }
 
 /* Buttons */
+/* Force pointer on all buttons and role=button */
+button {
+  cursor: pointer;
+}
 .book-btn, .order-btn, .submit-btn {
     background: linear-gradient(45deg, #e74c3c, #c0392b);
     color: white;
@@ -880,6 +884,59 @@ body {
     font-size: clamp(1rem, 2vw, 1.08rem);
     margin-top: 0.3rem;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  margin: 10% auto;
+  max-width: 500px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="tel"],
+.modal-content input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-content button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.modal-content button:hover {
+  background-color: #218838;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 28px;
+  color: #333;
+  cursor: pointer;
+}
+
 
 /* Enhanced 24/7 Service Status */
 .service-status {
@@ -1904,4 +1961,10 @@ html {
     .modal {
         display: none !important;
     }
+}
+@layer base {
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer !important;
+  }
 }
