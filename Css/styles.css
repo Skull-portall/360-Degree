@@ -776,23 +776,25 @@ body {
 
 /* Buttons */
 .book-btn, .order-btn, .submit-btn {
-   background: linear-gradient(45deg, #e74c3c, #c0392b);
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
     color: white;
     padding: 12px 30px;
     border: none;
     border-radius: 25px;
     font-weight: 600;
-    cursor: pointer !important;  /* 👈 FORCE pointer */
+    cursor: pointer; /* Keep only this */
     transition: all 0.3s ease;
     width: 100%;
     font-size: clamp(0.9rem, 2vw, 1rem);
     min-height: 48px;
-    position: relative;          /* 👈 ensure it’s on top */
-    z-index: 10;                 /* 👈 ensure button is clickable */
+    position: relative;
+    z-index: 10;
 }
 
 .book-btn:hover, .order-btn:hover, .submit-btn:hover {
     transform: translateY(-2px);
+    opacity: 0.9;
+    transform: scale(1.02);
     box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
 }
 
