@@ -306,6 +306,64 @@ function openSportsModal(activity, price) {
     }
 }
 
+// Open and Close Modal Functions
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = 'block';
+}
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = 'none';
+}
+
+// Close modal when clicking outside
+window.onclick = function (event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    if (event.target === modal) modal.style.display = "none";
+  });
+}
+
+// Price Calculation
+function updateLaundryTotal() {
+  const basePrice = 1000;
+  const perfume = document.getElementById("perfumeAdd").checked ? 500 : 0;
+  const ironing = document.getElementById("ironAdd").checked ? 1000 : 0;
+  const quantity = parseInt(document.getElementById("laundryQty").value) || 1;
+
+  const total = (basePrice + perfume + ironing) * quantity;
+  document.getElementById("totalLaundryPrice").textContent = total;
+}
+
+// WhatsApp Booking
+function sendLaundryBooking() {
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const qty = document.getElementById("laundryQty").value;
+  const perfume = document.getElementById("perfumeAdd").checked ? "Yes" : "No";
+  const ironing = document.getElementById("ironAdd").checked ? "Yes" : "No";
+  const total = document.getElementById("totalLaundryPrice").textContent;
+
+  if (!name || !phone) {
+    alert("Please enter your full name and phone number.");
+    return;
+  }
+
+  const message = `Hello, I would like to book Laundry Service.%0A
+  Name: ${name}%0A
+  Phone: ${phone}%0A
+  Number of Clothes: ${qty}%0A
+  Add Perfume: ${perfume}%0A
+  Add Ironing: ${ironing}%0A
+  Total Price: ₦${total}`;
+
+  const whatsappNumber = "2349161616"; // Replace with your real WhatsApp number
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
+
 function openServiceModal(service, price) {
     console.log('Opening service modal:', service, price);
     currentBookingType = 'service';

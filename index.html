@@ -515,7 +515,41 @@
                         <button class="book-btn" onclick="openServiceModal('Event Center Hall', 70000)">Book Now</button>
                     </div>
                 </div>
-
+               
+               <!-- Laundry Service -->
+<div class="service-card">
+    <div class="image-gallery" data-gallery="laundry">
+        <div class="gallery-container">
+            <img src="images/laundry1.jpg" alt="Laundry" class="gallery-image active" data-description="Professional laundry services with premium care">
+            <img src="images/laundry2.jpg" alt="Clean Clothes" class="gallery-image" data-description="Crisp, clean clothes with a fresh scent">
+            <img src="images/laundry3.jpg" alt="Folding Service" class="gallery-image" data-description="Neatly folded and packed laundry ready for pickup">
+        </div>
+        <button class="gallery-btn prev-btn" onclick="changeImage('laundry', -1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="gallery-btn next-btn" onclick="changeImage('laundry', 1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="gallery-counter">
+            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+        </div>
+        <div class="gallery-dots">
+            <span class="dot active" onclick="currentImage('laundry', 1)"></span>
+            <span class="dot" onclick="currentImage('laundry', 2)"></span>
+            <span class="dot" onclick="currentImage('laundry', 3)"></span>
+        </div>
+        <div class="image-description">
+            <span class="description-text">Professional laundry services with premium care</span>
+        </div>
+    </div>
+    <div class="service-info  ">
+        <h3>Laundry Service</h3>
+        <p>Reliable laundry care for your clothes, trousers, and bedsheets. Charged per set.</p>
+        <div class="price">₦1,000 <span>per set</span></div>
+        <button class="book-btn" onclick="openServiceModal('Laundry Service', 1000)">Book Now</button>
+    </div>
+</div>
+ 
                 <!-- Salon -->
                 <div class="service-card">
                     <div class="image-gallery" data-gallery="salon">
@@ -1210,6 +1244,38 @@
         </div>
     </div>
 
+<!-- Laundry Booking Modal -->
+<div id="laundryModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('laundryModal')">&times;</span>
+    <h2>Book Laundry Service</h2>
+    
+    <label>Full Name:</label>
+    <input type="text" id="customerName" placeholder="Your full name" required>
+
+    <label>Phone Number:</label>
+    <input type="tel" id="customerPhone" placeholder="Your phone number" required>
+
+    <label>Number of Clothes:</label>
+    <input type="number" id="laundryQty" min="1" value="1" onchange="updateLaundryTotal()">
+
+    <label>
+      <input type="checkbox" id="perfumeAdd" onchange="updateLaundryTotal()">
+      Add Perfume (₦500)
+    </label>
+    
+    <label>
+      <input type="checkbox" id="ironAdd" onchange="updateLaundryTotal()">
+      Add Ironing (₦1000)
+    </label>
+
+    <p>Total: ₦<span id="totalLaundryPrice">1000</span></p>
+
+    <button onclick="sendLaundryBooking()">Book via WhatsApp</button>
+  </div>
+</div>
+
+    
     <!-- Pool Modal -->
     <div id="poolModal" class="modal">
         <div class="modal-content">
