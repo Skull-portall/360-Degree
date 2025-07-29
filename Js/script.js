@@ -665,9 +665,9 @@ Number of Guests: ${guests}
 💰 *Total Amount: ₦${total}*
 
 💳 *Payment Details:*
-Bank: First Bank Nigeria
-Account Name: 360 Degree Hotel Ltd
-Account Number: 3014567890
+Bank: UBA
+Account Name: 360 degree global estate ltd
+Account Number: 1025588876
 Sort Code: 011
 
 📋 *Instructions:*
@@ -718,9 +718,9 @@ Special Instructions: ${instructions || 'None'}
 💰 *Total Amount: ₦${total}*
 
 💳 *Payment Details:*
-Bank: First Bank Nigeria
-Account Name: 360 Degree Hotel Ltd
-Account Number: 3014567890
+Bank: UBA
+Account Name: 360 degree globale state ltd
+Account Number: 1025588876
 Sort Code: 011
 
 📋 *Instructions:*
@@ -770,9 +770,9 @@ Special Requirements: ${requirements || 'None'}
 💰 *Total Amount: ₦${total}*
 
 💳 *Payment Details:*
-Bank: First Bank Nigeria
-Account Name: 360 Degree Hotel Ltd
-Account Number: 3014567890
+Bank: UBA
+Account Name: 360 degree globale state ltd
+Account Number: 1025926748
 Sort Code: 011
 
 📋 *Instructions:*
@@ -821,9 +821,9 @@ Preferred Date: ${date}
 💰 *Total Amount: ₦${total}*
 
 💳 *Payment Details:*
-Bank: First Bank Nigeria
-Account Name: 360 Degree Hotel Ltd
-Account Number: 3014567890
+Bank: UBA
+Account Name: 360 degree globale state ltd
+Account Number: 1025926748
 Sort Code: 011
 
 📋 *Instructions:*
@@ -887,9 +887,9 @@ Special Requirements: ${requirements || 'None'}
 💰 *Total Amount: ₦${total}*
 
 💳 *Payment Details:*
-Bank: First Bank Nigeria
-Account Name: 360 Degree Hotel Ltd
-Account Number: 3014567890
+Bank: UBA
+Account Name: 360 degree globale state ltd
+Account Number: 1025926748
 Sort Code: 011
 
 📋 *Instructions:*
@@ -939,9 +939,9 @@ Special Requests: ${requests || 'None'}
 💰 *Total Amount: ₦${total}*
 
 💳 *Payment Details:*
-Bank: First Bank Nigeria
-Account Name: 360 Degree Hotel Ltd
-Account Number: 3014567890
+Bank: UBA
+Account Name: 360 degree globale state ltd
+Account Number: 1025926748
 Sort Code: 011
 
 📋 *Instructions:*
@@ -988,9 +988,9 @@ Preferred Date: ${date}
 💰 *Total Amount: ₦${total}*
 
 💳 *Payment Details:*
-Bank: First Bank Nigeria
-Account Name: 360 Degree Hotel Ltd
-Account Number: 3014567890
+Bank:  UBA
+Account Name: 360 degree globale state ltd
+Account Number: 1025926748
 Sort Code: 011
 
 📋 *Instructions:*

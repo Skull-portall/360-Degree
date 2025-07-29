@@ -201,9 +201,9 @@ class HotelShoppingCart {
         message += `Type: ${serviceData.type}\n\n`;
         
         message += `💳 *Payment Details:*\n`;
-        message += `Bank: First Bank Nigeria\n`;
-        message += `Account Name: 360 Degree Hotel Ltd\n`;
-        message += `Account Number: 3014567890\n`;
+        message += `Bank: UBA\n`;
+        message += `Account Name: 360 degree global estate ltd\n`;
+        message += `Account Number: 1025588876\n`;
         message += `Sort Code: 011\n\n`;
         
         message += `📋 *Instructions:*\n`;
@@ -582,9 +582,9 @@ class HotelShoppingCart {
         });
         
         message += `💳 *Payment Details:*\n`;
-        message += `Bank: First Bank Nigeria\n`;
-        message += `Account Name: 360 Degree Hotel Ltd\n`;
-        message += `Account Number: 3014567890\n`;
+        message += `Bank: UBA\n`;
+        message += `Account Name: 360 degree global estate ltd\n`;
+        message += `Account Number: 1025588876\n`;
         message += `Sort Code: 011\n\n`;
         
         message += `📋 *Instructions:*\n`;
