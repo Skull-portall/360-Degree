@@ -80,6 +80,7 @@
 
 
 let ordersData = [];
+let cartData = [];
 
 function parseAmount(amount) {
     // Remove commas and convert to number
@@ -91,8 +92,26 @@ async function fetchOrders() {
         const response = await fetch('https://three60hotel.onrender.com/api/orders'); // replace with your deployed URL if needed
         if (!response.ok) throw new Error('Failed to fetch orders');
 
+
         const data = await response.json();
-        ordersData = data;
+
+
+        const cartresponse = await fetch('https://three60hotel.onrender.com/api/carts'); // replace with your deployed URL if needed
+        if (!cartresponse.ok) throw new Error('Failed to fetch carts');
+        // http://localhost:5000/api/carts
+
+        const cartdata = await cartresponse.json();
+        cartData = cartdata;
+
+        // console.log('Carts fetched:', cartData);
+
+        ordersData = [...data, ...cartData.carts]
+            .map(order => ({
+                ...order,
+                // amount: parseAmount(order.amount),
+                serviceName: order.serviceName ? order.serviceName : 'multiple services',
+            }));
+        // console.log('Carts and orders fetched:', ordersData);
         filterOrders()
 
         console.log('Orders fetched:', ordersData);
@@ -101,6 +120,7 @@ async function fetchOrders() {
         console.error('Error fetching orders:', err.message);
     }
 }
+
 
 // Call this on page load
 let currentOrderId = null;
@@ -191,14 +211,16 @@ function updateStats() {
 
     // Calculate stats
     const pendingOrders = ordersData.filter(order => order.status === 'pending').length;
-    const confirmedToday = ordersData.filter(order =>
-        order.date === today && order.status === 'confirmed'
-    ).length;
-
-
+    const confirmedToday = ordersData.filter(order => {
+        const orderDate = new Date(order.date).toISOString().split('T')[0];
+        return orderDate === today && order.status === 'confirmed';
+    }).length;
 
     const todayRevenue = ordersData
-        .filter(order => order.date === today && order.status !== 'cancelled')
+        .filter(order => {
+            const orderDate = new Date(order.date).toISOString().split('T')[0];
+            return orderDate === today && order.status !== 'cancelled' && order.status !== 'pending';
+        })
         .reduce((sum, order) => sum + parseAmount(order.amount), 0);
 
     const monthlyRevenue = ordersData
@@ -206,9 +228,10 @@ function updateStats() {
             const orderDate = new Date(order.date);
             return orderDate.getMonth() === currentMonth &&
                 orderDate.getFullYear() === currentYear &&
-                order.status !== 'cancelled';
+                order.status !== 'cancelled' && order.status !== 'pending';
         })
         .reduce((sum, order) => sum + parseAmount(order.amount), 0);
+
 
     // Update UI
     document.getElementById('pendingOrders').textContent = pendingOrders;
@@ -248,11 +271,18 @@ function filterOrders() {
     renderOrdersTable();
 }
 
-function renderOrdersTable() {
+let currentPage = 1;
+const ordersPerPage = 8;
+
+function renderOrdersTable(page = 1) {
     const tbody = document.getElementById('ordersTableBody');
     tbody.innerHTML = '';
 
-    filteredOrders.forEach(order => {
+    const start = (page - 1) * ordersPerPage;
+    const end = start + ordersPerPage;
+    const paginatedOrders = filteredOrders.slice(start, end);
+
+    paginatedOrders.forEach(order => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td><strong>${order.orderNumber}</strong></td>
@@ -284,7 +314,52 @@ function renderOrdersTable() {
         `;
         tbody.appendChild(row);
     });
+
+    renderPagination();
 }
+
+
+function renderPagination() {
+    const paginationContainer = document.getElementById('paginationControls');
+    if (!paginationContainer) return;
+
+    paginationContainer.innerHTML = '';
+
+    const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+
+    // Previous button
+    const prev = document.createElement('button');
+    prev.textContent = 'Prev';
+    prev.disabled = currentPage === 1;
+    prev.onclick = () => {
+        currentPage--;
+        renderOrdersTable(currentPage);
+    };
+    paginationContainer.appendChild(prev);
+
+    // Page numbers
+    for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.textContent = i;
+        if (i === currentPage) pageBtn.classList.add('active');
+        pageBtn.onclick = () => {
+            currentPage = i;
+            renderOrdersTable(i);
+        };
+        paginationContainer.appendChild(pageBtn);
+    }
+
+    // Next button
+    const next = document.createElement('button');
+    next.textContent = 'Next';
+    next.disabled = currentPage === totalPages;
+    next.onclick = () => {
+        currentPage++;
+        renderOrdersTable(currentPage);
+    };
+    paginationContainer.appendChild(next);
+}
+
 
 function viewOrder(orderId) {
     const order = ordersData.find(o => o._id === orderId);
@@ -368,6 +443,24 @@ function formatOrderDetails(order) {
                 <p><strong>People:</strong> ${details.people}</p>
                 <p><strong>Date:</strong> ${formatDate(details.date)}</p>
                 <p><strong>Time:</strong> ${details.time}</p>
+            `;
+            break;
+        case 'multiple services':
+            const servicesHtml = order.services.map(service => `
+        <div style="margin-bottom: 10px;">
+            <p><strong>Service:</strong> ${service.name}</p>
+            <p><strong>Type:</strong> ${service.type}</p>
+            <p><strong>Description:</strong> ${service.description}</p>
+            <p><strong>Price:</strong> ₦${service.price.toLocaleString()}</p>
+            <p><strong>Quantity:</strong> ${service.quantity}</p>
+            <hr />
+        </div>
+    `).join('');
+            html = `
+                <div>
+                    <h4>Multiple Services</h4>
+                    ${servicesHtml}
+                </div>
             `;
             break;
         default:

@@ -14,7 +14,7 @@ class HotelShoppingCart {
             pool: '2349163161616',
             gateTickets: '2349163161616'
         };
-        
+
         this.init();
     }
 
@@ -113,12 +113,12 @@ class HotelShoppingCart {
     enhanceExistingButtons() {
         // Replace existing booking buttons with dual buttons
         const bookButtons = document.querySelectorAll('.book-btn, .order-btn');
-        
+
         bookButtons.forEach(button => {
             // Create dual button container
             const buttonContainer = document.createElement('div');
             buttonContainer.className = 'dual-button-container';
-            
+
             // Create Order Now button (preserves original functionality)
             const orderNowBtn = document.createElement('button');
             orderNowBtn.className = 'order-now-btn';
@@ -126,7 +126,7 @@ class HotelShoppingCart {
                 <i class="fas fa-bolt"></i>
                 <span>Order Now</span>
             `;
-            
+
             // Create Add to Cart button
             const addToCartBtn = document.createElement('button');
             addToCartBtn.className = 'add-to-cart-btn';
@@ -139,13 +139,13 @@ class HotelShoppingCart {
             const serviceCard = button.closest('.room-card, .food-card, .sport-card, .service-card, .nightclub-card, .amenity-card, .gate-ticket-card');
             if (serviceCard) {
                 const serviceData = this.extractServiceData(serviceCard, button);
-                
+
                 // Order Now button - preserves original modal functionality
                 orderNowBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     this.handleOrderNow(serviceData, button);
                 });
-                
+
                 // Add to Cart button
                 addToCartBtn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -155,13 +155,13 @@ class HotelShoppingCart {
                 // Add both buttons to container
                 buttonContainer.appendChild(orderNowBtn);
                 buttonContainer.appendChild(addToCartBtn);
-                
+
                 // Replace the original button with dual button container
                 button.parentNode.replaceChild(buttonContainer, button);
             }
         });
     }
-    
+
     // Handle Order Now functionality (preserves original modal behavior)
     handleOrderNow(serviceData, originalButton) {
         // Get the original onclick function and execute it
@@ -180,18 +180,18 @@ class HotelShoppingCart {
             this.handleDirectBooking(serviceData);
         }
     }
-    
+
     // Handle direct booking for services without modal
     handleDirectBooking(serviceData) {
         const message = this.generateSingleServiceMessage(serviceData);
         const phoneNumber = this.whatsappNumbers[serviceData.type] || this.whatsappNumbers.rooms;
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-        
+
         window.open(whatsappUrl, '_blank');
         this.showNotification(`Redirecting to WhatsApp for ${serviceData.name}...`, 'success');
     }
-    
+
     // Generate message for single service booking
     generateSingleServiceMessage(serviceData) {
         let message = `🏨 *360 DEGREE HOTEL - SINGLE SERVICE BOOKING*\n\n`;
@@ -199,17 +199,17 @@ class HotelShoppingCart {
         message += `Service: ${serviceData.name}\n`;
         message += `Price: ₦${serviceData.price.toLocaleString()}\n`;
         message += `Type: ${serviceData.type}\n\n`;
-        
+
         message += `💳 *Payment Details:*\n`;
         message += `Bank: UBA\n`;
         message += `Account Name: 360 degree global estate ltd\n`;
         message += `Account Number: 1025588876\n`;
         message += `Sort Code: 011\n\n`;
-        
+
         message += `📋 *Instructions:*\n`;
         message += `Please make payment and send receipt via WhatsApp to confirm your booking.\n\n`;
         message += `Thank you for choosing 360 Degree Hotel!`;
-        
+
         return message;
     }
 
@@ -218,7 +218,7 @@ class HotelShoppingCart {
         const nameElement = card.querySelector('h3');
         const priceElement = card.querySelector('.price');
         const descElement = card.querySelector('p');
-        
+
         let serviceName = nameElement ? nameElement.textContent.trim() : 'Unknown Service';
         let price = 0;
         let serviceType = 'service';
@@ -264,8 +264,8 @@ class HotelShoppingCart {
     // Add item to cart
     addToCart(item) {
         // Check if item already exists
-        const existingItemIndex = this.cart.findIndex(cartItem => 
-            cartItem.type === item.type && 
+        const existingItemIndex = this.cart.findIndex(cartItem =>
+            cartItem.type === item.type &&
             cartItem.name === item.name
         );
 
@@ -280,10 +280,10 @@ class HotelShoppingCart {
         this.saveCart();
         this.updateCartButton();
         this.showNotification(`${item.name} added to cart!`);
-        
+
         // Add visual feedback to button
         this.animateAddToCart(event.target);
-        
+
         console.log('🛒 Item added to cart:', item);
     }
 
@@ -313,7 +313,7 @@ class HotelShoppingCart {
     // Clear entire cart
     clearCart() {
         if (this.cart.length === 0) return;
-        
+
         if (confirm('Are you sure you want to clear your cart?')) {
             this.cart = [];
             this.saveCart();
@@ -363,7 +363,7 @@ class HotelShoppingCart {
             cartFooter.style.display = 'block';
             cartItemCount.style.display = 'block';
             cartItemCount.textContent = this.getTotalItems();
-            
+
             this.updateCartTotal();
             this.bindCartItemEvents();
         }
@@ -434,7 +434,7 @@ class HotelShoppingCart {
     updateCartButton() {
         const badge = document.getElementById('cartBadge');
         const totalItems = this.getTotalItems();
-        
+
         if (totalItems > 0) {
             badge.style.display = 'block';
             badge.textContent = totalItems > 99 ? '99+' : totalItems;
@@ -447,7 +447,7 @@ class HotelShoppingCart {
     updateCartTotal() {
         const totalAmount = this.getTotalPrice();
         const cartFooter = document.getElementById('cartFooter');
-        
+
         // Update existing total or create new footer content
         cartFooter.innerHTML = `
             <div class="customer-details">
@@ -470,11 +470,11 @@ class HotelShoppingCart {
                 </button>
             </div>
         `;
-        
+
         // Re-bind events after updating HTML
         this.bindFooterEvents();
     }
-    
+
     // Bind footer events
     bindFooterEvents() {
         // Clear cart
@@ -514,7 +514,7 @@ class HotelShoppingCart {
         // Validate customer details
         const customerName = document.getElementById('cartCustomerName')?.value.trim();
         const customerPhone = document.getElementById('cartCustomerPhone')?.value.trim();
-        
+
         if (!customerName || !customerPhone) {
             this.showNotification('Please fill in your name and phone number', 'error');
             return;
@@ -526,29 +526,58 @@ class HotelShoppingCart {
             Processing...
         `;
 
+        const newAmount = this.getTotalPrice();
+        const stringAmount = newAmount.toLocaleString();
+        console.log('====================================');
+        console.log(stringAmount);
+        console.log('====================================');
+
         try {
+
+            const cartData = {
+                customer: customerName,
+                phone: customerPhone,
+                services: [...this.cart],
+                amount: `${stringAmount}`,
+                date: new Date().toISOString(),
+                status: "pending",
+                details: { note: "Deliver before 9AM" },
+                service: 'multiple services'
+            };
+
+
+            const res = await fetch('http://localhost:5000/api/carts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cartData)
+            });
+
+
+
             // Generate WhatsApp message
             const message = this.generateWhatsAppMessage(customerName, customerPhone);
-            
+
             // Get WhatsApp number (using the first service type's number)
             const phoneNumber = this.whatsappNumbers[this.cart[0].type] || this.whatsappNumbers.rooms;
-            
+
             // Create WhatsApp URL
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
+
             // Open WhatsApp
             window.open(whatsappUrl, '_blank');
-            
+
             // Show success message
             this.showNotification('Redirecting to WhatsApp...', 'success');
-            
+            console.log(this.cart)
             // Clear cart after successful checkout
             setTimeout(() => {
                 this.clearCart();
                 this.closeCart();
             }, 2000);
-            
+
         } catch (error) {
             console.error('Checkout error:', error);
             this.showNotification('Checkout failed. Please try again.', 'error');
@@ -567,12 +596,12 @@ class HotelShoppingCart {
     generateWhatsAppMessage() {
         const totalAmount = this.getTotalPrice();
         const totalItems = this.getTotalItems();
-        
+
         let message = `🛒 *360 DEGREE HOTEL - MULTIPLE SERVICES ORDER*\n\n`;
         message += `📋 *Order Summary:*\n`;
         message += `Total Items: ${totalItems}\n`;
         message += `Total Amount: ₦${totalAmount.toLocaleString()}\n\n`;
-        
+
         message += `🛍️ *Items Ordered:*\n`;
         this.cart.forEach((item, index) => {
             message += `${index + 1}. ${item.name}\n`;
@@ -580,17 +609,17 @@ class HotelShoppingCart {
             message += `   Unit Price: ₦${item.price.toLocaleString()}\n`;
             message += `   Subtotal: ₦${(item.price * item.quantity).toLocaleString()}\n\n`;
         });
-        
+
         message += `💳 *Payment Details:*\n`;
         message += `Bank: UBA\n`;
         message += `Account Name: 360 degree global estate ltd\n`;
         message += `Account Number: 1025588876\n`;
         message += `Sort Code: 011\n\n`;
-        
+
         message += `📋 *Instructions:*\n`;
         message += `Please make payment and send receipt via WhatsApp to confirm your order.\n\n`;
         message += `Thank you for choosing 360 Degree Hotel!`;
-        
+
         return message;
     }
 
@@ -612,22 +641,22 @@ class HotelShoppingCart {
     showNotification(message, type = 'success') {
         const notification = document.createElement('div');
         notification.className = `cart-notification ${type}`;
-        
-        const icon = type === 'success' ? 'fa-check-circle' : 
-                    type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-        
+
+        const icon = type === 'success' ? 'fa-check-circle' :
+            type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+
         notification.innerHTML = `
             <i class="fas ${icon}"></i>
             <span>${message}</span>
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Show notification
         setTimeout(() => {
             notification.classList.add('show');
         }, 100);
-        
+
         // Hide and remove notification
         setTimeout(() => {
             notification.classList.remove('show');
@@ -644,7 +673,7 @@ class HotelShoppingCart {
             <div class="loading-spinner"></div>
             <span>ADDING</span>
         `;
-        
+
         setTimeout(() => {
             button.classList.remove('adding');
             button.classList.add('success');
@@ -652,7 +681,7 @@ class HotelShoppingCart {
                 <i class="fas fa-check"></i>
                 <span>ADDED</span>
             `;
-            
+
             setTimeout(() => {
                 button.classList.remove('success');
                 button.innerHTML = `
@@ -687,7 +716,7 @@ class HotelShoppingCart {
 }
 
 // Initialize cart when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Wait a bit for the existing script to load
     setTimeout(() => {
         window.hotelCart = new HotelShoppingCart();
