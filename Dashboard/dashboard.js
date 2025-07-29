@@ -87,6 +87,15 @@ function parseAmount(amount) {
     return Number(amount.replace(/,/g, ''));
 }
 
+
+const downloadReport = (range) => {
+    console.log('====================================');
+    console.log(`Downloading ${range} report...`);
+    console.log('====================================');
+    window.open(`http://localhost:5000/api/reports/pdf-report/${range}`, '_blank');
+};
+
+
 async function fetchOrders() {
     try {
         const response = await fetch('https://three60hotel.onrender.com/api/orders'); // replace with your deployed URL if needed
@@ -698,12 +707,13 @@ function updateCharts(data) {
 
 function generateReport(type) {
     showToast(`Generating ${type} report...`, 'info');
+    downloadReport(type);
 
-    // Simulate report generation
     setTimeout(() => {
         showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} report generated successfully!`, 'success');
     }, 2000);
 }
+
 
 function refreshData() {
     showToast('Refreshing data...', 'info');
