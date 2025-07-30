@@ -803,3 +803,50 @@ body {
         transform: translateY(0);
     }
 }
+
+
+.notification-bell {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 2px 6px;
+}
+
+.notification-modal {
+  position: absolute;
+  top: 65px;
+  right: 15px;
+  background: white;
+  border: 1px solid #ddd;
+  width: 250px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  color: #000;
+}
+
+.notification-modal.hidden {
+  display: none;
+}
+
+.notification-modal ul {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.notification-modal li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+

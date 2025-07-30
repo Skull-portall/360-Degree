@@ -6,13 +6,13 @@ class HotelShoppingCart {
         this.cart = [];
         this.isOpen = false;
         this.whatsappNumbers = {
-            rooms: '2349163161616',
-            food: '2349163161616',
-            sports: '2349163161616',
-            services: '2349163161616',
-            nightclub: '2349163161616',
-            pool: '2349163161616',
-            gateTickets: '2349163161616'
+            rooms: '2349156546479',
+            food: '2349156546479',
+            sports: '2349156546479',
+            services: '2349156546479',
+            nightclub: '2349156546479',
+            pool: '2349156546479',
+            gateTickets: '2349156546479'
         };
 
         this.init();
@@ -528,9 +528,9 @@ class HotelShoppingCart {
 
         const newAmount = this.getTotalPrice();
         const stringAmount = newAmount.toLocaleString();
-        console.log('====================================');
-        console.log(stringAmount);
-        console.log('====================================');
+        // console.log('====================================');
+        // console.log(stringAmount);
+        // console.log('====================================');
 
         try {
 
@@ -546,7 +546,7 @@ class HotelShoppingCart {
             };
 
 
-            const res = await fetch('http://localhost:5000/api/carts', {
+            const res = await fetch('https://three60hotel.onrender.com/api/carts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

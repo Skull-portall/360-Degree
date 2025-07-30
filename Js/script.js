@@ -33,13 +33,13 @@ function createOrderAndSendWhatsApp(orderData, messageCategory, messageContent) 
 
 // WhatsApp numbers for different services
 const whatsappNumbers = {
-    rooms: '2349163161616',        // Room bookings
-    food: '2349163161616',         // Food orders
-    sports: '2349163161616',       // Sports & Entertainment
-    services: '2349163161616',     // Event Hall, Salon, Bar
-    nightclub: '2349163161616',    // Nightclub & Pool
-    pool: '2349163161616',         // Pool (same as nightclub)
-    gateTickets: '2349163161616'   // Gate tickets
+    rooms: '2349156546479',        // Room bookings
+    food: '2349156546479',         // Food orders
+    sports: '2349150861906',       // Sports & Entertainment
+    services: '2349150861906',     // Event Hall, Salon, Bar
+    nightclub: '2349150861906',    // Nightclub & Pool
+    pool: '2349150861906',         // Pool (same as nightclub)
+    gateTickets: '2349150861906'   // Gate tickets
 };
 
 // Mobile menu toggle
@@ -308,49 +308,49 @@ function openSportsModal(activity, price) {
 
 // Open and Close Modal Functions
 function openModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (modal) modal.style.display = 'block';
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'block';
 }
 
 function closeModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (modal) modal.style.display = 'none';
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'none';
 }
 
 // Close modal when clicking outside
 window.onclick = function (event) {
-  const modals = document.querySelectorAll('.modal');
-  modals.forEach(modal => {
-    if (event.target === modal) modal.style.display = "none";
-  });
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target === modal) modal.style.display = "none";
+    });
 }
 
 // Price Calculation
 function updateLaundryTotal() {
-  const basePrice = 1000;
-  const perfume = document.getElementById("perfumeAdd").checked ? 500 : 0;
-  const ironing = document.getElementById("ironAdd").checked ? 1000 : 0;
-  const quantity = parseInt(document.getElementById("laundryQty").value) || 1;
+    const basePrice = 1000;
+    const perfume = document.getElementById("perfumeAdd").checked ? 500 : 0;
+    const ironing = document.getElementById("ironAdd").checked ? 1000 : 0;
+    const quantity = parseInt(document.getElementById("laundryQty").value) || 1;
 
-  const total = (basePrice + perfume + ironing) * quantity;
-  document.getElementById("totalLaundryPrice").textContent = total;
+    const total = (basePrice + perfume + ironing) * quantity;
+    document.getElementById("totalLaundryPrice").textContent = total;
 }
 
 // WhatsApp Booking
 function sendLaundryBooking() {
-  const name = document.getElementById("customerName").value.trim();
-  const phone = document.getElementById("customerPhone").value.trim();
-  const qty = document.getElementById("laundryQty").value;
-  const perfume = document.getElementById("perfumeAdd").checked ? "Yes" : "No";
-  const ironing = document.getElementById("ironAdd").checked ? "Yes" : "No";
-  const total = document.getElementById("totalLaundryPrice").textContent;
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
+    const qty = document.getElementById("laundryQty").value;
+    const perfume = document.getElementById("perfumeAdd").checked ? "Yes" : "No";
+    const ironing = document.getElementById("ironAdd").checked ? "Yes" : "No";
+    const total = document.getElementById("totalLaundryPrice").textContent;
 
-  if (!name || !phone) {
-    alert("Please enter your full name and phone number.");
-    return;
-  }
+    if (!name || !phone) {
+        alert("Please enter your full name and phone number.");
+        return;
+    }
 
-  const message = `Hello, I would like to book Laundry Service.%0A
+    const message = `Hello, I would like to book Laundry Service.%0A
   Name: ${name}%0A
   Phone: ${phone}%0A
   Number of Clothes: ${qty}%0A
@@ -358,9 +358,9 @@ function sendLaundryBooking() {
   Add Ironing: ${ironing}%0A
   Total Price: ₦${total}`;
 
-  const whatsappNumber = "2349161616"; // Replace with your real WhatsApp number
-  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
+    const whatsappNumber = "2349161616"; // Replace with your real WhatsApp number
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
 }
 
 

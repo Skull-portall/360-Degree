@@ -169,7 +169,7 @@ function setupClickHandlers() {
     }
 
     // Forgot password link
-    const forgotPasswordLink = document.querySelector('.forgot-password');
+    const forgotPasswordLink = document.querySelector('.forgot-passwor');
     if (forgotPasswordLink) {
         forgotPasswordLink.addEventListener('click', function (e) {
             e.preventDefault();

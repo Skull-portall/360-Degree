@@ -79,6 +79,8 @@
 // ];
 
 
+
+
 let ordersData = [];
 let cartData = [];
 
@@ -89,10 +91,7 @@ function parseAmount(amount) {
 
 
 const downloadReport = (range) => {
-    console.log('====================================');
-    console.log(`Downloading ${range} report...`);
-    console.log('====================================');
-    window.open(`http://localhost:5000/api/reports/pdf-report/${range}`, '_blank');
+    window.open(`https://three60hotel.onrender.com/api/reports/pdf-report/${range}`, '_blank');
 };
 
 
@@ -147,6 +146,7 @@ const serviceNames = {
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function () {
+
     // Check authentication
     checkAuthentication();
 
@@ -160,6 +160,53 @@ document.addEventListener('DOMContentLoaded', function () {
         // Call your function that displays orders in the UI
         renderOrdersTable();
     }
+
+
+    const socket = io('https://three60hotel.onrender.com'); // update to your backend URL
+    const notificationCount = document.getElementById('notificationCount');
+    const notificationList = document.getElementById('notifications');
+    const bell = document.getElementById('notificationBell');
+    const modal = document.getElementById('notificationModal');
+
+    let unseenOrders = [];
+
+    // Handle incoming new orders
+    socket.on('newOrder', (newOrder) => {
+        unseenOrders.unshift(newOrder); // add to start
+        updateNotificationUI();
+        refreshData()
+
+    });
+
+    socket.on('newCart', (cart) => {
+        unseenOrders.unshift(cart); // add to start
+        updateNotificationUI();
+        refreshData()
+    });
+
+    function updateNotificationUI() {
+        // Update count
+        notificationCount.textContent = unseenOrders.length;
+        notificationCount.style.display = unseenOrders.length ? 'inline-block' : 'none';
+
+        // Update list
+        notificationList.innerHTML = '';
+        unseenOrders.forEach((order) => {
+            const li = document.createElement('li');
+            li.textContent = `New Order: ${order.serviceName || 'Multiple services'} by ${order.customer || 'Unknown'}`;
+            notificationList.appendChild(li);
+        });
+    }
+
+    // Toggle modal on bell click
+    bell.addEventListener('click', () => {
+        modal.classList.toggle('hidden');
+        if (!modal.classList.contains('hidden')) {
+            // unseenOrders = []; // reset
+            updateNotificationUI();
+        }
+    });
+
 
     // Set default dates
     const today = new Date().toISOString().split('T')[0];
@@ -221,13 +268,13 @@ function updateStats() {
     // Calculate stats
     const pendingOrders = ordersData.filter(order => order.status === 'pending').length;
     const confirmedToday = ordersData.filter(order => {
-        const orderDate = new Date(order.date).toISOString().split('T')[0];
+        const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
         return orderDate === today && order.status === 'confirmed';
     }).length;
 
     const todayRevenue = ordersData
         .filter(order => {
-            const orderDate = new Date(order.date).toISOString().split('T')[0];
+            const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
             return orderDate === today && order.status !== 'cancelled' && order.status !== 'pending';
         })
         .reduce((sum, order) => sum + parseAmount(order.amount), 0);
@@ -607,23 +654,30 @@ function updateAnalytics() {
 
         switch (period) {
             case 'today':
+                // Get only the date part in YYYY-MM-DD format
                 filterDate = now.toISOString().split('T')[0];
-                filteredData = ordersData.filter(order => order.date === filterDate);
+
+                filteredData = ordersData.filter(order => {
+                    const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
+                    return orderDate === filterDate;
+                });
+
+                console.log('Filtering for today:', filterDate, filteredData);
                 break;
             case 'week':
                 const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                filteredData = ordersData.filter(order => new Date(order.date) >= weekAgo);
+                filteredData = ordersData.filter(order => new Date(order.createdAt) >= weekAgo);
                 break;
             case 'month':
                 filteredData = ordersData.filter(order => {
-                    const orderDate = new Date(order.date);
+                    const orderDate = new Date(order.createdAt);
                     return orderDate.getMonth() === now.getMonth() &&
                         orderDate.getFullYear() === now.getFullYear();
                 });
                 break;
             case 'year':
                 filteredData = ordersData.filter(order => {
-                    const orderDate = new Date(order.date);
+                    const orderDate = new Date(order.createdAt);
                     return orderDate.getFullYear() === now.getFullYear();
                 });
                 break;
@@ -805,3 +859,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+
