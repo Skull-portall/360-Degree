@@ -378,6 +378,16 @@ function openServiceModal(service, price) {
 
         // Update duration label based on service type
         const durationLabel = document.getElementById('durationLabel');
+        const typeLabel = document.getElementById('servicePeopleLabel');
+
+        if (durationLabel) {
+            if (service === 'Laundry Service') {
+                typeLabel.textContent = 'Number of sets';
+            } else {
+                typeLabel.textContent = 'Number of People';
+            }
+        }
+
         if (durationLabel) {
             if (service === 'Event Center Hall') {
                 durationLabel.textContent = 'days';
