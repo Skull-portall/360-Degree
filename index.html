@@ -1164,175 +1164,110 @@
 
     <!-- Services Section -->
     <section id="services" class="section">
-      <div class="container">
-        <h2 class="section-title">Premium Services</h2>
-        <div class="services-grid">
-          <!-- Event Center Hall -->
-          <div class="service-card">
-            <div class="image-gallery" data-gallery="event-hall">
-              <div class="gallery-container">
-                <img
-                  src="images/event 1.jpg"
-                  alt="Event Hall"
-                  class="gallery-image active"
-                  data-description="Elegant event hall perfect for weddings, conferences, and special occasions"
-                />
-                <img
-                  src="images/event 2.jpg"
-                  alt="Wedding Setup"
-                  class="gallery-image"
-                  data-description="Beautiful wedding setup with premium decorations and lighting"
-                />
-                <img
-                  src="images/Event.jpg"
-                  alt="Conference Setup"
-                  class="gallery-image"
-                  data-description="Professional conference setup with modern AV equipment"
-                />
-              </div>
-              <button class="gallery-btn prev-btn" onclick="changeImage('event-hall', -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="gallery-btn next-btn" onclick="changeImage('event-hall', 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-              <div class="gallery-counter">
-                <span class="current-slide">1</span>/<span class="total-slides">3</span>
-              </div>
-              <div class="gallery-dots">
-                <span class="dot active" onclick="currentImage('event-hall', 1)"></span>
-                <span class="dot" onclick="currentImage('event-hall', 2)"></span>
-                <span class="dot" onclick="currentImage('event-hall', 3)"></span>
-              </div>
-              <div class="image-description">
-                <span class="description-text"
-                  >Elegant event hall perfect for weddings, conferences, and special occasions</span
-                >
-              </div>
-            </div>
-            <div class="service-info">
-              <h3>Event Center Hall</h3>
-              <p>
-                Spacious event hall perfect for weddings, conferences, and special celebrations with
-                full catering service.
-              </p>
-              <div class="price">₦70,000 <span>per day</span></div>
-              <button class="book-btn" onclick="openServiceModal('Event Center Hall', 70000)">
-                Book Now
-              </button>
-            </div>
-          </div>
-
-          <!-- Laundry Service -->
-          <div class="service-card">
-            <div class="image-gallery" data-gallery="laundry">
-              <div class="gallery-container">
-                <img
-                  src="images/laundry1.jpg"
-                  alt="Laundry"
-                  class="gallery-image active"
-                  data-description="Professional laundry services with premium care"
-                />
-                <img
-                  src="images/laundry2.jpg"
-                  alt="Clean Clothes"
-                  class="gallery-image"
-                  data-description="Crisp, clean clothes with a fresh scent"
-                />
-                <img
-                  src="images/laundry3.jpg"
-                  alt="Folding Service"
-                  class="gallery-image"
-                  data-description="Neatly folded and packed laundry ready for pickup"
-                />
-              </div>
-              <button class="gallery-btn prev-btn" onclick="changeImage('laundry', -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="gallery-btn next-btn" onclick="changeImage('laundry', 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-              <div class="gallery-counter">
-                <span class="current-slide">1</span>/<span class="total-slides">3</span>
-              </div>
-              <div class="gallery-dots">
-                <span class="dot active" onclick="currentImage('laundry', 1)"></span>
-                <span class="dot" onclick="currentImage('laundry', 2)"></span>
-                <span class="dot" onclick="currentImage('laundry', 3)"></span>
-              </div>
-              <div class="image-description">
-                <span class="description-text"
-                  >Professional laundry services with premium care</span
-                >
-              </div>
-            </div>
-            <div class="service-info">
-              <h3>Laundry Service</h3>
-              <p>
-                Reliable laundry care for your clothes, trousers, and bedsheets. Charged per set.
-              </p>
-              <div class="price">₦1,000 <span>per set</span></div>
-              <button class="book-btn" onclick="openServiceModal('Laundry Service', 1000)">
-                Book Now
-              </button>
-            </div>
-          </div>
-
-          <!-- Salon -->
-          <div class="service-card">
-            <div class="image-gallery" data-gallery="salon">
-              <div class="gallery-container">
-                <img
-                  src="images/Saloon 3.jpg"
-                  alt="Salon"
-                  class="gallery-image active"
-                  data-description="Modern unisex salon with professional stylists and premium treatments"
-                />
-                <img
-                  src="images/saloon 2.jpg"
-                  alt="Hair Styling"
-                  class="gallery-image"
-                  data-description="Expert hair styling and coloring services for all hair types"
-                />
-                <img
-                  src="images/Sloon 4.jpg"
-                  alt="Spa Treatment"
-                  class="gallery-image"
-                  data-description="Relaxing spa treatments and beauty services"
-                />
-              </div>
-              <button class="gallery-btn prev-btn" onclick="changeImage('salon', -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="gallery-btn next-btn" onclick="changeImage('salon', 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-              <div class="gallery-counter">
-                <span class="current-slide">1</span>/<span class="total-slides">3</span>
-              </div>
-              <div class="gallery-dots">
-                <span class="dot active" onclick="currentImage('salon', 1)"></span>
-                <span class="dot" onclick="currentImage('salon', 2)"></span>
-                <span class="dot" onclick="currentImage('salon', 3)"></span>
-              </div>
-              <div class="image-description">
-                <span class="description-text"
-                  >Modern unisex salon with professional stylists and premium treatments</span
-                >
-              </div>
-            </div>
-            <div class="service-info">
-              <h3>Salon (Unisex)</h3>
-              <p>
-                Professional hair styling, beauty treatments, and spa services for both men and
-                women.
-              </p>
-              <div class="price">₦2,000 <span>per session</span></div>
-              <button class="book-btn" onclick="openServiceModal('Salon (Unisex)', 2000)">
-                Book Now
-              </button>
-            </div>
-          </div>
+        <div class="container">
+            <h2 class="section-title">Premium Services</h2>
+            <div class="services-grid">
+                <!-- Event Center Hall -->
+                <div class="service-card">
+                    <div class="image-gallery" data-gallery="event-hall">
+                        <div class="gallery-container">
+                            <img src="images/event 1.jpg" alt="Event Hall" class="gallery-image active" data-description="Elegant event hall perfect for weddings, conferences, and special occasions">
+                            <img src="images/event 2.jpg" alt="Wedding Setup" class="gallery-image" data-description="Beautiful wedding setup with premium decorations and lighting">
+                            <img src="images/Event.jpg" alt="Conference Setup" class="gallery-image" data-description="Professional conference setup with modern AV equipment">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('event-hall', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('event-hall', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('event-hall', 1)"></span>
+                            <span class="dot" onclick="currentImage('event-hall', 2)"></span>
+                            <span class="dot" onclick="currentImage('event-hall', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Elegant event hall perfect for weddings, conferences, and special occasions</span>
+                        </div>
+                    </div>
+                    <div class="service-info">
+                        <h3>Event Center Hall</h3>
+                        <p>Spacious event hall perfect for weddings, conferences, and special celebrations with full catering service.</p>
+                        <div class="price">₦70,000 <span>per day</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Event Center Hall', 70000)">Book Now</button>
+                    </div>
+                </div>
+               
+               <!-- Laundry Service -->
+<div class="service-card">
+    <div class="image-gallery" data-gallery="laundry">
+        <div class="gallery-container">
+            <img src="images/laundry1.jpg" alt="Laundry" class="gallery-image active" data-description="Professional laundry services with premium care">
+            <img src="images/laundry2.jpg" alt="Clean Clothes" class="gallery-image" data-description="Crisp, clean clothes with a fresh scent">
+            <img src="images/laundry3.jpg" alt="Folding Service" class="gallery-image" data-description="Neatly folded and packed laundry ready for pickup">
+        </div>
+        <button class="gallery-btn prev-btn" onclick="changeImage('laundry', -1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="gallery-btn next-btn" onclick="changeImage('laundry', 1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="gallery-counter">
+            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+        </div>
+        <div class="gallery-dots">
+            <span class="dot active" onclick="currentImage('laundry', 1)"></span>
+            <span class="dot" onclick="currentImage('laundry', 2)"></span>
+            <span class="dot" onclick="currentImage('laundry', 3)"></span>
+        </div>
+        <div class="image-description">
+            <span class="description-text">Professional laundry services with premium care</span>
+        </div>
+    </div>
+    <div class="service-info  ">
+        <h3>Laundry Service</h3>
+        <p>Reliable laundry care for your clothes, trousers, and bedsheets. Charged per set.</p>
+        <div class="price">₦1,000 <span>per set</span></div>
+        <button class="book-btn" onclick="openServiceModal('Laundry Service', 1000)">Book Now</button>
+    </div>
+</div>
+ 
+                <!-- Salon -->
+                <div class="service-card">
+                    <div class="image-gallery" data-gallery="salon">
+                        <div class="gallery-container">
+                            <img src="images/Saloon 3.jpg" alt="Salon" class="gallery-image active" data-description="Modern unisex salon with professional stylists and premium treatments">
+                            <img src="images/saloon 2.jpg" alt="Hair Styling" class="gallery-image" data-description="Expert hair styling and coloring services for all hair types">
+                            <img src="images/Sloon 4.jpg" alt="Spa Treatment" class="gallery-image" data-description="Relaxing spa treatments and beauty services">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('salon', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('salon', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('salon', 1)"></span>
+                            <span class="dot" onclick="currentImage('salon', 2)"></span>
+                            <span class="dot" onclick="currentImage('salon', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Modern unisex salon with professional stylists and premium treatments</span>
+                        </div>
+                    </div>
+                    <div class="service-info">
+                        <h3>Salon (Unisex)</h3>
+                        <p>Professional hair styling, beauty treatments, and spa services for both men and women.</p>
+                        <div class="price">₦2,000 <span>per session</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Salon (Unisex)', 2000)">Book Now</button>
+                    </div>
+                </div>
 
           <!-- Premium Bar
                 <div class="service-card">
@@ -1586,63 +1521,41 @@
             </div>
           </div>
 
-          <!-- Spa & Wellness -->
-          <div class="amenity-card">
-            <div class="image-gallery" data-gallery="spa-wellness">
-              <div class="gallery-container">
-                <img
-                  src="/images/featnees 1.jpg"
-                  alt="Spa"
-                  class="gallery-image active"
-                  data-description="Tranquil spa environment with professional massage and wellness treatments"
-                />
-                <img
-                  src="/images/featnees 2.jpg"
-                  alt="Massage Room"
-                  class="gallery-image"
-                  data-description="Private massage rooms with experienced therapists"
-                />
-                <img
-                  src="/images/featness 3.jpg"
-                  alt="Wellness Center"
-                  class="gallery-image"
-                  data-description="Complete wellness center with sauna and relaxation areas"
-                />
-              </div>
-              <button class="gallery-btn prev-btn" onclick="changeImage('spa-wellness', -1)">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="gallery-btn next-btn" onclick="changeImage('spa-wellness', 1)">
-                <i class="fas fa-chevron-right"></i>
-              </button>
-              <div class="gallery-counter">
-                <span class="current-slide">1</span>/<span class="total-slides">3</span>
-              </div>
-              <div class="gallery-dots">
-                <span class="dot active" onclick="currentImage('spa-wellness', 1)"></span>
-                <span class="dot" onclick="currentImage('spa-wellness', 2)"></span>
-                <span class="dot" onclick="currentImage('spa-wellness', 3)"></span>
-              </div>
-              <div class="image-description">
-                <span class="description-text"
-                  >Tranquil spa environment with professional massage and wellness treatments</span
-                >
-              </div>
+                <!-- Spa & Wellness -->
+                <div class="amenity-card">
+                    <div class="image-gallery" data-gallery="spa-wellness">
+                        <div class="gallery-container">
+                            <img src="/images/featnees 1.jpg" alt="Spa" class="gallery-image active" data-description="Tranquil spa environment with professional massage and wellness treatments">
+                            <img src="/images/featnees 2.jpg" alt="Massage Room" class="gallery-image" data-description="Private massage rooms with experienced therapists">
+                            <img src="/images/featness 3.jpg" alt="Wellness Center" class="gallery-image" data-description="Complete wellness center with sauna and relaxation areas">
+                        </div>
+                        <button class="gallery-btn prev-btn" onclick="changeImage('spa-wellness', -1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn next-btn" onclick="changeImage('spa-wellness', 1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="gallery-counter">
+                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                        </div>
+                        <div class="gallery-dots">
+                            <span class="dot active" onclick="currentImage('spa-wellness', 1)"></span>
+                            <span class="dot" onclick="currentImage('spa-wellness', 2)"></span>
+                            <span class="dot" onclick="currentImage('spa-wellness', 3)"></span>
+                        </div>
+                        <div class="image-description">
+                            <span class="description-text">Tranquil spa environment with professional massage and wellness treatments</span>
+                        </div>
+                    </div>
+                    <div class="amenity-info">
+                        <h3>Spa & Wellness Center</h3>
+                        <p>Rejuvenate your body and mind with our comprehensive spa services, massages, and wellness treatments.</p>
+                        <div class="price">₦25,000 <span>per session</span></div>
+                        <button class="book-btn" onclick="openServiceModal('Spa & Wellness Center', 25000)">Book Session</button>
+                    </div>
+                </div>
             </div>
-            <div class="amenity-info">
-              <h3>Spa & Wellness Center</h3>
-              <p>
-                Rejuvenate your body and mind with our comprehensive spa services, massages, and
-                wellness treatments.
-              </p>
-              <div class="price">₦25,000 <span>per session</span></div>
-              <button class="book-btn" onclick="openServiceModal('Spa & Wellness Center', 25000)">
-                Book Session
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- About Section -->
