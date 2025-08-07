@@ -6,7 +6,6 @@ let currentPrice = 0;
 
 // Gallery management
 const galleries = {};
-
 const autoSlideIntervals = {};
 
 function createOrderAndSendWhatsApp(orderData, messageCategory, messageContent) {

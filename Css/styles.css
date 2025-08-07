@@ -65,8 +65,7 @@
   justify-content: center;
   width: 100%;
   flex-direction: row;
-  flex: 1;
-  margin: 40px;
+  margin-top: 40px;
 }
 
 .view-menu-btn {
