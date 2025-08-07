@@ -59,6 +59,9 @@
 .tab-content.active-tab {
   display: block;
 }
+.ameer {
+  background: #000;
+}
 
 .big-btn {
   display: flex;
