@@ -78,57 +78,48 @@
 //     }
 // ];
 
-
-
-
 let ordersData = [];
 let cartData = [];
 
 function parseAmount(amount) {
-    // Remove commas and convert to number
-    return Number(amount.replace(/,/g, ''));
+  // Remove commas and convert to number
+  return Number(amount.replace(/,/g, ''));
 }
-
 
 const downloadReport = (range) => {
-    window.open(`https://three60hotel.onrender.com/api/reports/pdf-report/${range}`, '_blank');
+  window.open(`https://three60hotel-n6u5.onrender.com/api/reports/pdf-report/${range}`, '_blank');
 };
 
-
 async function fetchOrders() {
-    try {
-        const response = await fetch('https://three60hotel.onrender.com/api/orders'); // replace with your deployed URL if needed
-        if (!response.ok) throw new Error('Failed to fetch orders');
+  try {
+    const response = await fetch('https://three60hotel-n6u5.onrender.com/api/orders'); // replace with your deployed URL if needed
+    if (!response.ok) throw new Error('Failed to fetch orders');
 
+    const data = await response.json();
 
-        const data = await response.json();
+    const cartresponse = await fetch('https://three60hotel-n6u5.onrender.com/api/carts'); // replace with your deployed URL if needed
+    if (!cartresponse.ok) throw new Error('Failed to fetch carts');
+    // http://localhost:5000/api/carts
 
+    const cartdata = await cartresponse.json();
+    cartData = cartdata;
 
-        const cartresponse = await fetch('https://three60hotel.onrender.com/api/carts'); // replace with your deployed URL if needed
-        if (!cartresponse.ok) throw new Error('Failed to fetch carts');
-        // http://localhost:5000/api/carts
+    // console.log('Carts fetched:', cartData);
 
-        const cartdata = await cartresponse.json();
-        cartData = cartdata;
+    ordersData = [...data, ...cartData.carts].map((order) => ({
+      ...order,
+      // amount: parseAmount(order.amount),
+      serviceName: order.serviceName ? order.serviceName : 'multiple services',
+    }));
+    // console.log('Carts and orders fetched:', ordersData);
+    filterOrders();
 
-        // console.log('Carts fetched:', cartData);
-
-        ordersData = [...data, ...cartData.carts]
-            .map(order => ({
-                ...order,
-                // amount: parseAmount(order.amount),
-                serviceName: order.serviceName ? order.serviceName : 'multiple services',
-            }));
-        // console.log('Carts and orders fetched:', ordersData);
-        filterOrders()
-
-        console.log('Orders fetched:', ordersData);
-        // refreshData()
-    } catch (err) {
-        console.error('Error fetching orders:', err.message);
-    }
+    console.log('Orders fetched:', ordersData);
+    // refreshData()
+  } catch (err) {
+    console.error('Error fetching orders:', err.message);
+  }
 }
-
 
 // Call this on page load
 let currentOrderId = null;
@@ -136,211 +127,213 @@ let filteredOrders = [...ordersData];
 
 // Service name mappings
 const serviceNames = {
-    rooms: 'Room Booking',
-    food: 'Food Order',
-    sports: 'Sports Booking',
-    gateTickets: 'Gate Tickets',
-    services: 'Services',
-    nightclub: 'Nightclub'
+  rooms: 'Room Booking',
+  food: 'Food Order',
+  sports: 'Sports Booking',
+  gateTickets: 'Gate Tickets',
+  services: 'Services',
+  nightclub: 'Nightclub',
 };
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function () {
+  // Check authentication
+  checkAuthentication();
 
-    // Check authentication
-    checkAuthentication();
-
-    initializeDashboard();
-    updateStats();
+  initializeDashboard();
+  updateStats();
+  renderOrdersTable();
+  updateAnalytics();
+  fetchOrders();
+  refreshData();
+  if (ordersData.length > 0) {
+    // Call your function that displays orders in the UI
     renderOrdersTable();
-    updateAnalytics();
-    fetchOrders();
-    refreshData()
-    if (ordersData.length > 0) {
-        // Call your function that displays orders in the UI
-        renderOrdersTable();
+  }
+
+  const socket = io('https://three60hotel-n6u5.onrender.com'); // update to your backend URL
+  const notificationCount = document.getElementById('notificationCount');
+  const notificationList = document.getElementById('notifications');
+  const bell = document.getElementById('notificationBell');
+  const modal = document.getElementById('notificationModal');
+
+  let unseenOrders = [];
+
+  // Handle incoming new orders
+  socket.on('newOrder', (newOrder) => {
+    unseenOrders.unshift(newOrder); // add to start
+    updateNotificationUI();
+    refreshData();
+  });
+
+  socket.on('newCart', (cart) => {
+    unseenOrders.unshift(cart); // add to start
+    updateNotificationUI();
+    refreshData();
+  });
+
+  function updateNotificationUI() {
+    // Update count
+    notificationCount.textContent = unseenOrders.length;
+    notificationCount.style.display = unseenOrders.length ? 'inline-block' : 'none';
+
+    // Update list
+    notificationList.innerHTML = '';
+    unseenOrders.forEach((order) => {
+      const li = document.createElement('li');
+      li.textContent = `New Order: ${order.serviceName || 'Multiple services'} by ${
+        order.customer || 'Unknown'
+      }`;
+      notificationList.appendChild(li);
+    });
+  }
+
+  // Toggle modal on bell click
+  bell.addEventListener('click', () => {
+    modal.classList.toggle('hidden');
+    if (!modal.classList.contains('hidden')) {
+      // unseenOrders = []; // reset
+      updateNotificationUI();
     }
+  });
 
-
-    const socket = io('https://three60hotel.onrender.com'); // update to your backend URL
-    const notificationCount = document.getElementById('notificationCount');
-    const notificationList = document.getElementById('notifications');
-    const bell = document.getElementById('notificationBell');
-    const modal = document.getElementById('notificationModal');
-
-    let unseenOrders = [];
-
-    // Handle incoming new orders
-    socket.on('newOrder', (newOrder) => {
-        unseenOrders.unshift(newOrder); // add to start
-        updateNotificationUI();
-        refreshData()
-
-    });
-
-    socket.on('newCart', (cart) => {
-        unseenOrders.unshift(cart); // add to start
-        updateNotificationUI();
-        refreshData()
-    });
-
-    function updateNotificationUI() {
-        // Update count
-        notificationCount.textContent = unseenOrders.length;
-        notificationCount.style.display = unseenOrders.length ? 'inline-block' : 'none';
-
-        // Update list
-        notificationList.innerHTML = '';
-        unseenOrders.forEach((order) => {
-            const li = document.createElement('li');
-            li.textContent = `New Order: ${order.serviceName || 'Multiple services'} by ${order.customer || 'Unknown'}`;
-            notificationList.appendChild(li);
-        });
-    }
-
-    // Toggle modal on bell click
-    bell.addEventListener('click', () => {
-        modal.classList.toggle('hidden');
-        if (!modal.classList.contains('hidden')) {
-            // unseenOrders = []; // reset
-            updateNotificationUI();
-        }
-    });
-
-
-    // Set default dates
-    const today = new Date().toISOString().split('T')[0];
-    const firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
-    const startDateEl = document.getElementById('startDate');
-    const endDateEl = document.getElementById('endDate');
-    if (startDateEl) startDateEl.value = firstDay;
-    if (endDateEl) endDateEl.value = today;
+  // Set default dates
+  const today = new Date().toISOString().split('T')[0];
+  const firstDay = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+    .toISOString()
+    .split('T')[0];
+  const startDateEl = document.getElementById('startDate');
+  const endDateEl = document.getElementById('endDate');
+  if (startDateEl) startDateEl.value = firstDay;
+  if (endDateEl) endDateEl.value = today;
 });
 
 function checkAuthentication() {
-    const session = getSession();
+  const session = getSession();
 
-    if (!session || !isSessionValid(session)) {
-        // Redirect to login if not authenticated
-        console.log('❌ No valid session found, redirecting to login');
-        setTimeout(() => {
-            window.location.href = 'login.html';
-        }, 100);
-        return;
-    }
+  if (!session || !isSessionValid(session)) {
+    // Redirect to login if not authenticated
+    console.log('❌ No valid session found, redirecting to login');
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 100);
+    return;
+  }
 
-    console.log('✅ User authenticated:', session.username);
+  console.log('✅ User authenticated:', session.username);
 }
 
 function getSession() {
-    try {
-        const sessionData = localStorage.getItem('hotel_admin_session');
-        return sessionData ? JSON.parse(sessionData) : null;
-    } catch (error) {
-        console.error('Error reading session:', error);
-        return null;
-    }
+  try {
+    const sessionData = localStorage.getItem('hotel_admin_session');
+    return sessionData ? JSON.parse(sessionData) : null;
+  } catch (error) {
+    console.error('Error reading session:', error);
+    return null;
+  }
 }
 
 function isSessionValid(session) {
-    if (!session || !session.expiresAt) {
-        return false;
-    }
+  if (!session || !session.expiresAt) {
+    return false;
+  }
 
-    return Date.now() < session.expiresAt;
+  return Date.now() < session.expiresAt;
 }
 function initializeDashboard() {
-    console.log('🚀 Dashboard initialized');
+  console.log('🚀 Dashboard initialized');
 
-    // Update notification count
-    const pendingCount = ordersData.filter(order => order.status === 'pending').length;
-    document.getElementById('notificationCount').textContent = pendingCount;
+  // Update notification count
+  const pendingCount = ordersData.filter((order) => order.status === 'pending').length;
+  document.getElementById('notificationCount').textContent = pendingCount;
 
-    // Show orders section by default
-    showSection('orders');
+  // Show orders section by default
+  showSection('orders');
 }
 
 function updateStats() {
-    const today = new Date().toISOString().split('T')[0];
-    const currentMonth = new Date().getMonth();
-    const currentYear = new Date().getFullYear();
+  const today = new Date().toISOString().split('T')[0];
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
 
-    // Calculate stats
-    const pendingOrders = ordersData.filter(order => order.status === 'pending').length;
-    const confirmedToday = ordersData.filter(order => {
-        const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
-        return orderDate === today && order.status === 'confirmed';
-    }).length;
+  // Calculate stats
+  const pendingOrders = ordersData.filter((order) => order.status === 'pending').length;
+  const confirmedToday = ordersData.filter((order) => {
+    const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
+    return orderDate === today && order.status === 'confirmed';
+  }).length;
 
-    const todayRevenue = ordersData
-        .filter(order => {
-            const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
-            return orderDate === today && order.status !== 'cancelled' && order.status !== 'pending';
-        })
-        .reduce((sum, order) => sum + parseAmount(order.amount), 0);
+  const todayRevenue = ordersData
+    .filter((order) => {
+      const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
+      return orderDate === today && order.status !== 'cancelled' && order.status !== 'pending';
+    })
+    .reduce((sum, order) => sum + parseAmount(order.amount), 0);
 
-    const monthlyRevenue = ordersData
-        .filter(order => {
-            const orderDate = new Date(order.date);
-            return orderDate.getMonth() === currentMonth &&
-                orderDate.getFullYear() === currentYear &&
-                order.status !== 'cancelled' && order.status !== 'pending';
-        })
-        .reduce((sum, order) => sum + parseAmount(order.amount), 0);
+  const monthlyRevenue = ordersData
+    .filter((order) => {
+      const orderDate = new Date(order.date);
+      return (
+        orderDate.getMonth() === currentMonth &&
+        orderDate.getFullYear() === currentYear &&
+        order.status !== 'cancelled' &&
+        order.status !== 'pending'
+      );
+    })
+    .reduce((sum, order) => sum + parseAmount(order.amount), 0);
 
-
-    // Update UI
-    document.getElementById('pendingOrders').textContent = pendingOrders;
-    document.getElementById('confirmedOrders').textContent = confirmedToday;
-    document.getElementById('todayRevenue').textContent = `₦${todayRevenue.toLocaleString()}`;
-    document.getElementById('monthlyRevenue').textContent = `₦${monthlyRevenue.toLocaleString()}`;
+  // Update UI
+  document.getElementById('pendingOrders').textContent = pendingOrders;
+  document.getElementById('confirmedOrders').textContent = confirmedToday;
+  document.getElementById('todayRevenue').textContent = `₦${todayRevenue.toLocaleString()}`;
+  document.getElementById('monthlyRevenue').textContent = `₦${monthlyRevenue.toLocaleString()}`;
 }
 
 function showSection(sectionName) {
-    // Hide all sections
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
+  // Hide all sections
+  document.querySelectorAll('.content-section').forEach((section) => {
+    section.classList.remove('active');
+  });
 
-    // Show selected section
-    const targetSection = document.getElementById(sectionName + 'Section');
-    if (targetSection) {
-        targetSection.classList.add('active');
-    }
+  // Show selected section
+  const targetSection = document.getElementById(sectionName + 'Section');
+  if (targetSection) {
+    targetSection.classList.add('active');
+  }
 
-    // Update analytics if analytics section is shown
-    if (sectionName === 'analytics') {
-        updateAnalytics();
-    }
+  // Update analytics if analytics section is shown
+  if (sectionName === 'analytics') {
+    updateAnalytics();
+  }
 }
 
 function filterOrders() {
-    const orderFilter = document.getElementById('orderFilter').value;
-    const serviceFilter = document.getElementById('serviceFilter').value;
+  const orderFilter = document.getElementById('orderFilter').value;
+  const serviceFilter = document.getElementById('serviceFilter').value;
 
-    filteredOrders = ordersData.filter(order => {
-        const statusMatch = orderFilter === 'all' || order.status === orderFilter;
-        const serviceMatch = serviceFilter === 'all' || order.service === serviceFilter;
-        return statusMatch && serviceMatch;
-    });
+  filteredOrders = ordersData.filter((order) => {
+    const statusMatch = orderFilter === 'all' || order.status === orderFilter;
+    const serviceMatch = serviceFilter === 'all' || order.service === serviceFilter;
+    return statusMatch && serviceMatch;
+  });
 
-    renderOrdersTable();
+  renderOrdersTable();
 }
 
 let currentPage = 1;
 const ordersPerPage = 8;
 
 function renderOrdersTable(page = 1) {
-    const tbody = document.getElementById('ordersTableBody');
-    tbody.innerHTML = '';
+  const tbody = document.getElementById('ordersTableBody');
+  tbody.innerHTML = '';
 
-    const start = (page - 1) * ordersPerPage;
-    const end = start + ordersPerPage;
-    const paginatedOrders = filteredOrders.slice(start, end);
+  const start = (page - 1) * ordersPerPage;
+  const end = start + ordersPerPage;
+  const paginatedOrders = filteredOrders.slice(start, end);
 
-    paginatedOrders.forEach(order => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
+  paginatedOrders.forEach((order) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
             <td><strong>${order.orderNumber}</strong></td>
             <td>
                 <div>${order.customer}</div>
@@ -355,75 +348,81 @@ function renderOrdersTable(page = 1) {
                     <button class="btn-small btn-view" onclick="viewOrder('${order._id}')">
                         <i class="fas fa-eye"></i>
                     </button>
-                    ${order.status === 'pending' ? `
+                    ${
+                      order.status === 'pending'
+                        ? `
                         <button class="btn-small btn-confirm" onclick="quickConfirmOrder('${order._id}')">
                             <i class="fas fa-check"></i>
                         </button>
-                    ` : ''}
-                    ${order.status === 'confirmed' ? `
+                    `
+                        : ''
+                    }
+                    ${
+                      order.status === 'confirmed'
+                        ? `
                         <button class="btn-small btn-complete" onclick="quickCompleteOrder('${order._id}')">
                             <i class="fas fa-check-double"></i>
                         </button>
-                    ` : ''}
+                    `
+                        : ''
+                    }
                 </div>
             </td>
         `;
-        tbody.appendChild(row);
-    });
+    tbody.appendChild(row);
+  });
 
-    renderPagination();
+  renderPagination();
 }
-
 
 function renderPagination() {
-    const paginationContainer = document.getElementById('paginationControls');
-    if (!paginationContainer) return;
+  const paginationContainer = document.getElementById('paginationControls');
+  if (!paginationContainer) return;
 
-    paginationContainer.innerHTML = '';
+  paginationContainer.innerHTML = '';
 
-    const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
 
-    // Previous button
-    const prev = document.createElement('button');
-    prev.textContent = 'Prev';
-    prev.disabled = currentPage === 1;
-    prev.onclick = () => {
-        currentPage--;
-        renderOrdersTable(currentPage);
+  // Previous button
+  const prev = document.createElement('button');
+  prev.textContent = 'Prev';
+  prev.disabled = currentPage === 1;
+  prev.onclick = () => {
+    currentPage--;
+    renderOrdersTable(currentPage);
+  };
+  paginationContainer.appendChild(prev);
+
+  // Page numbers
+  for (let i = 1; i <= totalPages; i++) {
+    const pageBtn = document.createElement('button');
+    pageBtn.textContent = i;
+    if (i === currentPage) pageBtn.classList.add('active');
+    pageBtn.onclick = () => {
+      currentPage = i;
+      renderOrdersTable(i);
     };
-    paginationContainer.appendChild(prev);
+    paginationContainer.appendChild(pageBtn);
+  }
 
-    // Page numbers
-    for (let i = 1; i <= totalPages; i++) {
-        const pageBtn = document.createElement('button');
-        pageBtn.textContent = i;
-        if (i === currentPage) pageBtn.classList.add('active');
-        pageBtn.onclick = () => {
-            currentPage = i;
-            renderOrdersTable(i);
-        };
-        paginationContainer.appendChild(pageBtn);
-    }
-
-    // Next button
-    const next = document.createElement('button');
-    next.textContent = 'Next';
-    next.disabled = currentPage === totalPages;
-    next.onclick = () => {
-        currentPage++;
-        renderOrdersTable(currentPage);
-    };
-    paginationContainer.appendChild(next);
+  // Next button
+  const next = document.createElement('button');
+  next.textContent = 'Next';
+  next.disabled = currentPage === totalPages;
+  next.onclick = () => {
+    currentPage++;
+    renderOrdersTable(currentPage);
+  };
+  paginationContainer.appendChild(next);
 }
 
-
 function viewOrder(orderId) {
-    const order = ordersData.find(o => o._id === orderId);
-    if (!order) return;
+  const order = ordersData.find((o) => o._id === orderId);
+  if (!order) return;
 
-    currentOrderId = orderId;
+  currentOrderId = orderId;
 
-    const detailsHtml = `
+  const detailsHtml = `
         <div style="margin-bottom: 1.5rem;">
             <h3>Order #${order.orderNumber}</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
@@ -458,51 +457,57 @@ function viewOrder(orderId) {
         </div>
     `;
 
-    document.getElementById('orderDetails').innerHTML = detailsHtml;
-    document.getElementById('orderModal').style.display = 'block';
+  document.getElementById('orderDetails').innerHTML = detailsHtml;
+  document.getElementById('orderModal').style.display = 'block';
 }
 
 function formatOrderDetails(order) {
-    const details = order.details;
-    let html = '';
+  const details = order.details;
+  let html = '';
 
-    switch (order.service) {
-        case 'rooms':
-            html = `
+  switch (order.service) {
+    case 'rooms':
+      html = `
                 <p><strong>Nights:</strong> ${details.nights}</p>
                 <p><strong>Check-in:</strong> ${formatDate(details.checkin)}</p>
                 <p><strong>Check-out:</strong> ${formatDate(details.checkout)}</p>
                 <p><strong>Guests:</strong> ${details.guests}</p>
             `;
-            break;
-        case 'food':
-            html = `
+      break;
+    case 'food':
+      html = `
                 <p><strong>Quantity:</strong> ${details.quantity}</p>
-                ${details.instructions ? `<p><strong>Instructions:</strong> ${details.instructions}</p>` : ''}
+                ${
+                  details.instructions
+                    ? `<p><strong>Instructions:</strong> ${details.instructions}</p>`
+                    : ''
+                }
             `;
-            break;
-        case 'sports':
-            html = `
+      break;
+    case 'sports':
+      html = `
                 <p><strong>Hours:</strong> ${details.hours}</p>
                 <p><strong>Date:</strong> ${formatDate(details.PreferredDate)}</p>
             `;
-            break;
-        case 'gateTickets':
-            html = `
+      break;
+    case 'gateTickets':
+      html = `
                 <p><strong>Days:</strong> ${details.days}</p>
                 <p><strong>People:</strong> ${details.people}</p>
                 <p><strong>Entry Date:</strong> ${formatDate(details.entryDate)}</p>
             `;
-            break;
-        case 'nightclub':
-            html = `
+      break;
+    case 'nightclub':
+      html = `
                 <p><strong>People:</strong> ${details.people}</p>
                 <p><strong>Date:</strong> ${formatDate(details.date)}</p>
                 <p><strong>Time:</strong> ${details.time}</p>
             `;
-            break;
-        case 'multiple services':
-            const servicesHtml = order.services.map(service => `
+      break;
+    case 'multiple services':
+      const servicesHtml = order.services
+        .map(
+          (service) => `
         <div style="margin-bottom: 10px;">
             <p><strong>Service:</strong> ${service.name}</p>
             <p><strong>Type:</strong> ${service.type}</p>
@@ -511,354 +516,362 @@ function formatOrderDetails(order) {
             <p><strong>Quantity:</strong> ${service.quantity}</p>
             <hr />
         </div>
-    `).join('');
-            html = `
+    `
+        )
+        .join('');
+      html = `
                 <div>
                     <h4>Multiple Services</h4>
                     ${servicesHtml}
                 </div>
             `;
-            break;
-        default:
-            html = '<p>No additional details available</p>';
-    }
+      break;
+    default:
+      html = '<p>No additional details available</p>';
+  }
 
-    return html;
+  return html;
 }
 
 async function quickConfirmOrder(orderId) {
-    try {
-        const response = await fetch(`https://three60hotel.onrender.com/api/orders/${orderId}/status`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status: 'confirmed' }),
-        });
+  try {
+    const response = await fetch(
+      `https://three60hotel-n6u5.onrender.com/api/orders/${orderId}/status`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'confirmed' }),
+      }
+    );
 
-        if (!response.ok) throw new Error('Failed to confirm order');
+    if (!response.ok) throw new Error('Failed to confirm order');
 
-        // Update local ordersData
-        const updatedOrder = await response.json();
-        const index = ordersData.findIndex(o => o._id === orderId);
-        if (index !== -1) {
-            ordersData[index].status = updatedOrder.status;
-        }
-
-        updateStats();
-        renderOrdersTable();
-        refreshData()
-
-        showToast('Order confirmed successfully!', 'success');
-    } catch (error) {
-        console.error(error);
-        showToast('Failed to confirm order!', 'error');
+    // Update local ordersData
+    const updatedOrder = await response.json();
+    const index = ordersData.findIndex((o) => o._id === orderId);
+    if (index !== -1) {
+      ordersData[index].status = updatedOrder.status;
     }
+
+    updateStats();
+    renderOrdersTable();
+    refreshData();
+
+    showToast('Order confirmed successfully!', 'success');
+  } catch (error) {
+    console.error(error);
+    showToast('Failed to confirm order!', 'error');
+  }
 }
 
 async function quickCompleteOrder(orderId) {
-    try {
-        const response = await fetch(`https://three60hotel.onrender.com/api/orders/${orderId}/status`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status: 'completed' }),
-        });
+  try {
+    const response = await fetch(
+      `https://three60hotel-n6u5.onrender.com/api/orders/${orderId}/status`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'completed' }),
+      }
+    );
 
-        if (!response.ok) throw new Error('Failed to complete order');
+    if (!response.ok) throw new Error('Failed to complete order');
 
-        const updatedOrder = await response.json();
-        const index = ordersData.findIndex(o => o._id === orderId);
-        if (index !== -1) {
-            ordersData[index].status = updatedOrder.status;
-        }
-
-        updateStats();
-        renderOrdersTable();
-        refreshData()
-
-        showToast('Order marked as completed!', 'success');
-    } catch (error) {
-        console.error(error);
-        showToast('Failed to complete order!', 'error');
+    const updatedOrder = await response.json();
+    const index = ordersData.findIndex((o) => o._id === orderId);
+    if (index !== -1) {
+      ordersData[index].status = updatedOrder.status;
     }
+
+    updateStats();
+    renderOrdersTable();
+    refreshData();
+
+    showToast('Order marked as completed!', 'success');
+  } catch (error) {
+    console.error(error);
+    showToast('Failed to complete order!', 'error');
+  }
 }
 
-
 function confirmOrder() {
-    if (currentOrderId) {
-        quickConfirmOrder(currentOrderId);
-        closeOrderModal();
-    }
+  if (currentOrderId) {
+    quickConfirmOrder(currentOrderId);
+    closeOrderModal();
+  }
 }
 
 function completeOrder() {
-    if (currentOrderId) {
-        quickCompleteOrder(currentOrderId);
-        closeOrderModal();
-    }
+  if (currentOrderId) {
+    quickCompleteOrder(currentOrderId);
+    closeOrderModal();
+  }
 }
 
 async function cancelOrder() {
-    if (!currentOrderId) return;
+  if (!currentOrderId) return;
 
-    try {
-        const response = await fetch(`https://three60hotel.onrender.com/api/orders/${currentOrderId}/status`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status: 'cancelled' }),
-        });
+  try {
+    const response = await fetch(
+      `https://three60hotel-n6u5.onrender.com/api/orders/${currentOrderId}/status`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'cancelled' }),
+      }
+    );
 
-        if (!response.ok) throw new Error('Failed to cancel order');
+    if (!response.ok) throw new Error('Failed to cancel order');
 
-        const updatedOrder = await response.json();
+    const updatedOrder = await response.json();
 
-        // Update the local ordersData array if needed
-        const index = ordersData.findIndex(o => o._id === currentOrderId);
-        if (index !== -1) {
-            ordersData[index].status = updatedOrder.status;
-        }
-
-        updateStats();
-        renderOrdersTable();
-        refreshData()
-
-        showToast('Order cancelled', 'error');
-        closeOrderModal();
-
-    } catch (error) {
-        console.error(error);
-        showToast('Failed to cancel order', 'error');
+    // Update the local ordersData array if needed
+    const index = ordersData.findIndex((o) => o._id === currentOrderId);
+    if (index !== -1) {
+      ordersData[index].status = updatedOrder.status;
     }
+
+    updateStats();
+    renderOrdersTable();
+    refreshData();
+
+    showToast('Order cancelled', 'error');
+    closeOrderModal();
+  } catch (error) {
+    console.error(error);
+    showToast('Failed to cancel order', 'error');
+  }
 }
 
 function closeOrderModal() {
-    document.getElementById('orderModal').style.display = 'none';
-    currentOrderId = null;
+  document.getElementById('orderModal').style.display = 'none';
+  currentOrderId = null;
 }
 
 function updateAnalytics() {
-    const period = document.getElementById('periodFilter').value;
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
+  const period = document.getElementById('periodFilter').value;
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
 
-    let filteredData = [...ordersData];
+  let filteredData = [...ordersData];
 
-    // Filter by period
-    if (period !== 'custom') {
-        const now = new Date();
-        let filterDate;
+  // Filter by period
+  if (period !== 'custom') {
+    const now = new Date();
+    let filterDate;
 
-        switch (period) {
-            case 'today':
-                // Get only the date part in YYYY-MM-DD format
-                filterDate = now.toISOString().split('T')[0];
+    switch (period) {
+      case 'today':
+        // Get only the date part in YYYY-MM-DD format
+        filterDate = now.toISOString().split('T')[0];
 
-                filteredData = ordersData.filter(order => {
-                    const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
-                    return orderDate === filterDate;
-                });
+        filteredData = ordersData.filter((order) => {
+          const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
+          return orderDate === filterDate;
+        });
 
-                console.log('Filtering for today:', filterDate, filteredData);
-                break;
-            case 'week':
-                const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-                filteredData = ordersData.filter(order => new Date(order.createdAt) >= weekAgo);
-                break;
-            case 'month':
-                filteredData = ordersData.filter(order => {
-                    const orderDate = new Date(order.createdAt);
-                    return orderDate.getMonth() === now.getMonth() &&
-                        orderDate.getFullYear() === now.getFullYear();
-                });
-                break;
-            case 'year':
-                filteredData = ordersData.filter(order => {
-                    const orderDate = new Date(order.createdAt);
-                    return orderDate.getFullYear() === now.getFullYear();
-                });
-                break;
-        }
-    } else if (startDate && endDate) {
-        filteredData = ordersData.filter(order =>
-            order.date >= startDate && order.date <= endDate
-        );
+        console.log('Filtering for today:', filterDate, filteredData);
+        break;
+      case 'week':
+        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        filteredData = ordersData.filter((order) => new Date(order.createdAt) >= weekAgo);
+        break;
+      case 'month':
+        filteredData = ordersData.filter((order) => {
+          const orderDate = new Date(order.createdAt);
+          return (
+            orderDate.getMonth() === now.getMonth() && orderDate.getFullYear() === now.getFullYear()
+          );
+        });
+        break;
+      case 'year':
+        filteredData = ordersData.filter((order) => {
+          const orderDate = new Date(order.createdAt);
+          return orderDate.getFullYear() === now.getFullYear();
+        });
+        break;
     }
+  } else if (startDate && endDate) {
+    filteredData = ordersData.filter((order) => order.date >= startDate && order.date <= endDate);
+  }
 
-    // Update service statistics
-    updateServiceStats(filteredData);
-    updateQuickStats(filteredData);
+  // Update service statistics
+  updateServiceStats(filteredData);
+  updateQuickStats(filteredData);
 
-    // Update charts (placeholder)
-    updateCharts(filteredData);
+  // Update charts (placeholder)
+  updateCharts(filteredData);
 }
 
 function updateServiceStats(data) {
-    const serviceStats = {};
+  const serviceStats = {};
 
-    data.forEach(order => {
-        if (order.status !== 'cancelled') {
-            if (!serviceStats[order.service]) {
-                serviceStats[order.service] = { count: 0, revenue: 0 };
-            }
-            serviceStats[order.service].count++;
-            serviceStats[order.service].revenue += parseAmount(order.amount);
-        }
-    });
+  data.forEach((order) => {
+    if (order.status !== 'cancelled') {
+      if (!serviceStats[order.service]) {
+        serviceStats[order.service] = { count: 0, revenue: 0 };
+      }
+      serviceStats[order.service].count++;
+      serviceStats[order.service].revenue += parseAmount(order.amount);
+    }
+  });
 
-    const container = document.getElementById('serviceStats');
-    container.innerHTML = '';
+  const container = document.getElementById('serviceStats');
+  container.innerHTML = '';
 
-    Object.entries(serviceStats).forEach(([service, stats]) => {
-        const div = document.createElement('div');
-        div.className = 'service-stat';
-        div.innerHTML = `
+  Object.entries(serviceStats).forEach(([service, stats]) => {
+    const div = document.createElement('div');
+    div.className = 'service-stat';
+    div.innerHTML = `
             <span class="service-stat-name">${serviceNames[service] || service}</span>
             <span class="service-stat-value">₦${stats.revenue.toLocaleString()}</span>
         `;
-        container.appendChild(div);
-    });
+    container.appendChild(div);
+  });
 }
 
 function updateQuickStats(data) {
-    const validOrders = data.filter(order => order.status !== 'cancelled');
-    const totalOrders = validOrders.length;
-    const totalRevenue = validOrders.reduce((sum, order) => sum + parseAmount(order.amount), 0);
-    const avgOrder = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+  const validOrders = data.filter((order) => order.status !== 'cancelled');
+  const totalOrders = validOrders.length;
+  const totalRevenue = validOrders.reduce((sum, order) => sum + parseAmount(order.amount), 0);
+  const avgOrder = totalOrders > 0 ? totalRevenue / totalOrders : 0;
 
-    // Find top service
-    const serviceCounts = {};
-    validOrders.forEach(order => {
-        serviceCounts[order.service] = (serviceCounts[order.service] || 0) + 1;
-    });
-    const topService = Object.keys(serviceCounts).reduce((a, b) =>
-        serviceCounts[a] > serviceCounts[b] ? a : b, 'None'
-    );
+  // Find top service
+  const serviceCounts = {};
+  validOrders.forEach((order) => {
+    serviceCounts[order.service] = (serviceCounts[order.service] || 0) + 1;
+  });
+  const topService = Object.keys(serviceCounts).reduce(
+    (a, b) => (serviceCounts[a] > serviceCounts[b] ? a : b),
+    'None'
+  );
 
-    // Calculate completion rate
-    const completedOrders = data.filter(order => order.status === 'completed').length;
-    const completionRate = totalOrders > 0 ? (completedOrders / totalOrders * 100).toFixed(1) : 0;
+  // Calculate completion rate
+  const completedOrders = data.filter((order) => order.status === 'completed').length;
+  const completionRate = totalOrders > 0 ? ((completedOrders / totalOrders) * 100).toFixed(1) : 0;
 
-    // Update UI
-    document.getElementById('totalOrders').textContent = totalOrders;
-    document.getElementById('avgOrder').textContent = `₦${avgOrder.toLocaleString()}`;
-    document.getElementById('topService').textContent = serviceNames[topService] || topService;
-    document.getElementById('completionRate').textContent = `${completionRate}%`;
+  // Update UI
+  document.getElementById('totalOrders').textContent = totalOrders;
+  document.getElementById('avgOrder').textContent = `₦${avgOrder.toLocaleString()}`;
+  document.getElementById('topService').textContent = serviceNames[topService] || topService;
+  document.getElementById('completionRate').textContent = `${completionRate}%`;
 }
 
 function updateCharts(data) {
-    // Placeholder for chart updates
-    // In a real implementation, you would use Chart.js or similar library
-    const revenueChart = document.getElementById('revenueChart');
-    const ordersChart = document.getElementById('ordersChart');
+  // Placeholder for chart updates
+  // In a real implementation, you would use Chart.js or similar library
+  const revenueChart = document.getElementById('revenueChart');
+  const ordersChart = document.getElementById('ordersChart');
 
-    revenueChart.textContent = 'Revenue chart will be displayed here';
-    ordersChart.textContent = 'Orders trend chart will be displayed here';
+  revenueChart.textContent = 'Revenue chart will be displayed here';
+  ordersChart.textContent = 'Orders trend chart will be displayed here';
 }
 
 function generateReport(type) {
-    showToast(`Generating ${type} report...`, 'info');
-    downloadReport(type);
+  showToast(`Generating ${type} report...`, 'info');
+  downloadReport(type);
 
-    setTimeout(() => {
-        showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} report generated successfully!`, 'success');
-    }, 2000);
+  setTimeout(() => {
+    showToast(
+      `${type.charAt(0).toUpperCase() + type.slice(1)} report generated successfully!`,
+      'success'
+    );
+  }, 2000);
 }
 
-
 function refreshData() {
-    showToast('Refreshing data...', 'info');
+  showToast('Refreshing data...', 'info');
 
-    // Simulate data refresh
-    setTimeout(() => {
-        updateStats();
-        renderOrdersTable();
-        updateAnalytics();
-        fetchOrders();
-        showToast('Data refreshed successfully!', 'success');
-    }, 1500);
+  // Simulate data refresh
+  setTimeout(() => {
+    updateStats();
+    renderOrdersTable();
+    updateAnalytics();
+    fetchOrders();
+    showToast('Data refreshed successfully!', 'success');
+  }, 1500);
 }
 
 function logout() {
-    if (confirm('Are you sure you want to logout?')) {
-        showToast('Logging out...', 'info');
+  if (confirm('Are you sure you want to logout?')) {
+    showToast('Logging out...', 'info');
 
-        // Clear session
-        try {
-            localStorage.removeItem('hotel_admin_session');
-            console.log('🗑️ Session cleared on logout');
-        } catch (error) {
-            console.error('❌ Error clearing session:', error);
-        }
-
-        setTimeout(() => {
-            try {
-                window.location.href = 'login.html';
-            } catch (error) {
-                console.error('❌ Redirect failed:', error);
-                // Fallback: reload the page
-                window.location.reload();
-            }
-        }, 1000);
+    // Clear session
+    try {
+      localStorage.removeItem('hotel_admin_session');
+      console.log('🗑️ Session cleared on logout');
+    } catch (error) {
+      console.error('❌ Error clearing session:', error);
     }
+
+    setTimeout(() => {
+      try {
+        window.location.href = 'login.html';
+      } catch (error) {
+        console.error('❌ Redirect failed:', error);
+        // Fallback: reload the page
+        window.location.reload();
+      }
+    }, 1000);
+  }
 }
 
 function showToast(message, type = 'info') {
-    const toast = document.getElementById('toast');
-    const icon = toast.querySelector('.toast-icon');
-    const messageEl = toast.querySelector('.toast-message');
+  const toast = document.getElementById('toast');
+  const icon = toast.querySelector('.toast-icon');
+  const messageEl = toast.querySelector('.toast-message');
 
-    // Set icon based on type
-    const icons = {
-        success: 'fas fa-check-circle',
-        error: 'fas fa-exclamation-circle',
-        info: 'fas fa-info-circle'
-    };
+  // Set icon based on type
+  const icons = {
+    success: 'fas fa-check-circle',
+    error: 'fas fa-exclamation-circle',
+    info: 'fas fa-info-circle',
+  };
 
-    icon.className = `toast-icon ${icons[type]}`;
-    messageEl.textContent = message;
-    toast.className = `toast ${type} show`;
+  icon.className = `toast-icon ${icons[type]}`;
+  messageEl.textContent = message;
+  toast.className = `toast ${type} show`;
 
-    // Hide after 3 seconds
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+  // Hide after 3 seconds
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
 }
 
 function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
 }
 
 // Close modal when clicking outside
 window.onclick = function (event) {
-    const modal = document.getElementById('orderModal');
-    if (event.target === modal) {
-        closeOrderModal();
-    }
-}
+  const modal = document.getElementById('orderModal');
+  if (event.target === modal) {
+    closeOrderModal();
+  }
+};
 
 // Handle period filter change
 document.addEventListener('DOMContentLoaded', function () {
-    const periodFilter = document.getElementById('periodFilter');
-    const startDate = document.getElementById('startDate');
-    const endDate = document.getElementById('endDate');
+  const periodFilter = document.getElementById('periodFilter');
+  const startDate = document.getElementById('startDate');
+  const endDate = document.getElementById('endDate');
 
-    if (periodFilter) {
-        periodFilter.addEventListener('change', function () {
-            const isCustom = this.value === 'custom';
-            startDate.style.display = isCustom ? 'block' : 'none';
-            endDate.style.display = isCustom ? 'block' : 'none';
-        });
-    }
+  if (periodFilter) {
+    periodFilter.addEventListener('change', function () {
+      const isCustom = this.value === 'custom';
+      startDate.style.display = isCustom ? 'block' : 'none';
+      endDate.style.display = isCustom ? 'block' : 'none';
+    });
+  }
 });
-
-
-

@@ -9,37 +9,36 @@ const galleries = {};
 const autoSlideIntervals = {};
 
 function createOrderAndSendWhatsApp(orderData, messageCategory, messageContent) {
-    fetch('https://three60hotel.onrender.com/api/orders', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderData)
+  fetch('https://three60hotel-n6u5.onrender.com/api/orders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(orderData),
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error('Failed to create order');
+      return response.json();
     })
-        .then(response => {
-            if (!response.ok) throw new Error('Failed to create order');
-            return response.json();
-        })
-        .then(data => {
-            console.log('✅ Order created:', data);
-            sendToWhatsApp(messageContent, messageCategory);
-        })
-        .catch(error => {
-            console.error('❌ Error creating order:', error);
-            alert('An error occurred while placing your order. Please try again.');
-        });
+    .then((data) => {
+      console.log('✅ Order created:', data);
+      sendToWhatsApp(messageContent, messageCategory);
+    })
+    .catch((error) => {
+      console.error('❌ Error creating order:', error);
+      alert('An error occurred while placing your order. Please try again.');
+    });
 }
-
 
 // WhatsApp numbers for different services
 const whatsappNumbers = {
-    rooms: '2349156546479',        // Room bookings
-    food: '2349156546479',         // Food orders
-    sports: '2349150861906',       // Sports & Entertainment
-    services: '2349150861906',     // Event Hall, Salon, Bar
-    nightclub: '2349150861906',    // Nightclub & Pool
-    pool: '2349150861906',         // Pool (same as nightclub)
-    gateTickets: '2349150861906'   // Gate tickets
+  rooms: '2349156546479', // Room bookings
+  food: '2349156546479', // Food orders
+  sports: '2349150861906', // Sports & Entertainment
+  services: '2349150861906', // Event Hall, Salon, Bar
+  nightclub: '2349150861906', // Nightclub & Pool
+  pool: '2349150861906', // Pool (same as nightclub)
+  gateTickets: '2349150861906', // Gate tickets
 };
 
 // Mobile menu toggle
@@ -47,124 +46,182 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 
 if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        });
+  // Close mobile menu when clicking on a link
+  document.querySelectorAll('.nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
     });
+  });
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+  });
 }
 
 // Smooth scrolling function
 function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-        element.scrollIntoView({
-            behavior: 'smooth'
-        });
-    }
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
+}
+
+function openMenuModal() {
+  document.getElementById('menuModal').style.display = 'block';
+}
+
+function closeMenuModal() {
+  document.getElementById('menuModal').style.display = 'none';
+}
+
+function openTab(evt, tabName) {
+  const tabContent = document.getElementsByClassName('tab-content');
+  const tabButtons = document.getElementsByClassName('tab-btn');
+
+  for (let i = 0; i < tabContent.length; i++) {
+    tabContent[i].classList.remove('active-tab');
+  }
+
+  for (let i = 0; i < tabButtons.length; i++) {
+    tabButtons[i].classList.remove('active');
+  }
+
+  document.getElementById(tabName).classList.add('active-tab');
+  evt.currentTarget.classList.add('active');
 }
 
 // Image Gallery Functions
 function initializeGalleries() {
-    console.log('🖼️ Initializing image galleries...');
+  console.log('🖼️ Initializing image galleries...');
 
-    const galleryElements = document.querySelectorAll('.image-gallery');
+  const galleryElements = document.querySelectorAll('.image-gallery');
 
-    galleryElements.forEach(gallery => {
-        const galleryId = gallery.getAttribute('data-gallery');
-        const images = gallery.querySelectorAll('.gallery-image');
-        const dots = gallery.querySelectorAll('.dot');
-        const currentSlideSpan = gallery.querySelector('.current-slide');
-        const totalSlidesSpan = gallery.querySelector('.total-slides');
-        const descriptionElement = gallery.querySelector('.description-text');
+  galleryElements.forEach((gallery) => {
+    const galleryId = gallery.getAttribute('data-gallery');
+    const images = gallery.querySelectorAll('.gallery-image');
+    const dots = gallery.querySelectorAll('.dot');
+    const currentSlideSpan = gallery.querySelector('.current-slide');
+    const totalSlidesSpan = gallery.querySelector('.total-slides');
+    const descriptionElement = gallery.querySelector('.description-text');
 
-        if (galleryId && images.length > 0) {
-            galleries[galleryId] = {
-                currentIndex: 0,
-                totalImages: images.length,
-                images: images,
-                dots: dots,
-                currentSlideSpan: currentSlideSpan,
-                totalSlidesSpan: totalSlidesSpan,
-                descriptionElement: descriptionElement,
-                gallery: gallery
-            };
+    if (galleryId && images.length > 0) {
+      galleries[galleryId] = {
+        currentIndex: 0,
+        totalImages: images.length,
+        images: images,
+        dots: dots,
+        currentSlideSpan: currentSlideSpan,
+        totalSlidesSpan: totalSlidesSpan,
+        descriptionElement: descriptionElement,
+        gallery: gallery,
+      };
 
-            // Set total slides
-            if (totalSlidesSpan) {
-                totalSlidesSpan.textContent = images.length;
-            }
+      // Set total slides
+      if (totalSlidesSpan) {
+        totalSlidesSpan.textContent = images.length;
+      }
 
-            // Set initial description
-            updateImageDescription(galleryId);
+      // Set initial description
+      updateImageDescription(galleryId);
 
-            // Start auto-slide for this gallery
-            startAutoSlide(galleryId);
+      // Start auto-slide for this gallery
+      startAutoSlide(galleryId);
 
-            console.log(`✅ Gallery "${galleryId}" initialized with ${images.length} images`);
-        }
-    });
+      console.log(`✅ Gallery "${galleryId}" initialized with ${images.length} images`);
+    }
+  });
 
-    console.log(`🎯 Total galleries initialized: ${Object.keys(galleries).length}`);
+  console.log(`🎯 Total galleries initialized: ${Object.keys(galleries).length}`);
 }
 
 function updateImageDescription(galleryId) {
-    if (!galleries[galleryId]) return;
+  if (!galleries[galleryId]) return;
 
-    const gallery = galleries[galleryId];
-    const currentImage = gallery.images[gallery.currentIndex];
-    const description = currentImage.getAttribute('data-description');
+  const gallery = galleries[galleryId];
+  const currentImage = gallery.images[gallery.currentIndex];
+  const description = currentImage.getAttribute('data-description');
 
-    if (gallery.descriptionElement && description) {
-        gallery.descriptionElement.textContent = description;
-    }
+  if (gallery.descriptionElement && description) {
+    gallery.descriptionElement.textContent = description;
+  }
 }
 
 function changeImage(galleryId, direction) {
-    if (!galleries[galleryId]) return;
+  if (!galleries[galleryId]) return;
 
-    const gallery = galleries[galleryId];
+  const gallery = galleries[galleryId];
 
+  // Remove active class from current image and dot
+  gallery.images[gallery.currentIndex].classList.remove('active');
+  if (gallery.dots[gallery.currentIndex]) {
+    gallery.dots[gallery.currentIndex].classList.remove('active');
+  }
+
+  // Calculate new index
+  gallery.currentIndex += direction;
+
+  // Handle wrap around
+  if (gallery.currentIndex >= gallery.totalImages) {
+    gallery.currentIndex = 0;
+  } else if (gallery.currentIndex < 0) {
+    gallery.currentIndex = gallery.totalImages - 1;
+  }
+
+  // Add active class to new image and dot
+  gallery.images[gallery.currentIndex].classList.add('active');
+  if (gallery.dots[gallery.currentIndex]) {
+    gallery.dots[gallery.currentIndex].classList.add('active');
+  }
+
+  // Update counter
+  if (gallery.currentSlideSpan) {
+    gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
+  }
+
+  // Update description
+  updateImageDescription(galleryId);
+
+  // Restart auto-slide
+  restartAutoSlide(galleryId);
+}
+
+function currentImage(galleryId, imageIndex) {
+  if (!galleries[galleryId]) return;
+
+  const gallery = galleries[galleryId];
+  const newIndex = imageIndex - 1; // Convert to 0-based index
+
+  if (newIndex >= 0 && newIndex < gallery.totalImages) {
     // Remove active class from current image and dot
     gallery.images[gallery.currentIndex].classList.remove('active');
     if (gallery.dots[gallery.currentIndex]) {
-        gallery.dots[gallery.currentIndex].classList.remove('active');
+      gallery.dots[gallery.currentIndex].classList.remove('active');
     }
 
-    // Calculate new index
-    gallery.currentIndex += direction;
-
-    // Handle wrap around
-    if (gallery.currentIndex >= gallery.totalImages) {
-        gallery.currentIndex = 0;
-    } else if (gallery.currentIndex < 0) {
-        gallery.currentIndex = gallery.totalImages - 1;
-    }
+    // Set new index
+    gallery.currentIndex = newIndex;
 
     // Add active class to new image and dot
     gallery.images[gallery.currentIndex].classList.add('active');
     if (gallery.dots[gallery.currentIndex]) {
-        gallery.dots[gallery.currentIndex].classList.add('active');
+      gallery.dots[gallery.currentIndex].classList.add('active');
     }
 
     // Update counter
     if (gallery.currentSlideSpan) {
-        gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
+      gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
     }
 
     // Update description
@@ -172,185 +229,152 @@ function changeImage(galleryId, direction) {
 
     // Restart auto-slide
     restartAutoSlide(galleryId);
-}
-
-function currentImage(galleryId, imageIndex) {
-    if (!galleries[galleryId]) return;
-
-    const gallery = galleries[galleryId];
-    const newIndex = imageIndex - 1; // Convert to 0-based index
-
-    if (newIndex >= 0 && newIndex < gallery.totalImages) {
-        // Remove active class from current image and dot
-        gallery.images[gallery.currentIndex].classList.remove('active');
-        if (gallery.dots[gallery.currentIndex]) {
-            gallery.dots[gallery.currentIndex].classList.remove('active');
-        }
-
-        // Set new index
-        gallery.currentIndex = newIndex;
-
-        // Add active class to new image and dot
-        gallery.images[gallery.currentIndex].classList.add('active');
-        if (gallery.dots[gallery.currentIndex]) {
-            gallery.dots[gallery.currentIndex].classList.add('active');
-        }
-
-        // Update counter
-        if (gallery.currentSlideSpan) {
-            gallery.currentSlideSpan.textContent = gallery.currentIndex + 1;
-        }
-
-        // Update description
-        updateImageDescription(galleryId);
-
-        // Restart auto-slide
-        restartAutoSlide(galleryId);
-    }
+  }
 }
 
 function startAutoSlide(galleryId) {
-    if (!galleries[galleryId]) return;
+  if (!galleries[galleryId]) return;
 
-    // Clear existing interval if any
-    if (autoSlideIntervals[galleryId]) {
-        clearInterval(autoSlideIntervals[galleryId]);
-    }
+  // Clear existing interval if any
+  if (autoSlideIntervals[galleryId]) {
+    clearInterval(autoSlideIntervals[galleryId]);
+  }
 
-    // Start new interval (change image every 3 seconds)
-    autoSlideIntervals[galleryId] = setInterval(() => {
-        changeImage(galleryId, 1);
-    }, 3000);
+  // Start new interval (change image every 3 seconds)
+  autoSlideIntervals[galleryId] = setInterval(() => {
+    changeImage(galleryId, 1);
+  }, 3000);
 }
 
 function restartAutoSlide(galleryId) {
-    startAutoSlide(galleryId);
+  startAutoSlide(galleryId);
 }
 
 function pauseAutoSlide(galleryId) {
-    if (autoSlideIntervals[galleryId]) {
-        clearInterval(autoSlideIntervals[galleryId]);
-    }
+  if (autoSlideIntervals[galleryId]) {
+    clearInterval(autoSlideIntervals[galleryId]);
+  }
 }
 
 function resumeAutoSlide(galleryId) {
-    startAutoSlide(galleryId);
+  startAutoSlide(galleryId);
 }
 
 // Google Maps Direction Function
 function openDirections() {
-    const hotelAddress = "360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel";
-    const encodedAddress = encodeURIComponent(hotelAddress);
-    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
-    window.open(mapsUrl, '_blank');
+  const hotelAddress =
+    '360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel';
+  const encodedAddress = encodeURIComponent(hotelAddress);
+  const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+  window.open(mapsUrl, '_blank');
 }
 
 // Modal functions
 function openBookingModal(roomType, price) {
-    console.log('Opening room booking modal:', roomType, price);
-    currentBookingType = 'room';
-    currentPrice = price;
-    const roomTypeInput = document.getElementById('roomType');
-    if (roomTypeInput) {
-        roomTypeInput.value = roomType;
-    }
-    const modal = document.getElementById('bookingModal');
-    if (modal) {
-        modal.style.display = 'block';
-        calculateRoomTotal();
-    }
+  console.log('Opening room booking modal:', roomType, price);
+  currentBookingType = 'room';
+  currentPrice = price;
+  const roomTypeInput = document.getElementById('roomType');
+  if (roomTypeInput) {
+    roomTypeInput.value = roomType;
+  }
+  const modal = document.getElementById('bookingModal');
+  if (modal) {
+    modal.style.display = 'block';
+    calculateRoomTotal();
+  }
 }
 
 function openFoodModal(foodItem, price) {
-    console.log('Opening food modal:', foodItem, price);
-    currentBookingType = 'food';
-    currentPrice = price;
-    const foodItemInput = document.getElementById('foodItem');
-    if (foodItemInput) {
-        foodItemInput.value = foodItem;
-    }
-    const modal = document.getElementById('foodModal');
-    if (modal) {
-        modal.style.display = 'block';
-        calculateFoodTotal();
-    }
+  console.log('Opening food modal:', foodItem, price);
+  currentBookingType = 'food';
+  currentPrice = price;
+  const foodItemInput = document.getElementById('foodItem');
+  if (foodItemInput) {
+    foodItemInput.value = foodItem;
+  }
+  const modal = document.getElementById('foodModal');
+  if (modal) {
+    modal.style.display = 'block';
+    calculateFoodTotal();
+  }
 }
 
 function openGateTicketModal(ticketType, price, accessType) {
-    console.log('Opening gate ticket modal:', ticketType, price, accessType);
-    currentBookingType = 'gateTicket';
-    currentPrice = price;
-    const ticketTypeInput = document.getElementById('gateTicketType');
-    if (ticketTypeInput) {
-        ticketTypeInput.value = ticketType;
-    }
-    const modal = document.getElementById('gateTicketModal');
-    if (modal) {
-        modal.style.display = 'block';
-        calculateGateTicketTotal();
-    }
+  console.log('Opening gate ticket modal:', ticketType, price, accessType);
+  currentBookingType = 'gateTicket';
+  currentPrice = price;
+  const ticketTypeInput = document.getElementById('gateTicketType');
+  if (ticketTypeInput) {
+    ticketTypeInput.value = ticketType;
+  }
+  const modal = document.getElementById('gateTicketModal');
+  if (modal) {
+    modal.style.display = 'block';
+    calculateGateTicketTotal();
+  }
 }
 
 function openSportsModal(activity, price) {
-    console.log('Opening sports modal:', activity, price);
-    currentBookingType = 'sports';
-    currentPrice = price;
-    const activityInput = document.getElementById('sportsActivity');
-    if (activityInput) {
-        activityInput.value = activity;
-    }
-    const modal = document.getElementById('sportsModal');
-    if (modal) {
-        modal.style.display = 'block';
-        calculateSportsTotal();
-    }
+  console.log('Opening sports modal:', activity, price);
+  currentBookingType = 'sports';
+  currentPrice = price;
+  const activityInput = document.getElementById('sportsActivity');
+  if (activityInput) {
+    activityInput.value = activity;
+  }
+  const modal = document.getElementById('sportsModal');
+  if (modal) {
+    modal.style.display = 'block';
+    calculateSportsTotal();
+  }
 }
 
 // Open and Close Modal Functions
 function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'block';
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = 'block';
 }
 
 function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) modal.style.display = 'none';
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = 'none';
 }
 
 // Close modal when clicking outside
 window.onclick = function (event) {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target === modal) modal.style.display = "none";
-    });
-}
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach((modal) => {
+    if (event.target === modal) modal.style.display = 'none';
+  });
+};
 
 // Price Calculation
 function updateLaundryTotal() {
-    const basePrice = 1000;
-    const perfume = document.getElementById("perfumeAdd").checked ? 500 : 0;
-    const ironing = document.getElementById("ironAdd").checked ? 1000 : 0;
-    const quantity = parseInt(document.getElementById("laundryQty").value) || 1;
+  const basePrice = 1000;
+  const perfume = document.getElementById('perfumeAdd').checked ? 500 : 0;
+  const ironing = document.getElementById('ironAdd').checked ? 1000 : 0;
+  const quantity = parseInt(document.getElementById('laundryQty').value) || 1;
 
-    const total = (basePrice + perfume + ironing) * quantity;
-    document.getElementById("totalLaundryPrice").textContent = total;
+  const total = (basePrice + perfume + ironing) * quantity;
+  document.getElementById('totalLaundryPrice').textContent = total;
 }
 
 // WhatsApp Booking
 function sendLaundryBooking() {
-    const name = document.getElementById("customerName").value.trim();
-    const phone = document.getElementById("customerPhone").value.trim();
-    const qty = document.getElementById("laundryQty").value;
-    const perfume = document.getElementById("perfumeAdd").checked ? "Yes" : "No";
-    const ironing = document.getElementById("ironAdd").checked ? "Yes" : "No";
-    const total = document.getElementById("totalLaundryPrice").textContent;
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const qty = document.getElementById('laundryQty').value;
+  const perfume = document.getElementById('perfumeAdd').checked ? 'Yes' : 'No';
+  const ironing = document.getElementById('ironAdd').checked ? 'Yes' : 'No';
+  const total = document.getElementById('totalLaundryPrice').textContent;
 
-    if (!name || !phone) {
-        alert("Please enter your full name and phone number.");
-        return;
-    }
+  if (!name || !phone) {
+    alert('Please enter your full name and phone number.');
+    return;
+  }
 
-    const message = `Hello, I would like to book Laundry Service.%0A
+  const message = `Hello, I would like to book Laundry Service.%0A
   Name: ${name}%0A
   Phone: ${phone}%0A
   Number of Clothes: ${qty}%0A
@@ -358,366 +382,372 @@ function sendLaundryBooking() {
   Add Ironing: ${ironing}%0A
   Total Price: ₦${total}`;
 
-    const whatsappNumber = "2349161616"; // Replace with your real WhatsApp number
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
+  const whatsappNumber = '2349161616'; // Replace with your real WhatsApp number
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
 }
 
-
 function openServiceModal(service, price) {
-    console.log('Opening service modal:', service, price);
-    currentBookingType = 'service';
-    currentPrice = price;
-    const serviceInput = document.getElementById('serviceType');
-    if (serviceInput) {
-        serviceInput.value = service;
+  console.log('Opening service modal:', service, price);
+  currentBookingType = 'service';
+  currentPrice = price;
+  const serviceInput = document.getElementById('serviceType');
+  if (serviceInput) {
+    serviceInput.value = service;
+  }
+  const modal = document.getElementById('serviceModal');
+  if (modal) {
+    modal.style.display = 'block';
+
+    // Update duration label based on service type
+    const durationLabel = document.getElementById('durationLabel');
+    const typeLabel = document.getElementById('servicePeopleLabel');
+
+    if (durationLabel) {
+      if (service === 'Laundry Service') {
+        typeLabel.textContent = 'Number of sets';
+      } else {
+        typeLabel.textContent = 'Number of People';
+      }
     }
-    const modal = document.getElementById('serviceModal');
-    if (modal) {
-        modal.style.display = 'block';
 
-        // Update duration label based on service type
-        const durationLabel = document.getElementById('durationLabel');
-        const typeLabel = document.getElementById('servicePeopleLabel');
-
-        if (durationLabel) {
-            if (service === 'Laundry Service') {
-                typeLabel.textContent = 'Number of sets';
-            } else {
-                typeLabel.textContent = 'Number of People';
-            }
-        }
-
-        if (durationLabel) {
-            if (service === 'Event Center Hall') {
-                durationLabel.textContent = 'days';
-            } else if (service === 'Salon (Unisex)') {
-                durationLabel.textContent = 'sessions';
-            } else if (service === 'Premium Bar') {
-                durationLabel.textContent = 'hours';
-            }
-        }
-
-        calculateServiceTotal();
+    if (durationLabel) {
+      if (service === 'Event Center Hall') {
+        durationLabel.textContent = 'days';
+      } else if (service === 'Salon (Unisex)') {
+        durationLabel.textContent = 'sessions';
+      } else if (service === 'Premium Bar') {
+        durationLabel.textContent = 'hours';
+      }
     }
+
+    calculateServiceTotal();
+  }
 }
 
 function openNightclubModal(service, price) {
-    console.log('Opening nightclub modal:', service, price);
-    currentBookingType = 'nightclub';
-    currentPrice = price;
-    const serviceInput = document.getElementById('nightclubService');
-    if (serviceInput) {
-        serviceInput.value = service;
-    }
-    const modal = document.getElementById('nightclubModal');
-    if (modal) {
-        modal.style.display = 'block';
-        calculateNightclubTotal();
-    }
+  console.log('Opening nightclub modal:', service, price);
+  currentBookingType = 'nightclub';
+  currentPrice = price;
+  const serviceInput = document.getElementById('nightclubService');
+  if (serviceInput) {
+    serviceInput.value = service;
+  }
+  const modal = document.getElementById('nightclubModal');
+  if (modal) {
+    modal.style.display = 'block';
+    calculateNightclubTotal();
+  }
 }
 
 function openPoolModal(service, price) {
-    console.log('Opening pool modal:', service, price);
-    currentBookingType = 'pool';
-    currentPrice = price;
-    const serviceInput = document.getElementById('poolService');
-    if (serviceInput) {
-        serviceInput.value = service;
-    }
-    const modal = document.getElementById('poolModal');
-    if (modal) {
-        modal.style.display = 'block';
-        calculatePoolTotal();
-    }
+  console.log('Opening pool modal:', service, price);
+  currentBookingType = 'pool';
+  currentPrice = price;
+  const serviceInput = document.getElementById('poolService');
+  if (serviceInput) {
+    serviceInput.value = service;
+  }
+  const modal = document.getElementById('poolModal');
+  if (modal) {
+    modal.style.display = 'block';
+    calculatePoolTotal();
+  }
 }
 
 function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
-    }
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+  }
 }
 
 // Close modal when clicking outside
 window.onclick = function (event) {
-    const modals = ['bookingModal', 'foodModal', 'gateTicketModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
-    modals.forEach(modalId => {
-        const modal = document.getElementById(modalId);
-        if (modal && event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-}
+  const modals = [
+    'bookingModal',
+    'foodModal',
+    'gateTicketModal',
+    'sportsModal',
+    'serviceModal',
+    'nightclubModal',
+    'poolModal',
+  ];
+  modals.forEach((modalId) => {
+    const modal = document.getElementById(modalId);
+    if (modal && event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+};
 
 // Calculate totals
 function calculateRoomTotal() {
-    const nightsInput = document.getElementById('nights');
-    const totalPriceElement = document.getElementById('totalPrice');
-    if (nightsInput && totalPriceElement) {
-        const nights = nightsInput.value || 1;
-        const total = currentPrice * nights;
-        totalPriceElement.textContent = total.toLocaleString();
-    }
+  const nightsInput = document.getElementById('nights');
+  const totalPriceElement = document.getElementById('totalPrice');
+  if (nightsInput && totalPriceElement) {
+    const nights = nightsInput.value || 1;
+    const total = currentPrice * nights;
+    totalPriceElement.textContent = total.toLocaleString();
+  }
 }
 
 function calculateFoodTotal() {
-    const quantityInput = document.getElementById('foodQuantity');
-    const totalPriceElement = document.getElementById('foodTotalPrice');
-    if (quantityInput && totalPriceElement) {
-        const quantity = quantityInput.value || 1;
-        const total = currentPrice * quantity;
-        totalPriceElement.textContent = total.toLocaleString();
-    }
+  const quantityInput = document.getElementById('foodQuantity');
+  const totalPriceElement = document.getElementById('foodTotalPrice');
+  if (quantityInput && totalPriceElement) {
+    const quantity = quantityInput.value || 1;
+    const total = currentPrice * quantity;
+    totalPriceElement.textContent = total.toLocaleString();
+  }
 }
 
 function calculateGateTicketTotal() {
-    const daysInput = document.getElementById('gateTicketDays');
-    const peopleInput = document.getElementById('gateTicketPeople');
-    const totalPriceElement = document.getElementById('gateTicketTotalPrice');
-    if (daysInput && peopleInput && totalPriceElement) {
-        const days = daysInput.value || 1;
-        const people = peopleInput.value || 1;
-        const total = currentPrice * days * people;
-        totalPriceElement.textContent = total.toLocaleString();
-    }
+  const daysInput = document.getElementById('gateTicketDays');
+  const peopleInput = document.getElementById('gateTicketPeople');
+  const totalPriceElement = document.getElementById('gateTicketTotalPrice');
+  if (daysInput && peopleInput && totalPriceElement) {
+    const days = daysInput.value || 1;
+    const people = peopleInput.value || 1;
+    const total = currentPrice * days * people;
+    totalPriceElement.textContent = total.toLocaleString();
+  }
 }
 
 function calculateSportsTotal() {
-    const quantityInput = document.getElementById('sportsQuantity');
-    const totalPriceElement = document.getElementById('sportsTotalPrice');
-    if (quantityInput && totalPriceElement) {
-        const quantity = quantityInput.value || 1;
-        const total = currentPrice * quantity;
-        totalPriceElement.textContent = total.toLocaleString();
-    }
+  const quantityInput = document.getElementById('sportsQuantity');
+  const totalPriceElement = document.getElementById('sportsTotalPrice');
+  if (quantityInput && totalPriceElement) {
+    const quantity = quantityInput.value || 1;
+    const total = currentPrice * quantity;
+    totalPriceElement.textContent = total.toLocaleString();
+  }
 }
 
 function calculateServiceTotal() {
-    const durationInput = document.getElementById('serviceDuration');
-    const peopleInput = document.getElementById('servicePeople');
-    const serviceTypeInput = document.getElementById('serviceType');
-    const totalPriceElement = document.getElementById('serviceTotalPrice');
+  const durationInput = document.getElementById('serviceDuration');
+  const peopleInput = document.getElementById('servicePeople');
+  const serviceTypeInput = document.getElementById('serviceType');
+  const totalPriceElement = document.getElementById('serviceTotalPrice');
 
-    if (durationInput && peopleInput && serviceTypeInput && totalPriceElement) {
-        const duration = durationInput.value || 1;
-        const people = peopleInput.value || 1;
-        const service = serviceTypeInput.value;
+  if (durationInput && peopleInput && serviceTypeInput && totalPriceElement) {
+    const duration = durationInput.value || 1;
+    const people = peopleInput.value || 1;
+    const service = serviceTypeInput.value;
 
-        let total;
-        if (service === 'Event Center Hall') {
-            // Event hall is per day, not per person
-            total = currentPrice * duration;
-        } else {
-            // Salon and Bar are per person
-            total = currentPrice * duration * people;
-        }
-
-        totalPriceElement.textContent = total.toLocaleString();
+    let total;
+    if (service === 'Event Center Hall') {
+      // Event hall is per day, not per person
+      total = currentPrice * duration;
+    } else {
+      // Salon and Bar are per person
+      total = currentPrice * duration * people;
     }
+
+    totalPriceElement.textContent = total.toLocaleString();
+  }
 }
 
 function calculateNightclubTotal() {
-    const peopleInput = document.getElementById('nightclubPeople');
-    const totalPriceElement = document.getElementById('nightclubTotalPrice');
-    if (peopleInput && totalPriceElement) {
-        const people = peopleInput.value || 1;
-        const total = currentPrice * people;
-        totalPriceElement.textContent = total.toLocaleString();
-    }
+  const peopleInput = document.getElementById('nightclubPeople');
+  const totalPriceElement = document.getElementById('nightclubTotalPrice');
+  if (peopleInput && totalPriceElement) {
+    const people = peopleInput.value || 1;
+    const total = currentPrice * people;
+    totalPriceElement.textContent = total.toLocaleString();
+  }
 }
 
 function calculatePoolTotal() {
-    const daysInput = document.getElementById('poolDays');
-    const peopleInput = document.getElementById('poolPeople');
-    const totalPriceElement = document.getElementById('poolTotalPrice');
-    if (daysInput && peopleInput && totalPriceElement) {
-        const days = daysInput.value || 1;
-        const people = peopleInput.value || 1;
-        const total = currentPrice * days * people;
-        totalPriceElement.textContent = total.toLocaleString();
-    }
+  const daysInput = document.getElementById('poolDays');
+  const peopleInput = document.getElementById('poolPeople');
+  const totalPriceElement = document.getElementById('poolTotalPrice');
+  if (daysInput && peopleInput && totalPriceElement) {
+    const days = daysInput.value || 1;
+    const people = peopleInput.value || 1;
+    const total = currentPrice * days * people;
+    totalPriceElement.textContent = total.toLocaleString();
+  }
 }
 
 // Event listeners for quantity changes
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('🚀 DOM loaded, setting up ALL event listeners...');
+  console.log('🚀 DOM loaded, setting up ALL event listeners...');
 
-    // Initialize image galleries first
-    initializeGalleries();
+  // Initialize image galleries first
+  initializeGalleries();
 
-    // Add hover pause/resume for galleries
-    Object.keys(galleries).forEach(galleryId => {
-        const gallery = galleries[galleryId].gallery;
+  // Add hover pause/resume for galleries
+  Object.keys(galleries).forEach((galleryId) => {
+    const gallery = galleries[galleryId].gallery;
 
-        gallery.addEventListener('mouseenter', () => {
-            pauseAutoSlide(galleryId);
-        });
-
-        gallery.addEventListener('mouseleave', () => {
-            resumeAutoSlide(galleryId);
-        });
+    gallery.addEventListener('mouseenter', () => {
+      pauseAutoSlide(galleryId);
     });
 
-    // Room booking listeners
-    const nightsInput = document.getElementById('nights');
-    if (nightsInput) {
-        nightsInput.addEventListener('input', calculateRoomTotal);
-    }
-
-    // Food ordering listeners
-    const foodQuantityInput = document.getElementById('foodQuantity');
-    if (foodQuantityInput) {
-        foodQuantityInput.addEventListener('input', calculateFoodTotal);
-    }
-
-    // Gate ticket listeners
-    const gateTicketDaysInput = document.getElementById('gateTicketDays');
-    const gateTicketPeopleInput = document.getElementById('gateTicketPeople');
-    if (gateTicketDaysInput) {
-        gateTicketDaysInput.addEventListener('input', calculateGateTicketTotal);
-    }
-    if (gateTicketPeopleInput) {
-        gateTicketPeopleInput.addEventListener('input', calculateGateTicketTotal);
-    }
-
-    // Sports booking listeners
-    const sportsQuantityInput = document.getElementById('sportsQuantity');
-    if (sportsQuantityInput) {
-        sportsQuantityInput.addEventListener('input', calculateSportsTotal);
-    }
-
-    // Service booking listeners
-    const serviceDurationInput = document.getElementById('serviceDuration');
-    const servicePeopleInput = document.getElementById('servicePeople');
-    if (serviceDurationInput) {
-        serviceDurationInput.addEventListener('input', calculateServiceTotal);
-    }
-    if (servicePeopleInput) {
-        servicePeopleInput.addEventListener('input', calculateServiceTotal);
-    }
-
-    // Nightclub booking listeners
-    const nightclubPeopleInput = document.getElementById('nightclubPeople');
-    if (nightclubPeopleInput) {
-        nightclubPeopleInput.addEventListener('input', calculateNightclubTotal);
-    }
-
-    // Pool booking listeners
-    const poolDaysInput = document.getElementById('poolDays');
-    const poolPeopleInput = document.getElementById('poolPeople');
-    if (poolDaysInput) {
-        poolDaysInput.addEventListener('input', calculatePoolTotal);
-    }
-    if (poolPeopleInput) {
-        poolPeopleInput.addEventListener('input', calculatePoolTotal);
-    }
-
-    // Form submissions
-    setupFormSubmissions();
-
-    // Set minimum date to today for all date inputs
-    const today = new Date().toISOString().split('T')[0];
-    const dateInputs = document.querySelectorAll('input[type="date"]');
-    dateInputs.forEach(input => {
-        input.min = today;
+    gallery.addEventListener('mouseleave', () => {
+      resumeAutoSlide(galleryId);
     });
+  });
+
+  // Room booking listeners
+  const nightsInput = document.getElementById('nights');
+  if (nightsInput) {
+    nightsInput.addEventListener('input', calculateRoomTotal);
+  }
+
+  // Food ordering listeners
+  const foodQuantityInput = document.getElementById('foodQuantity');
+  if (foodQuantityInput) {
+    foodQuantityInput.addEventListener('input', calculateFoodTotal);
+  }
+
+  // Gate ticket listeners
+  const gateTicketDaysInput = document.getElementById('gateTicketDays');
+  const gateTicketPeopleInput = document.getElementById('gateTicketPeople');
+  if (gateTicketDaysInput) {
+    gateTicketDaysInput.addEventListener('input', calculateGateTicketTotal);
+  }
+  if (gateTicketPeopleInput) {
+    gateTicketPeopleInput.addEventListener('input', calculateGateTicketTotal);
+  }
+
+  // Sports booking listeners
+  const sportsQuantityInput = document.getElementById('sportsQuantity');
+  if (sportsQuantityInput) {
+    sportsQuantityInput.addEventListener('input', calculateSportsTotal);
+  }
+
+  // Service booking listeners
+  const serviceDurationInput = document.getElementById('serviceDuration');
+  const servicePeopleInput = document.getElementById('servicePeople');
+  if (serviceDurationInput) {
+    serviceDurationInput.addEventListener('input', calculateServiceTotal);
+  }
+  if (servicePeopleInput) {
+    servicePeopleInput.addEventListener('input', calculateServiceTotal);
+  }
+
+  // Nightclub booking listeners
+  const nightclubPeopleInput = document.getElementById('nightclubPeople');
+  if (nightclubPeopleInput) {
+    nightclubPeopleInput.addEventListener('input', calculateNightclubTotal);
+  }
+
+  // Pool booking listeners
+  const poolDaysInput = document.getElementById('poolDays');
+  const poolPeopleInput = document.getElementById('poolPeople');
+  if (poolDaysInput) {
+    poolDaysInput.addEventListener('input', calculatePoolTotal);
+  }
+  if (poolPeopleInput) {
+    poolPeopleInput.addEventListener('input', calculatePoolTotal);
+  }
+
+  // Form submissions
+  setupFormSubmissions();
+
+  // Set minimum date to today for all date inputs
+  const today = new Date().toISOString().split('T')[0];
+  const dateInputs = document.querySelectorAll('input[type="date"]');
+  dateInputs.forEach((input) => {
+    input.min = today;
+  });
 });
 
 function setupFormSubmissions() {
-    // Room booking form
-    const bookingForm = document.getElementById('bookingForm');
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            handleRoomBooking();
-        });
-    }
+  // Room booking form
+  const bookingForm = document.getElementById('bookingForm');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleRoomBooking();
+    });
+  }
 
-    // Food ordering form
-    const foodForm = document.getElementById('foodForm');
-    if (foodForm) {
-        foodForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            handleFoodOrder();
-        });
-    }
+  // Food ordering form
+  const foodForm = document.getElementById('foodForm');
+  if (foodForm) {
+    foodForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleFoodOrder();
+    });
+  }
 
-    // Gate ticket form
-    const gateTicketForm = document.getElementById('gateTicketForm');
-    if (gateTicketForm) {
-        gateTicketForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            handleGateTicketPurchase();
-        });
-    }
+  // Gate ticket form
+  const gateTicketForm = document.getElementById('gateTicketForm');
+  if (gateTicketForm) {
+    gateTicketForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleGateTicketPurchase();
+    });
+  }
 
-    // Sports booking form
-    const sportsForm = document.getElementById('sportsForm');
-    if (sportsForm) {
-        sportsForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            handleSportsBooking();
-        });
-    }
+  // Sports booking form
+  const sportsForm = document.getElementById('sportsForm');
+  if (sportsForm) {
+    sportsForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleSportsBooking();
+    });
+  }
 
-    // Service booking form
-    const serviceForm = document.getElementById('serviceForm');
-    if (serviceForm) {
-        serviceForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            handleServiceBooking();
-        });
-    }
+  // Service booking form
+  const serviceForm = document.getElementById('serviceForm');
+  if (serviceForm) {
+    serviceForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleServiceBooking();
+    });
+  }
 
-    // Nightclub booking form
-    const nightclubForm = document.getElementById('nightclubForm');
-    if (nightclubForm) {
-        nightclubForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            handleNightclubBooking();
-        });
-    }
+  // Nightclub booking form
+  const nightclubForm = document.getElementById('nightclubForm');
+  if (nightclubForm) {
+    nightclubForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handleNightclubBooking();
+    });
+  }
 
-    // Pool booking form
-    const poolForm = document.getElementById('poolForm');
-    if (poolForm) {
-        poolForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            handlePoolBooking();
-        });
-    }
+  // Pool booking form
+  const poolForm = document.getElementById('poolForm');
+  if (poolForm) {
+    poolForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handlePoolBooking();
+    });
+  }
 }
 
 // WhatsApp integration functions
 function handleRoomBooking() {
-    const roomType = document.getElementById('roomType').value;
-    const nights = document.getElementById('nights').value;
-    const checkinDate = document.getElementById('checkinDate').value;
-    const checkoutDate = document.getElementById('checkoutDate').value;
-    const guests = document.getElementById('guests').value;
-    const guestName = document.getElementById('guestName').value;
-    const guestPhone = document.getElementById('guestPhone').value;
-    const total = document.getElementById('totalPrice').textContent;
+  const roomType = document.getElementById('roomType').value;
+  const nights = document.getElementById('nights').value;
+  const checkinDate = document.getElementById('checkinDate').value;
+  const checkoutDate = document.getElementById('checkoutDate').value;
+  const guests = document.getElementById('guests').value;
+  const guestName = document.getElementById('guestName').value;
+  const guestPhone = document.getElementById('guestPhone').value;
+  const total = document.getElementById('totalPrice').textContent;
 
-    const orderData = {
-        customer: guestName,
-        phone: guestPhone,
-        service: 'rooms',
-        serviceName: roomType,
-        amount: total,
-        date: new Date().toISOString().split('T')[0],
-        status: 'pending',
-        details: {
-            nights: parseInt(nights),
-            checkin: checkinDate,
-            checkout: checkoutDate,
-            guests: parseInt(guests)
-        }
-    };
+  const orderData = {
+    customer: guestName,
+    phone: guestPhone,
+    service: 'rooms',
+    serviceName: roomType,
+    amount: total,
+    date: new Date().toISOString().split('T')[0],
+    status: 'pending',
+    details: {
+      nights: parseInt(nights),
+      checkin: checkinDate,
+      checkout: checkoutDate,
+      guests: parseInt(guests),
+    },
+  };
 
-
-    const message = `🏨 *360 DEGREE HOTEL - ROOM BOOKING*
+  const message = `🏨 *360 DEGREE HOTEL - ROOM BOOKING*
 
 👤 *Guest Details:*
 Name: ${guestName}
@@ -742,36 +772,36 @@ Sort Code: 011
 Please make payment and send receipt via WhatsApp to confirm your booking.
 
 Thank you for choosing 360 Degree Hotel!`;
-    createOrderAndSendWhatsApp(orderData, 'rooms', message);
+  createOrderAndSendWhatsApp(orderData, 'rooms', message);
 
-    // sendToWhatsApp(message, 'rooms');
+  // sendToWhatsApp(message, 'rooms');
 }
 
 function handleFoodOrder() {
-    const foodItem = document.getElementById('foodItem').value;
-    const quantity = document.getElementById('foodQuantity').value;
-    const instructions = document.getElementById('foodInstructions').value;
-    const guestName = document.getElementById('foodGuestName').value;
-    const roomNumber = document.getElementById('roomNumber').value;
-    const guestPhone = document.getElementById('foodGuestPhone').value;
-    const total = document.getElementById('foodTotalPrice').textContent;
+  const foodItem = document.getElementById('foodItem').value;
+  const quantity = document.getElementById('foodQuantity').value;
+  const instructions = document.getElementById('foodInstructions').value;
+  const guestName = document.getElementById('foodGuestName').value;
+  const roomNumber = document.getElementById('roomNumber').value;
+  const guestPhone = document.getElementById('foodGuestPhone').value;
+  const total = document.getElementById('foodTotalPrice').textContent;
 
-    const orderData = {
-        customer: guestName,
-        phone: guestPhone,
-        service: 'food',
-        serviceName: foodItem,
-        amount: total,
-        date: new Date().toISOString().split('T')[0],
-        status: 'pending',
-        details: {
-            quantity,
-            instructions: instructions || 'None',
-            roomNumber
-        }
-    };
+  const orderData = {
+    customer: guestName,
+    phone: guestPhone,
+    service: 'food',
+    serviceName: foodItem,
+    amount: total,
+    date: new Date().toISOString().split('T')[0],
+    status: 'pending',
+    details: {
+      quantity,
+      instructions: instructions || 'None',
+      roomNumber,
+    },
+  };
 
-    const message = `🍽️ *360 DEGREE HOTEL - FOOD ORDER*
+  const message = `🍽️ *360 DEGREE HOTEL - FOOD ORDER*
 
 👤 *Customer Details:*
 Name: ${guestName}
@@ -796,33 +826,33 @@ Please make payment and send receipt via WhatsApp. Your order will be prepared a
 
 Thank you for dining with us!`;
 
-    createOrderAndSendWhatsApp(orderData, 'food', message);
+  createOrderAndSendWhatsApp(orderData, 'food', message);
 }
 
 function handleGateTicketPurchase() {
-    const ticketType = document.getElementById('gateTicketType').value;
-    const days = document.getElementById('gateTicketDays').value;
-    const people = document.getElementById('gateTicketPeople').value;
-    const date = document.getElementById('gateTicketDate').value;
-    const guestName = document.getElementById('gateTicketGuestName').value;
-    const guestPhone = document.getElementById('gateTicketGuestPhone').value;
-    const requirements = document.getElementById('gateTicketRequirements').value;
-    const total = document.getElementById('gateTicketTotalPrice').textContent;
-    const orderData = {
-        customer: guestName,
-        phone: guestPhone,
-        service: "gateTicket",
-        serviceName: ticketType,
-        amount: 1000,
-        date: date,
-        status: "pending",
-        details: {
-            days,
-            people,
-            requirements
-        }
-    };
-    const message = `🎫 *360 DEGREE HOTEL - GATE ENTRY TICKET*
+  const ticketType = document.getElementById('gateTicketType').value;
+  const days = document.getElementById('gateTicketDays').value;
+  const people = document.getElementById('gateTicketPeople').value;
+  const date = document.getElementById('gateTicketDate').value;
+  const guestName = document.getElementById('gateTicketGuestName').value;
+  const guestPhone = document.getElementById('gateTicketGuestPhone').value;
+  const requirements = document.getElementById('gateTicketRequirements').value;
+  const total = document.getElementById('gateTicketTotalPrice').textContent;
+  const orderData = {
+    customer: guestName,
+    phone: guestPhone,
+    service: 'gateTicket',
+    serviceName: ticketType,
+    amount: 1000,
+    date: date,
+    status: 'pending',
+    details: {
+      days,
+      people,
+      requirements,
+    },
+  };
+  const message = `🎫 *360 DEGREE HOTEL - GATE ENTRY TICKET*
 
 👤 *Customer Details:*
 Name: ${guestName}
@@ -850,32 +880,32 @@ Please make payment and send receipt via WhatsApp to receive your gate entry tic
 
 Thank you for choosing 360 Degree Hotel!`;
 
-    createOrderAndSendWhatsApp(orderData, 'gateTickets', message);
+  createOrderAndSendWhatsApp(orderData, 'gateTickets', message);
 }
 
 function handleSportsBooking() {
-    const activity = document.getElementById('sportsActivity').value;
-    const quantity = document.getElementById('sportsQuantity').value;
-    const date = document.getElementById('sportsDate').value;
-    const guestName = document.getElementById('sportsGuestName').value;
-    const guestPhone = document.getElementById('sportsGuestPhone').value;
-    const total = document.getElementById('sportsTotalPrice').textContent;
+  const activity = document.getElementById('sportsActivity').value;
+  const quantity = document.getElementById('sportsQuantity').value;
+  const date = document.getElementById('sportsDate').value;
+  const guestName = document.getElementById('sportsGuestName').value;
+  const guestPhone = document.getElementById('sportsGuestPhone').value;
+  const total = document.getElementById('sportsTotalPrice').textContent;
 
-    const orderData = {
-        customer: guestName,
-        phone: guestPhone,
-        service: "sports",
-        serviceName: activity,
-        amount: total,
-        date: date,
-        status: "pending",
-        details: {
-            quantity,
-            activity,
-            PreferredDate: date
-        }
-    };
-    const message = `⚽ *360 DEGREE HOTEL - SPORTS BOOKING*
+  const orderData = {
+    customer: guestName,
+    phone: guestPhone,
+    service: 'sports',
+    serviceName: activity,
+    amount: total,
+    date: date,
+    status: 'pending',
+    details: {
+      quantity,
+      activity,
+      PreferredDate: date,
+    },
+  };
+  const message = `⚽ *360 DEGREE HOTEL - SPORTS BOOKING*
 
 👤 *Customer Details:*
 Name: ${guestName}
@@ -899,46 +929,46 @@ Please make payment and send receipt via WhatsApp to receive your booking confir
 
 Thank you for choosing our sports services!`;
 
-    createOrderAndSendWhatsApp(orderData, 'sports', message);
+  createOrderAndSendWhatsApp(orderData, 'sports', message);
 }
 
 function handleServiceBooking() {
-    const service = document.getElementById('serviceType').value;
-    const duration = document.getElementById('serviceDuration').value;
-    const people = document.getElementById('servicePeople').value;
-    const date = document.getElementById('serviceDate').value;
-    const time = document.getElementById('serviceTime').value;
-    const guestName = document.getElementById('serviceGuestName').value;
-    const guestPhone = document.getElementById('serviceGuestPhone').value;
-    const requirements = document.getElementById('serviceRequirements').value;
-    const total = document.getElementById('serviceTotalPrice').textContent;
+  const service = document.getElementById('serviceType').value;
+  const duration = document.getElementById('serviceDuration').value;
+  const people = document.getElementById('servicePeople').value;
+  const date = document.getElementById('serviceDate').value;
+  const time = document.getElementById('serviceTime').value;
+  const guestName = document.getElementById('serviceGuestName').value;
+  const guestPhone = document.getElementById('serviceGuestPhone').value;
+  const requirements = document.getElementById('serviceRequirements').value;
+  const total = document.getElementById('serviceTotalPrice').textContent;
 
-    let durationText = '';
-    if (service === 'Event Center Hall') {
-        durationText = `Duration: ${duration} day(s)`;
-    } else if (service === 'Salon (Unisex)') {
-        durationText = `Sessions: ${duration}`;
-    } else if (service === 'Premium Bar') {
-        durationText = `Hours: ${duration}`;
-    }
+  let durationText = '';
+  if (service === 'Event Center Hall') {
+    durationText = `Duration: ${duration} day(s)`;
+  } else if (service === 'Salon (Unisex)') {
+    durationText = `Sessions: ${duration}`;
+  } else if (service === 'Premium Bar') {
+    durationText = `Hours: ${duration}`;
+  }
 
-    const orderData = {
-        customer: guestName,
-        phone: guestPhone,
-        service: "services",
-        serviceName: service,
-        amount: total,
-        date: date,
-        status: "pending",
-        details: {
-            duration,
-            people,
-            time,
-            requirements
-        }
-    };
+  const orderData = {
+    customer: guestName,
+    phone: guestPhone,
+    service: 'services',
+    serviceName: service,
+    amount: total,
+    date: date,
+    status: 'pending',
+    details: {
+      duration,
+      people,
+      time,
+      requirements,
+    },
+  };
 
-    const message = `🏢 *360 DEGREE HOTEL - SERVICE BOOKING*
+  const message = `🏢 *360 DEGREE HOTEL - SERVICE BOOKING*
 
 👤 *Customer Details:*
 Name: ${guestName}
@@ -965,33 +995,33 @@ Please make payment and send receipt via WhatsApp to confirm your service bookin
 
 Thank you for choosing our premium services!`;
 
-    createOrderAndSendWhatsApp(orderData, 'services', message);
+  createOrderAndSendWhatsApp(orderData, 'services', message);
 }
 
 function handleNightclubBooking() {
-    const service = document.getElementById('nightclubService').value;
-    const people = document.getElementById('nightclubPeople').value;
-    const date = document.getElementById('nightclubDate').value;
-    const time = document.getElementById('nightclubTime').value;
-    const guestName = document.getElementById('nightclubGuestName').value;
-    const guestPhone = document.getElementById('nightclubGuestPhone').value;
-    const requests = document.getElementById('nightclubRequests').value;
-    const total = document.getElementById('nightclubTotalPrice').textContent;
-    const orderData = {
-        customer: guestName,
-        phone: guestPhone,
-        service: "nightclub",
-        serviceName: service,
-        amount: total,
-        date: date,
-        status: "pending",
-        details: {
-            people,
-            time,
-            requests
-        }
-    };
-    const message = `🎉 *360 DEGREE HOTEL - NIGHTCLUB BOOKING*
+  const service = document.getElementById('nightclubService').value;
+  const people = document.getElementById('nightclubPeople').value;
+  const date = document.getElementById('nightclubDate').value;
+  const time = document.getElementById('nightclubTime').value;
+  const guestName = document.getElementById('nightclubGuestName').value;
+  const guestPhone = document.getElementById('nightclubGuestPhone').value;
+  const requests = document.getElementById('nightclubRequests').value;
+  const total = document.getElementById('nightclubTotalPrice').textContent;
+  const orderData = {
+    customer: guestName,
+    phone: guestPhone,
+    service: 'nightclub',
+    serviceName: service,
+    amount: total,
+    date: date,
+    status: 'pending',
+    details: {
+      people,
+      time,
+      requests,
+    },
+  };
+  const message = `🎉 *360 DEGREE HOTEL - NIGHTCLUB BOOKING*
 
 👤 *Customer Details:*
 Name: ${guestName}
@@ -1017,31 +1047,31 @@ Please make payment and send receipt via WhatsApp to confirm your nightclub rese
 
 Thank you for choosing our nightclub services!`;
 
-    createOrderAndSendWhatsApp(orderData, 'nightclub', message);
+  createOrderAndSendWhatsApp(orderData, 'nightclub', message);
 }
 
 function handlePoolBooking() {
-    const service = document.getElementById('poolService').value;
-    const days = document.getElementById('poolDays').value;
-    const people = document.getElementById('poolPeople').value;
-    const date = document.getElementById('poolDate').value;
-    const guestName = document.getElementById('poolGuestName').value;
-    const guestPhone = document.getElementById('poolGuestPhone').value;
-    const total = document.getElementById('poolTotalPrice').textContent;
-    const orderData = {
-        customer: guestName,
-        phone: guestPhone,
-        service: "pool",
-        serviceName: service,
-        amount: total,
-        date: date,
-        status: "pending",
-        details: {
-            days,
-            people
-        }
-    };
-    const message = `🏊‍♂️ *360 DEGREE HOTEL - POOL ACCESS*
+  const service = document.getElementById('poolService').value;
+  const days = document.getElementById('poolDays').value;
+  const people = document.getElementById('poolPeople').value;
+  const date = document.getElementById('poolDate').value;
+  const guestName = document.getElementById('poolGuestName').value;
+  const guestPhone = document.getElementById('poolGuestPhone').value;
+  const total = document.getElementById('poolTotalPrice').textContent;
+  const orderData = {
+    customer: guestName,
+    phone: guestPhone,
+    service: 'pool',
+    serviceName: service,
+    amount: total,
+    date: date,
+    status: 'pending',
+    details: {
+      days,
+      people,
+    },
+  };
+  const message = `🏊‍♂️ *360 DEGREE HOTEL - POOL ACCESS*
 
 👤 *Customer Details:*
 Name: ${guestName}
@@ -1066,46 +1096,54 @@ Please make payment and send receipt via WhatsApp to receive your pool access pa
 
 Thank you for choosing our pool facilities!`;
 
-    createOrderAndSendWhatsApp(orderData, 'pool', message);
+  createOrderAndSendWhatsApp(orderData, 'pool', message);
 }
 
 function sendToWhatsApp(message, serviceType) {
-    // Get the appropriate WhatsApp number for the service type
-    const phoneNumber = whatsappNumbers[serviceType] || whatsappNumbers.rooms;
+  // Get the appropriate WhatsApp number for the service type
+  const phoneNumber = whatsappNumbers[serviceType] || whatsappNumbers.rooms;
 
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-    // Open WhatsApp in a new tab
-    window.open(whatsappUrl, '_blank');
+  // Open WhatsApp in a new tab
+  window.open(whatsappUrl, '_blank');
 
-    // Close the modal after sending
-    const modals = ['bookingModal', 'foodModal', 'gateTicketModal', 'sportsModal', 'serviceModal', 'nightclubModal', 'poolModal'];
-    modals.forEach(modalId => {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'none';
-        }
-    });
+  // Close the modal after sending
+  const modals = [
+    'bookingModal',
+    'foodModal',
+    'gateTicketModal',
+    'sportsModal',
+    'serviceModal',
+    'nightclubModal',
+    'poolModal',
+  ];
+  modals.forEach((modalId) => {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  });
 
-    // Show success message with service-specific info
-    showSuccessMessage(serviceType);
+  // Show success message with service-specific info
+  showSuccessMessage(serviceType);
 }
 
 function showSuccessMessage(serviceType) {
-    const serviceNames = {
-        rooms: 'Room Booking',
-        food: 'Food Order',
-        gateTickets: 'Gate Entry Ticket Purchase',
-        sports: 'Sports Booking',
-        services: 'Service Booking',
-        nightclub: 'Nightclub Booking',
-        pool: 'Pool Booking'
-    };
+  const serviceNames = {
+    rooms: 'Room Booking',
+    food: 'Food Order',
+    gateTickets: 'Gate Entry Ticket Purchase',
+    sports: 'Sports Booking',
+    services: 'Service Booking',
+    nightclub: 'Nightclub Booking',
+    pool: 'Pool Booking',
+  };
 
-    // Create and show a success notification
-    const notification = document.createElement('div');
-    notification.style.cssText = `
+  // Create and show a success notification
+  const notification = document.createElement('div');
+  notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
@@ -1119,17 +1157,17 @@ function showSuccessMessage(serviceType) {
         animation: slideIn 0.3s ease;
         max-width: 300px;
     `;
-    notification.innerHTML = `
+  notification.innerHTML = `
         <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
         ${serviceNames[serviceType]} - Redirecting to WhatsApp...
     `;
 
-    document.body.appendChild(notification);
+  document.body.appendChild(notification);
 
-    // Remove notification after 4 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 4000);
+  // Remove notification after 4 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 4000);
 }
 
 // Add CSS animation for notification
@@ -1150,148 +1188,150 @@ document.head.appendChild(style);
 
 // Enhanced Navbar scroll effect
 window.addEventListener('scroll', function () {
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+  const navbar = document.querySelector('.navbar');
+  if (navbar) {
+    if (window.scrollY > 100) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
     }
+  }
 });
 
 // Intersection Observer for animations
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px',
 };
 
 const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
 }, observerOptions);
 
 // Observe all cards for animation
 document.addEventListener('DOMContentLoaded', function () {
-    const cards = document.querySelectorAll('.room-card, .food-card, .sport-card, .service-card, .nightclub-card, .amenity-card, .gate-ticket-card');
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-    });
+  const cards = document.querySelectorAll(
+    '.room-card, .food-card, .sport-card, .service-card, .nightclub-card, .amenity-card, .gate-ticket-card'
+  );
+  cards.forEach((card) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(card);
+  });
 });
 
 // Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  });
 });
 
 // Add loading animation to buttons
 document.addEventListener('DOMContentLoaded', function () {
-    const buttons = document.querySelectorAll('.book-btn, .order-btn, .cta-btn');
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            const originalText = this.textContent;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-            this.disabled = true;
+  const buttons = document.querySelectorAll('.book-btn, .order-btn, .cta-btn');
+  buttons.forEach((button) => {
+    button.addEventListener('click', function () {
+      const originalText = this.textContent;
+      this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+      this.disabled = true;
 
-            setTimeout(() => {
-                this.textContent = originalText;
-                this.disabled = false;
-            }, 1000);
-        });
+      setTimeout(() => {
+        this.textContent = originalText;
+        this.disabled = false;
+      }, 1000);
     });
+  });
 });
 
 // Handle form validation
 document.addEventListener('DOMContentLoaded', function () {
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function (e) {
-            const requiredFields = form.querySelectorAll('[required]');
-            let isValid = true;
+  const forms = document.querySelectorAll('form');
+  forms.forEach((form) => {
+    form.addEventListener('submit', function (e) {
+      const requiredFields = form.querySelectorAll('[required]');
+      let isValid = true;
 
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.style.borderColor = '#e74c3c';
-                } else {
-                    field.style.borderColor = '#e0e0e0';
-                }
-            });
+      requiredFields.forEach((field) => {
+        if (!field.value.trim()) {
+          isValid = false;
+          field.style.borderColor = '#e74c3c';
+        } else {
+          field.style.borderColor = '#e0e0e0';
+        }
+      });
 
-            if (!isValid) {
-                e.preventDefault();
-                alert('Please fill in all required fields.');
-            }
-        });
+      if (!isValid) {
+        e.preventDefault();
+        alert('Please fill in all required fields.');
+      }
     });
+  });
 });
 
 // Enhanced accessibility for mobile
 document.addEventListener('DOMContentLoaded', function () {
-    // Add keyboard support for gallery navigation
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-            const activeGallery = document.querySelector('.image-gallery:hover');
-            if (activeGallery) {
-                const galleryId = activeGallery.getAttribute('data-gallery');
-                if (galleryId) {
-                    const direction = e.key === 'ArrowLeft' ? -1 : 1;
-                    changeImage(galleryId, direction);
-                }
-            }
+  // Add keyboard support for gallery navigation
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const activeGallery = document.querySelector('.image-gallery:hover');
+      if (activeGallery) {
+        const galleryId = activeGallery.getAttribute('data-gallery');
+        if (galleryId) {
+          const direction = e.key === 'ArrowLeft' ? -1 : 1;
+          changeImage(galleryId, direction);
         }
-
-        // Close modals with Escape key
-        if (e.key === 'Escape') {
-            const openModal = document.querySelector('.modal[style*="block"]');
-            if (openModal) {
-                openModal.style.display = 'none';
-            }
-        }
-    });
-
-    // Add touch support for gallery navigation
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', function (e) {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-
-    document.addEventListener('touchend', function (e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleGallerySwipe(e.target);
-    });
-
-    function handleGallerySwipe(target) {
-        const gallery = target.closest('.image-gallery');
-        if (!gallery) return;
-
-        const galleryId = gallery.getAttribute('data-gallery');
-        if (!galleryId) return;
-
-        const swipeDistance = touchEndX - touchStartX;
-        const minSwipeDistance = 50;
-
-        if (Math.abs(swipeDistance) > minSwipeDistance) {
-            const direction = swipeDistance > 0 ? -1 : 1;
-            changeImage(galleryId, direction);
-        }
+      }
     }
+
+    // Close modals with Escape key
+    if (e.key === 'Escape') {
+      const openModal = document.querySelector('.modal[style*="block"]');
+      if (openModal) {
+        openModal.style.display = 'none';
+      }
+    }
+  });
+
+  // Add touch support for gallery navigation
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener('touchend', function (e) {
+    touchEndX = e.changedTouches[0].screenX;
+    handleGallerySwipe(e.target);
+  });
+
+  function handleGallerySwipe(target) {
+    const gallery = target.closest('.image-gallery');
+    if (!gallery) return;
+
+    const galleryId = gallery.getAttribute('data-gallery');
+    if (!galleryId) return;
+
+    const swipeDistance = touchEndX - touchStartX;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      const direction = swipeDistance > 0 ? -1 : 1;
+      changeImage(galleryId, direction);
+    }
+  }
 });
