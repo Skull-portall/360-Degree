@@ -446,10 +446,10 @@
 
             <!-- Tabs -->
             <div class="tab-buttons">
-              <button class="tab-btn active" onclick="openTab(event, 'breakfast')">
+              <!-- <button class="tab-btn active" onclick="openTab(event, 'breakfast')">
                 Breakfast
-              </button>
-              <button class="tab-btn" onclick="openTab(event, 'fastfood')">Fast Food</button>
+              </button> -->
+              <button class="tab-btn active" onclick="openTab(event, 'fastfood')">Fast Food</button>
               <button class="tab-btn" onclick="openTab(event, 'rice')">Rice</button>
               <button class="tab-btn" onclick="openTab(event, 'soups')">Soups</button>
               <button class="tab-btn" onclick="openTab(event, 'swallow')">Swallow</button>
@@ -459,136 +459,28 @@
               <button class="tab-btn" onclick="openTab(event, 'drinks')">Drinks</button>
             </div>
 
-            <!-- Tab Contents -->
-
-            <!-- BREAKFAST -->
-            <div id="breakfast" class="tab-content active-tab">
-              <div class="food-card">
-                <div class="image-gallery" data-gallery="breakfast">
-                  <div class="gallery-container">
-                    <img
-                      src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Breakfast"
-                      class="gallery-image active"
-                      data-description="Quaker oats, tea, bread and more for a healthy start."
-                    />
-                    <img
-                      src="https://images.pexels.com/photos/4109744/pexels-photo-4109744.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Tea and Bread"
-                      class="gallery-image"
-                      data-description="Freshly brewed tea with buttered bread."
-                    />
-                    <img
-                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Oats and Fruits"
-                      class="gallery-image"
-                      data-description="Nutritious oats served with fresh fruits."
-                    />
-                  </div>
-                  <button class="gallery-btn prev-btn" onclick="changeImage('breakfast', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-                  <button class="gallery-btn next-btn" onclick="changeImage('breakfast', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                  <div class="gallery-counter">
-                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
-                  </div>
-                  <div class="gallery-dots">
-                    <span class="dot active" onclick="currentImage('breakfast', 1)"></span>
-                    <span class="dot" onclick="currentImage('breakfast', 2)"></span>
-                    <span class="dot" onclick="currentImage('breakfast', 3)"></span>
-                  </div>
-                  <div class="image-description">
-                    <span class="description-text"
-                      >Quaker oats, tea, bread and more for a healthy start.</span
-                    >
-                  </div>
-                </div>
-                <div class="food-info">
-                  <h3>Quaker oats</h3>
-                  <p>healthy options to start your day.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Breakfast', 0)">
-                    Order Now
-                  </button>
-                </div>
-              </div>
-              <div class="food-card">
-                <div class="image-gallery" data-gallery="breakfast">
-                  <div class="gallery-container">
-                    <img
-                      src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Breakfast"
-                      class="gallery-image active"
-                      data-description="Quaker oats, tea, bread and more for a healthy start."
-                    />
-                    <img
-                      src="https://images.pexels.com/photos/4109744/pexels-photo-4109744.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Tea and Bread"
-                      class="gallery-image"
-                      data-description="Freshly brewed tea with buttered bread."
-                    />
-                    <img
-                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Oats and Fruits"
-                      class="gallery-image"
-                      data-description="Nutritious oats served with fresh fruits."
-                    />
-                  </div>
-                  <button class="gallery-btn prev-btn" onclick="changeImage('breakfast', -1)">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-                  <button class="gallery-btn next-btn" onclick="changeImage('breakfast', 1)">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                  <div class="gallery-counter">
-                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
-                  </div>
-                  <div class="gallery-dots">
-                    <span class="dot active" onclick="currentImage('breakfast', 1)"></span>
-                    <span class="dot" onclick="currentImage('breakfast', 2)"></span>
-                    <span class="dot" onclick="currentImage('breakfast', 3)"></span>
-                  </div>
-                  <div class="image-description">
-                    <span class="description-text"
-                      >Quaker oats, tea, bread and more for a healthy start.</span
-                    >
-                  </div>
-                </div>
-                <div class="food-info">
-                  <h3>Tea/Bread</h3>
-                  <p>healthy options to start your day.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Breakfast', 0)">
-                    Order Now
-                  </button>
-                </div>
-              </div>
-            </div>
-
             <!-- FAST FOOD -->
             <div id="fastfood" class="tab-content">
               <div class="food-card">
                 <div class="image-gallery" data-gallery="fastfood">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg"
                       alt="Fast Food"
                       class="gallery-image active"
-                      data-description="Noodles, chips, spaghetti, yam fried/boiled, golden yam."
+                      data-description="Quick and delicious fast food options"
                     />
                     <img
-                      src="https://images.pexels.com/photos/3756523/pexels-photo-3756523.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/3756523/pexels-photo-3756523.jpeg"
                       alt="Fries"
                       class="gallery-image"
-                      data-description="Golden fried yam and chips."
+                      data-description="Golden fried yam and chips"
                     />
                     <img
-                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg"
                       alt="Noodles"
                       class="gallery-image"
-                      data-description="Delicious noodles served with veggies."
+                      data-description="Delicious noodles served with veggies"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('fastfood', -1)">
@@ -606,16 +498,237 @@
                     <span class="dot" onclick="currentImage('fastfood', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text"
-                      >Noodles, chips, spaghetti, yam fried/boiled, golden yam.</span
-                    >
+                    <span class="description-text">Quick and delicious fast food options</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Fast Food</h3>
-                  <p>Quick and tasty meals including noodles, chips, spaghetti, and yam.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Fast Food', 0)">
+                  <h3>Noodles</h3>
+                  <p>Quick and tasty meals for when you're on the go</p>
+                  <ul class="menu-items">
+                    <li>Noodles <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Fast Food:- Noodles', 3000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <!-- <div id="fastfood" class="tab-content"> -->
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="fastfood">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg"
+                      alt="Fast Food"
+                      class="gallery-image active"
+                      data-description="Quick and delicious fast food options"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3756523/pexels-photo-3756523.jpeg"
+                      alt="Fries"
+                      class="gallery-image"
+                      data-description="Golden fried yam and chips"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg"
+                      alt="Noodles"
+                      class="gallery-image"
+                      data-description="Delicious noodles served with veggies"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('fastfood', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('fastfood', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('fastfood', 1)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 2)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Quick and delicious fast food options</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Chips</h3>
+                  <p>Quick and tasty meals for when you're on the go</p>
+                  <ul class="menu-items">
+                    <li>Chips <span class="price">₦3,500</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Fast Food- Chips', 3500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+              <!-- </div> -->
+
+              <!-- <div id="fastfood" class="tab-content"> -->
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="fastfood">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg"
+                      alt="Fast Food"
+                      class="gallery-image active"
+                      data-description="Quick and delicious fast food options"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3756523/pexels-photo-3756523.jpeg"
+                      alt="Fries"
+                      class="gallery-image"
+                      data-description="Golden fried yam and chips"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg"
+                      alt="Noodles"
+                      class="gallery-image"
+                      data-description="Delicious noodles served with veggies"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('fastfood', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('fastfood', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('fastfood', 1)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 2)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Quick and delicious fast food options</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Spaghetti</h3>
+                  <p>Quick and tasty meals for when you're on the go</p>
+                  <ul class="menu-items">
+                    <li>Spaghetti <span class="price">₦3,500</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Fast Food:- Spaghetti', 3500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+              <!-- </div> -->
+
+              <!-- <div id="fastfood" class="tab-content"> -->
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="fastfood">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg"
+                      alt="Fast Food"
+                      class="gallery-image active"
+                      data-description="Quick and delicious fast food options"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3756523/pexels-photo-3756523.jpeg"
+                      alt="Fries"
+                      class="gallery-image"
+                      data-description="Golden fried yam and chips"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg"
+                      alt="Noodles"
+                      class="gallery-image"
+                      data-description="Delicious noodles served with veggies"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('fastfood', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('fastfood', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('fastfood', 1)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 2)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Quick and delicious fast food options</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>yam Fried/Boild</h3>
+                  <p>Quick and tasty meals for when you're on the go</p>
+                  <ul class="menu-items">
+                    <li>Yam Fried/Boiled <span class="price">₦3,500</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Fast Food:- yam Fried/Boild', 3500)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+              <!-- </div> -->
+
+              <!-- <div id="fastfood" class="tab-content"> -->
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="fastfood">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg"
+                      alt="Fast Food"
+                      class="gallery-image active"
+                      data-description="Quick and delicious fast food options"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3756523/pexels-photo-3756523.jpeg"
+                      alt="Fries"
+                      class="gallery-image"
+                      data-description="Golden fried yam and chips"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg"
+                      alt="Noodles"
+                      class="gallery-image"
+                      data-description="Delicious noodles served with veggies"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('fastfood', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('fastfood', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('fastfood', 1)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 2)"></span>
+                    <span class="dot" onclick="currentImage('fastfood', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Quick and delicious fast food options</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Golden Yam</h3>
+                  <p>Quick and tasty meals for when you're on the go</p>
+                  <ul class="menu-items">
+                    <li>Golden Yam <span class="price">₦3,500</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Fast Food:- Golden Yam ', 3500)"
+                  >
                     Order Now
                   </button>
                 </div>
@@ -628,22 +741,22 @@
                 <div class="image-gallery" data-gallery="rice">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/5638267/pexels-photo-5638267.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Rice"
+                      src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg"
+                      alt="Rice Dishes"
                       class="gallery-image active"
-                      data-description="Jollof rice, white rice with stew, rice and beans."
+                      data-description="Delicious rice dishes for every taste"
                     />
                     <img
-                      src="https://images.pexels.com/photos/139746/pexels-photo-139746.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="White Rice"
-                      class="gallery-image"
-                      data-description="White rice with tomato stew."
-                    />
-                    <img
-                      src="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
                       alt="Jollof Rice"
                       class="gallery-image"
-                      data-description="Classic Nigerian Jollof rice."
+                      data-description="Our famous Jollof rice"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3926124/pexels-photo-3926124.jpeg"
+                      alt="Rice and Stew"
+                      class="gallery-image"
+                      data-description="White rice with delicious stew"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('rice', -1)">
@@ -661,16 +774,131 @@
                     <span class="dot" onclick="currentImage('rice', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text"
-                      >Jollof rice, white rice with stew, rice and beans.</span
-                    >
+                    <span class="description-text">Delicious rice dishes for every taste</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Rice</h3>
-                  <p>Jollof rice, white rice with stew or sauce, and rice with beans.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Rice', 0)">Order Now</button>
+                  <h3>Jallof Rice</h3>
+                  <p>Traditional and special rice preparations</p>
+                  <ul class="menu-items">
+                    <li>Jollof Rice <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Rice Dishes:- Jallof Rice',3000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="rice">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg"
+                      alt="Rice Dishes"
+                      class="gallery-image active"
+                      data-description="Delicious rice dishes for every taste"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Jollof Rice"
+                      class="gallery-image"
+                      data-description="Our famous Jollof rice"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3926124/pexels-photo-3926124.jpeg"
+                      alt="Rice and Stew"
+                      class="gallery-image"
+                      data-description="White rice with delicious stew"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('rice', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('rice', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('rice', 1)"></span>
+                    <span class="dot" onclick="currentImage('rice', 2)"></span>
+                    <span class="dot" onclick="currentImage('rice', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Delicious rice dishes for every taste</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>White Rice and Stew/Sauce</h3>
+                  <p>Traditional and special rice preparations</p>
+                  <ul class="menu-items">
+                    <li>White Rice and Stew/Sauce <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Rice Dishes:- White Rice', 3000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="rice">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg"
+                      alt="Rice Dishes"
+                      class="gallery-image active"
+                      data-description="Delicious rice dishes for every taste"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Jollof Rice"
+                      class="gallery-image"
+                      data-description="Our famous Jollof rice"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3926124/pexels-photo-3926124.jpeg"
+                      alt="Rice and Stew"
+                      class="gallery-image"
+                      data-description="White rice with delicious stew"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('rice', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('rice', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('rice', 1)"></span>
+                    <span class="dot" onclick="currentImage('rice', 2)"></span>
+                    <span class="dot" onclick="currentImage('rice', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Delicious rice dishes for every taste</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Rice and Beans</h3>
+                  <p>Traditional and special rice preparations</p>
+                  <ul class="menu-items">
+                    <li>Rice and Beans <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Rice Dishes:- Rice and Beans', 3000)"
+                  >
+                    Order Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -681,22 +909,22 @@
                 <div class="image-gallery" data-gallery="soups">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/7190393/pexels-photo-7190393.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Soups"
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Nigerian Soups"
                       class="gallery-image active"
-                      data-description="Vegetable, white soup, egusi, ogbono, okra, afang, oha."
+                      data-description="Rich and flavorful Nigerian soups"
                     />
                     <img
-                      src="https://images.pexels.com/photos/12737539/pexels-photo-12737539.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
                       alt="Egusi Soup"
                       class="gallery-image"
-                      data-description="Rich egusi soup with assorted meats."
+                      data-description="Our delicious Egusi soup"
                     />
                     <img
-                      src="https://images.pexels.com/photos/1143754/pexels-photo-1143754.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Okra Soup"
+                      src="https://images.pexels.com/photos/6275118/pexels-photo-6275118.jpeg"
+                      alt="Oha Soup"
                       class="gallery-image"
-                      data-description="Freshly prepared okra soup with seafood."
+                      data-description="Traditional Oha soup"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('soups', -1)">
@@ -714,16 +942,351 @@
                     <span class="dot" onclick="currentImage('soups', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text"
-                      >Vegetable, white soup, egusi, ogbono, okra, afang, oha.</span
-                    >
+                    <span class="description-text">Rich and flavorful Nigerian soups</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Soups</h3>
-                  <p>Vegetable, white soup, egusi, ogbono, okra, afang, and oha.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Soups', 0)">Order Now</button>
+                  <h3>Vegetable Soup</h3>
+                  <p>Authentic Nigerian soups served with your choice of swallow</p>
+                  <ul class="menu-items">
+                    <li>Vegetable Soup <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Nigerian Soups:- Vegetable Soup', 300)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="soups">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Nigerian Soups"
+                      class="gallery-image active"
+                      data-description="Rich and flavorful Nigerian soups"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Egusi Soup"
+                      class="gallery-image"
+                      data-description="Our delicious Egusi soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6275118/pexels-photo-6275118.jpeg"
+                      alt="Oha Soup"
+                      class="gallery-image"
+                      data-description="Traditional Oha soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('soups', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('soups', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('soups', 1)"></span>
+                    <span class="dot" onclick="currentImage('soups', 2)"></span>
+                    <span class="dot" onclick="currentImage('soups', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Rich and flavorful Nigerian soups</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>White Soup</h3>
+                  <p>Authentic Nigerian soups served with your choice of swallow</p>
+                  <ul class="menu-items">
+                    <li>White Soup <span class="price">₦5,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Nigerian Soups:- White Soup ', 5000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="soups">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Nigerian Soups"
+                      class="gallery-image active"
+                      data-description="Rich and flavorful Nigerian soups"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Egusi Soup"
+                      class="gallery-image"
+                      data-description="Our delicious Egusi soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6275118/pexels-photo-6275118.jpeg"
+                      alt="Oha Soup"
+                      class="gallery-image"
+                      data-description="Traditional Oha soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('soups', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('soups', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('soups', 1)"></span>
+                    <span class="dot" onclick="currentImage('soups', 2)"></span>
+                    <span class="dot" onclick="currentImage('soups', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Rich and flavorful Nigerian soups</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Egusi Soup</h3>
+                  <p>Authentic Nigerian soups served with your choice of swallow</p>
+                  <ul class="menu-items">
+                    <li>Egusi Soup <span class="price">₦2,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Nigerian Soups:- Egusi Soup', 2000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="soups">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Nigerian Soups"
+                      class="gallery-image active"
+                      data-description="Rich and flavorful Nigerian soups"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Egusi Soup"
+                      class="gallery-image"
+                      data-description="Our delicious Egusi soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6275118/pexels-photo-6275118.jpeg"
+                      alt="Oha Soup"
+                      class="gallery-image"
+                      data-description="Traditional Oha soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('soups', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('soups', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('soups', 1)"></span>
+                    <span class="dot" onclick="currentImage('soups', 2)"></span>
+                    <span class="dot" onclick="currentImage('soups', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Rich and flavorful Nigerian soups</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Ogbono Soup</h3>
+                  <p>Authentic Nigerian soups served with your choice of swallow</p>
+                  <ul class="menu-items">
+                    <li>Ogbono Soup <span class="price">₦2,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Nigerian Soups:- Ogbono Soup', 2000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="soups">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Nigerian Soups"
+                      class="gallery-image active"
+                      data-description="Rich and flavorful Nigerian soups"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Egusi Soup"
+                      class="gallery-image"
+                      data-description="Our delicious Egusi soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6275118/pexels-photo-6275118.jpeg"
+                      alt="Oha Soup"
+                      class="gallery-image"
+                      data-description="Traditional Oha soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('soups', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('soups', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('soups', 1)"></span>
+                    <span class="dot" onclick="currentImage('soups', 2)"></span>
+                    <span class="dot" onclick="currentImage('soups', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Rich and flavorful Nigerian soups</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Okro Soup</h3>
+                  <p>Authentic Nigerian soups served with your choice of swallow</p>
+                  <ul class="menu-items">
+                    <li>Okro Soup <span class="price">₦2,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Nigerian Soups:- Okro Soup', 2000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="soups">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Nigerian Soups"
+                      class="gallery-image active"
+                      data-description="Rich and flavorful Nigerian soups"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Egusi Soup"
+                      class="gallery-image"
+                      data-description="Our delicious Egusi soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6275118/pexels-photo-6275118.jpeg"
+                      alt="Oha Soup"
+                      class="gallery-image"
+                      data-description="Traditional Oha soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('soups', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('soups', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('soups', 1)"></span>
+                    <span class="dot" onclick="currentImage('soups', 2)"></span>
+                    <span class="dot" onclick="currentImage('soups', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Rich and flavorful Nigerian soups</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Afang Soup</h3>
+                  <p>Authentic Nigerian soups served with your choice of swallow</p>
+                  <ul class="menu-items">
+                    <li>Afang Soup <span class="price">₦4,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Nigerian Soups:- Afang Soup', 4000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="soups">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Nigerian Soups"
+                      class="gallery-image active"
+                      data-description="Rich and flavorful Nigerian soups"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Egusi Soup"
+                      class="gallery-image"
+                      data-description="Our delicious Egusi soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6275118/pexels-photo-6275118.jpeg"
+                      alt="Oha Soup"
+                      class="gallery-image"
+                      data-description="Traditional Oha soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('soups', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('soups', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('soups', 1)"></span>
+                    <span class="dot" onclick="currentImage('soups', 2)"></span>
+                    <span class="dot" onclick="currentImage('soups', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Rich and flavorful Nigerian soups</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Oha Soup</h3>
+                  <p>Authentic Nigerian soups served with your choice of swallow</p>
+                  <ul class="menu-items">
+                    <li>Oha Soup <span class="price">₦4,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Nigerian Soups:- Oha Soup', 4000)"
+                  >
+                    Order Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -734,22 +1297,22 @@
                 <div class="image-gallery" data-gallery="swallow">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/11110396/pexels-photo-11110396.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
                       alt="Swallow"
                       class="gallery-image active"
-                      data-description="Yam poundo, semovita, amala, eba, fufu, wheat."
+                      data-description="Traditional Nigerian swallow foods"
                     />
                     <img
-                      src="https://images.pexels.com/photos/1143754/pexels-photo-1143754.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Amala"
+                      src="https://images.pexels.com/photos/6210959/pexels-photo-6210959.jpeg"
+                      alt="Eba"
                       class="gallery-image"
-                      data-description="Delicious amala served with assorted soup."
+                      data-description="Freshly prepared eba"
                     />
                     <img
-                      src="https://images.pexels.com/photos/12737539/pexels-photo-12737539.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Poundo Yam"
+                      src="https://images.pexels.com/photos/6210968/pexels-photo-6210968.jpeg"
+                      alt="Fufu"
                       class="gallery-image"
-                      data-description="Soft and smooth poundo yam."
+                      data-description="Soft fufu ready to eat"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('swallow', -1)">
@@ -767,16 +1330,278 @@
                     <span class="dot" onclick="currentImage('swallow', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text"
-                      >Yam poundo, semovita, amala, eba, fufu, wheat.</span
-                    >
+                    <span class="description-text">Traditional Nigerian swallow foods</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Swallow</h3>
-                  <p>Yam poundo, semovita, amala, eba, fufu, wheat.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Swallow', 0)">Order Now</button>
+                  <h3>Yam Poundo</h3>
+                  <p>Soft and delicious swallow to pair with your favorite soup</p>
+                  <ul class="menu-items">
+                    <li>Yam Poundo <span class="price">₦1,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Swallow:- Yam Poundo', 1000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="swallow">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Swallow"
+                      class="gallery-image active"
+                      data-description="Traditional Nigerian swallow foods"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210959/pexels-photo-6210959.jpeg"
+                      alt="Eba"
+                      class="gallery-image"
+                      data-description="Freshly prepared eba"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210968/pexels-photo-6210968.jpeg"
+                      alt="Fufu"
+                      class="gallery-image"
+                      data-description="Soft fufu ready to eat"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('swallow', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('swallow', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('swallow', 1)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 2)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Traditional Nigerian swallow foods</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Semovita</h3>
+                  <p>Soft and delicious swallow to pair with your favorite soup</p>
+                  <ul class="menu-items">
+                    <li>Semovita <span class="price">₦1,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Swallow:- Semovita', 1000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="swallow">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Swallow"
+                      class="gallery-image active"
+                      data-description="Traditional Nigerian swallow foods"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210959/pexels-photo-6210959.jpeg"
+                      alt="Eba"
+                      class="gallery-image"
+                      data-description="Freshly prepared eba"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210968/pexels-photo-6210968.jpeg"
+                      alt="Fufu"
+                      class="gallery-image"
+                      data-description="Soft fufu ready to eat"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('swallow', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('swallow', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('swallow', 1)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 2)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Traditional Nigerian swallow foods</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Amala</h3>
+                  <p>Soft and delicious swallow to pair with your favorite soup</p>
+                  <ul class="menu-items">
+                    <li>Amala <span class="price">₦1,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Swallow:- Amala', 1000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="swallow">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Swallow"
+                      class="gallery-image active"
+                      data-description="Traditional Nigerian swallow foods"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210959/pexels-photo-6210959.jpeg"
+                      alt="Eba"
+                      class="gallery-image"
+                      data-description="Freshly prepared eba"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210968/pexels-photo-6210968.jpeg"
+                      alt="Fufu"
+                      class="gallery-image"
+                      data-description="Soft fufu ready to eat"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('swallow', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('swallow', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('swallow', 1)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 2)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Traditional Nigerian swallow foods</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Eba</h3>
+                  <p>Soft and delicious swallow to pair with your favorite soup</p>
+                  <ul class="menu-items">
+                    <li>Eba <span class="price">₦500</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Swallow:- Eba', 500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="swallow">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Swallow"
+                      class="gallery-image active"
+                      data-description="Traditional Nigerian swallow foods"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210959/pexels-photo-6210959.jpeg"
+                      alt="Eba"
+                      class="gallery-image"
+                      data-description="Freshly prepared eba"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210968/pexels-photo-6210968.jpeg"
+                      alt="Fufu"
+                      class="gallery-image"
+                      data-description="Soft fufu ready to eat"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('swallow', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('swallow', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('swallow', 1)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 2)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Traditional Nigerian swallow foods</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Fufu</h3>
+                  <p>Soft and delicious swallow to pair with your favorite soup</p>
+                  <ul class="menu-items">
+                    <li>Fufu <span class="price">₦600</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Swallow:_ Fufu', 600)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="swallow">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Swallow"
+                      class="gallery-image active"
+                      data-description="Traditional Nigerian swallow foods"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210959/pexels-photo-6210959.jpeg"
+                      alt="Eba"
+                      class="gallery-image"
+                      data-description="Freshly prepared eba"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210968/pexels-photo-6210968.jpeg"
+                      alt="Fufu"
+                      class="gallery-image"
+                      data-description="Soft fufu ready to eat"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('swallow', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('swallow', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('swallow', 1)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 2)"></span>
+                    <span class="dot" onclick="currentImage('swallow', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Traditional Nigerian swallow foods</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Wheat</h3>
+                  <p>Soft and delicious swallow to pair with your favorite soup</p>
+                  <ul class="menu-items">
+                    <li>Wheat <span class="price">₦1,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Swallow:- Wheat', 1000)">
+                    Order Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -787,22 +1612,22 @@
                 <div class="image-gallery" data-gallery="meats">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg"
                       alt="Meats"
                       class="gallery-image active"
-                      data-description="Chicken, goat meat, turkey, beef."
+                      data-description="Premium quality meat selections"
                     />
                     <img
-                      src="https://images.pexels.com/photos/128402/pexels-photo-128402.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Grilled Chicken"
+                      src="https://images.pexels.com/photos/3535383/pexels-photo-3535383.jpeg"
+                      alt="Goat Meat"
                       class="gallery-image"
-                      data-description="Perfectly grilled chicken with seasoning."
+                      data-description="Tender goat meat"
                     />
                     <img
-                      src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Beef"
+                      src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg"
+                      alt="Turkey"
                       class="gallery-image"
-                      data-description="Tender beef cooked to perfection."
+                      data-description="Juicy turkey"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('meats', -1)">
@@ -820,14 +1645,226 @@
                     <span class="dot" onclick="currentImage('meats', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text">Chicken, goat meat, turkey, beef.</span>
+                    <span class="description-text">Premium quality meat selections</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Meats</h3>
-                  <p>Chicken, goat meat, turkey, beef.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Meats', 0)">Order Now</button>
+                  <h3>Chicken</h3>
+                  <p>High quality protein to complement your meal</p>
+                  <ul class="menu-items">
+                    <li>Chicken <span class="price">₦2,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Meats:- Chicken', 2000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="meats">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg"
+                      alt="Meats"
+                      class="gallery-image active"
+                      data-description="Premium quality meat selections"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3535383/pexels-photo-3535383.jpeg"
+                      alt="Goat Meat"
+                      class="gallery-image"
+                      data-description="Tender goat meat"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg"
+                      alt="Turkey"
+                      class="gallery-image"
+                      data-description="Juicy turkey"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('meats', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('meats', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('meats', 1)"></span>
+                    <span class="dot" onclick="currentImage('meats', 2)"></span>
+                    <span class="dot" onclick="currentImage('meats', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Premium quality meat selections</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Chicken</h3>
+                  <p>High quality protein to complement your meal</p>
+                  <ul class="menu-items">
+                    <li>Chicken <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Meats:- Chicken', 3000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="meats">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg"
+                      alt="Meats"
+                      class="gallery-image active"
+                      data-description="Premium quality meat selections"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3535383/pexels-photo-3535383.jpeg"
+                      alt="Goat Meat"
+                      class="gallery-image"
+                      data-description="Tender goat meat"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg"
+                      alt="Turkey"
+                      class="gallery-image"
+                      data-description="Juicy turkey"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('meats', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('meats', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('meats', 1)"></span>
+                    <span class="dot" onclick="currentImage('meats', 2)"></span>
+                    <span class="dot" onclick="currentImage('meats', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Premium quality meat selections</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Goat Meat</h3>
+                  <p>High quality protein to complement your meal</p>
+                  <ul class="menu-items">
+                    <li>Goat Meat <span class="price">₦1,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Meats:- Goat Meat', 1000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="meats">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg"
+                      alt="Meats"
+                      class="gallery-image active"
+                      data-description="Premium quality meat selections"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3535383/pexels-photo-3535383.jpeg"
+                      alt="Goat Meat"
+                      class="gallery-image"
+                      data-description="Tender goat meat"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg"
+                      alt="Turkey"
+                      class="gallery-image"
+                      data-description="Juicy turkey"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('meats', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('meats', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('meats', 1)"></span>
+                    <span class="dot" onclick="currentImage('meats', 2)"></span>
+                    <span class="dot" onclick="currentImage('meats', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Premium quality meat selections</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Turkey</h3>
+                  <p>High quality protein to complement your meal</p>
+                  <ul class="menu-items">
+                    <li>Turkey <span class="price">₦7,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Meats:- Turkey', 7000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="meats">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg"
+                      alt="Meats"
+                      class="gallery-image active"
+                      data-description="Premium quality meat selections"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3535383/pexels-photo-3535383.jpeg"
+                      alt="Goat Meat"
+                      class="gallery-image"
+                      data-description="Tender goat meat"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg"
+                      alt="Turkey"
+                      class="gallery-image"
+                      data-description="Juicy turkey"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('meats', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('meats', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('meats', 1)"></span>
+                    <span class="dot" onclick="currentImage('meats', 2)"></span>
+                    <span class="dot" onclick="currentImage('meats', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Premium quality meat selections</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Beef</h3>
+                  <p>High quality protein to complement your meal</p>
+                  <ul class="menu-items">
+                    <li>Beef <span class="price">₦1,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Meats:- Beef', 1000)">
+                    Order Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -838,22 +1875,22 @@
                 <div class="image-gallery" data-gallery="pastries">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/1030947/pexels-photo-1030947.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg"
                       alt="Pastries"
                       class="gallery-image active"
-                      data-description="Shawarma, meat pie, egg roll, samosa, spring roll, cup cakes."
+                      data-description="Freshly baked pastries and snacks"
                     />
                     <img
-                      src="https://images.pexels.com/photos/533325/pexels-photo-533325.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Shawarma"
-                      class="gallery-image"
-                      data-description="Fresh shawarma with juicy fillings."
-                    />
-                    <img
-                      src="https://images.pexels.com/photos/4109744/pexels-photo-4109744.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg"
                       alt="Meat Pie"
                       class="gallery-image"
-                      data-description="Flaky meat pie with rich filling."
+                      data-description="Flaky meat pies"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3681641/pexels-photo-3681641.jpeg"
+                      alt="Shawarma"
+                      class="gallery-image"
+                      data-description="Delicious shawarma wraps"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('pastries', -1)">
@@ -871,15 +1908,333 @@
                     <span class="dot" onclick="currentImage('pastries', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text"
-                      >Shawarma, meat pie, egg roll, samosa, spring roll, cup cakes.</span
-                    >
+                    <span class="description-text">Freshly baked pastries and snacks</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Pastries</h3>
-                  <p>Shawarma, meat pie, egg roll, samosa, spring roll, cup cakes.</p>
-                  <div class="price">₦0 <span>per person</span></div>
+                  <h3>Shawarma (Double)</h3>
+                  <p>Delicious baked goods and quick snacks</p>
+                  <ul class="menu-items">
+                    <li>Shawarma (Double) <span class="price">₦6,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Pastries:- Shawarma (Double)', 6000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="pastries">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg"
+                      alt="Pastries"
+                      class="gallery-image active"
+                      data-description="Freshly baked pastries and snacks"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg"
+                      alt="Meat Pie"
+                      class="gallery-image"
+                      data-description="Flaky meat pies"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3681641/pexels-photo-3681641.jpeg"
+                      alt="Shawarma"
+                      class="gallery-image"
+                      data-description="Delicious shawarma wraps"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('pastries', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('pastries', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('pastries', 1)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 2)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Freshly baked pastries and snacks</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Shawarma (Single)</h3>
+                  <p>Delicious baked goods and quick snacks</p>
+                  <ul class="menu-items">
+                    <li>Shawarma (Single) <span class="price">₦5,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Pastries:- Shawarma (Single)', 5000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="pastries">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg"
+                      alt="Pastries"
+                      class="gallery-image active"
+                      data-description="Freshly baked pastries and snacks"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg"
+                      alt="Meat Pie"
+                      class="gallery-image"
+                      data-description="Flaky meat pies"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3681641/pexels-photo-3681641.jpeg"
+                      alt="Shawarma"
+                      class="gallery-image"
+                      data-description="Delicious shawarma wraps"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('pastries', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('pastries', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('pastries', 1)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 2)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Freshly baked pastries and snacks</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Meat Pie</h3>
+                  <p>Delicious baked goods and quick snacks</p>
+                  <ul class="menu-items">
+                    <li>Meat Pie <span class="price">₦1,500</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Pastries:_ Meat Pie', 1500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="pastries">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg"
+                      alt="Pastries"
+                      class="gallery-image active"
+                      data-description="Freshly baked pastries and snacks"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg"
+                      alt="Meat Pie"
+                      class="gallery-image"
+                      data-description="Flaky meat pies"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3681641/pexels-photo-3681641.jpeg"
+                      alt="Shawarma"
+                      class="gallery-image"
+                      data-description="Delicious shawarma wraps"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('pastries', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('pastries', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('pastries', 1)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 2)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Freshly baked pastries and snacks</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Egg Roll</h3>
+                  <p>Delicious baked goods and quick snacks</p>
+                  <ul class="menu-items">
+                    <li>Egg Roll <span class="price">₦1,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Pastries:- Egg Roll', 1000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="pastries">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg"
+                      alt="Pastries"
+                      class="gallery-image active"
+                      data-description="Freshly baked pastries and snacks"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg"
+                      alt="Meat Pie"
+                      class="gallery-image"
+                      data-description="Flaky meat pies"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3681641/pexels-photo-3681641.jpeg"
+                      alt="Shawarma"
+                      class="gallery-image"
+                      data-description="Delicious shawarma wraps"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('pastries', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('pastries', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('pastries', 1)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 2)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Freshly baked pastries and snacks</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Samosa</h3>
+                  <p>Delicious baked goods and quick snacks</p>
+                  <ul class="menu-items">
+                    <li>Samosa <span class="price">---</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Pastries:- Samosa', 0)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="pastries">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg"
+                      alt="Pastries"
+                      class="gallery-image active"
+                      data-description="Freshly baked pastries and snacks"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg"
+                      alt="Meat Pie"
+                      class="gallery-image"
+                      data-description="Flaky meat pies"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3681641/pexels-photo-3681641.jpeg"
+                      alt="Shawarma"
+                      class="gallery-image"
+                      data-description="Delicious shawarma wraps"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('pastries', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('pastries', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('pastries', 1)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 2)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Freshly baked pastries and snacks</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Spring Roll</h3>
+                  <p>Delicious baked goods and quick snacks</p>
+                  <ul class="menu-items">
+                    <li>Spring Roll <span class="price">---</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Pastries', 0)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="pastries">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg"
+                      alt="Pastries"
+                      class="gallery-image active"
+                      data-description="Freshly baked pastries and snacks"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg"
+                      alt="Meat Pie"
+                      class="gallery-image"
+                      data-description="Flaky meat pies"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3681641/pexels-photo-3681641.jpeg"
+                      alt="Shawarma"
+                      class="gallery-image"
+                      data-description="Delicious shawarma wraps"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('pastries', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('pastries', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('pastries', 1)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 2)"></span>
+                    <span class="dot" onclick="currentImage('pastries', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Freshly baked pastries and snacks</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Cup Cakes</h3>
+                  <p>Delicious baked goods and quick snacks</p>
+                  <ul class="menu-items">
+                    <li>Cup Cakes <span class="price">---</span></li>
+                  </ul>
                   <button class="order-btn" onclick="openFoodModal('Pastries', 0)">
                     Order Now
                   </button>
@@ -893,22 +2248,22 @@
                 <div class="image-gallery" data-gallery="peppersoup">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/12737539/pexels-photo-12737539.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
                       alt="Pepper Soup"
                       class="gallery-image active"
-                      data-description="Cat fish, goat meat, intestine, chicken pepper soup."
+                      data-description="Spicy and flavorful pepper soup"
                     />
                     <img
-                      src="https://images.pexels.com/photos/1143754/pexels-photo-1143754.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Goat Meat Pepper Soup"
-                      class="gallery-image"
-                      data-description="Spicy goat meat pepper soup."
-                    />
-                    <img
-                      src="https://images.pexels.com/photos/7190393/pexels-photo-7190393.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
                       alt="Catfish Pepper Soup"
                       class="gallery-image"
-                      data-description="Richly spiced catfish pepper soup."
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
@@ -926,16 +2281,395 @@
                     <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text"
-                      >Cat fish, goat meat, intestine, chicken pepper soup.</span
-                    >
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Pepper Soup</h3>
-                  <p>Cat fish, goat meat, intestine, chicken pepper soup.</p>
-                  <div class="price">₦0 <span>per person</span></div>
-                  <button class="order-btn" onclick="openFoodModal('Pepper Soup', 0)">
+                  <h3>Cat Fish</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Cat Fish <span class="price">₦5,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Pepper Soup:- Cat Fish', 5000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="peppersoup">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Pepper Soup"
+                      class="gallery-image active"
+                      data-description="Spicy and flavorful pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Catfish Pepper Soup"
+                      class="gallery-image"
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('peppersoup', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('peppersoup', 1)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 2)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Cat Fish</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Cat Fish <span class="price">₦20,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Pepper Soup:- Cat Fish', 20000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="peppersoup">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Pepper Soup"
+                      class="gallery-image active"
+                      data-description="Spicy and flavorful pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Catfish Pepper Soup"
+                      class="gallery-image"
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('peppersoup', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('peppersoup', 1)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 2)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Goat Meat</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Goat Meat <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Pepper Soup:- Goat Meat', 3000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="peppersoup">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Pepper Soup"
+                      class="gallery-image active"
+                      data-description="Spicy and flavorful pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Catfish Pepper Soup"
+                      class="gallery-image"
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('peppersoup', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('peppersoup', 1)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 2)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Goat Meat</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Goat Meat <span class="price">₦5,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Pepper Soup:- Goat Meat', 5000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="peppersoup">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Pepper Soup"
+                      class="gallery-image active"
+                      data-description="Spicy and flavorful pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Catfish Pepper Soup"
+                      class="gallery-image"
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('peppersoup', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('peppersoup', 1)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 2)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Intestine</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Intestine <span class="price">₦3,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Pepper Soup:- Intestine', 3000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="peppersoup">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Pepper Soup"
+                      class="gallery-image active"
+                      data-description="Spicy and flavorful pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Catfish Pepper Soup"
+                      class="gallery-image"
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('peppersoup', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('peppersoup', 1)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 2)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Intestine</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Intestine <span class="price">₦5,000</span></li>
+                  </ul>
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Pepper Soup:- Intestine', 5000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="peppersoup">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Pepper Soup"
+                      class="gallery-image active"
+                      data-description="Spicy and flavorful pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Catfish Pepper Soup"
+                      class="gallery-image"
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('peppersoup', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('peppersoup', 1)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 2)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Chicken</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Chicken <span class="price">₦5,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Pepper Soup:- Chicken', 5000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="peppersoup">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg"
+                      alt="Pepper Soup"
+                      class="gallery-image active"
+                      data-description="Spicy and flavorful pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg"
+                      alt="Catfish Pepper Soup"
+                      class="gallery-image"
+                      data-description="Catfish pepper soup"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg"
+                      alt="Goat Meat Pepper Soup"
+                      class="gallery-image"
+                      data-description="Goat meat pepper soup"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('peppersoup', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('peppersoup', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('peppersoup', 1)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 2)"></span>
+                    <span class="dot" onclick="currentImage('peppersoup', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Spicy and flavorful pepper soup</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Chicken</h3>
+                  <p>Hot and spicy Nigerian pepper soup varieties</p>
+                  <ul class="menu-items">
+                    <li>Chicken <span class="price">₦7,000</span></li>
+                  </ul>
+                  <button class="order-btn" onclick="openFoodModal('Pepper Soup:- Chicken', 7000)">
                     Order Now
                   </button>
                 </div>
@@ -948,22 +2682,22 @@
                 <div class="image-gallery" data-gallery="drinks">
                   <div class="gallery-container">
                     <img
-                      src="https://images.pexels.com/photos/2983101/pexels-photo-2983101.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
                       alt="Drinks"
                       class="gallery-image active"
-                      data-description="Juices, vodka, soft drinks, beer."
+                      data-description="Refreshing drinks selection"
                     />
                     <img
-                      src="https://images.pexels.com/photos/290316/pexels-photo-290316.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
                       alt="Juices"
                       class="gallery-image"
-                      data-description="Refreshing juices and smoothies."
+                      data-description="Fresh fruit juices"
                     />
                     <img
-                      src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=800"
-                      alt="Soft Drinks"
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
                       class="gallery-image"
-                      data-description="Cold soft drinks for any occasion."
+                      data-description="Alcoholic beverages"
                     />
                   </div>
                   <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
@@ -981,21 +2715,868 @@
                     <span class="dot" onclick="currentImage('drinks', 3)"></span>
                   </div>
                   <div class="image-description">
-                    <span class="description-text">Juices, vodka, soft drinks, beer.</span>
+                    <span class="description-text">Refreshing drinks selection</span>
                   </div>
                 </div>
                 <div class="food-info">
-                  <h3>Drinks</h3>
-                  <p>
-                    Juices (Exotic, Active, 5Alive, Vinurt, Hollandia), vodka, soft drinks, beer.
-                  </p>
-                  <div class="price">₦0 <span>per person</span></div>
+                  <h3>Exotic (Big)</h3>
+
+                  <ul class="menu-items">
+                    <li>Exotic (Big) <span class="price">₦3,000</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Exotic (Big) ', 3000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Active (Big)</h3>
+                  <ul class="menu-items">
+                    <li>Active (Big) <span class="price">₦3,000</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Active (Big)', 3000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>5alive (Big)</h3>
+                  <ul>
+                    <li>5alive (Big) <span class="price">₦2,500</span></li>
+                  </ul>
+
                   <button class="order-btn" onclick="openFoodModal('Drinks', 0)">Order Now</button>
                 </div>
               </div>
-            </div>
 
-            <!-- Repeat the above "food-card" for each category (fastfood, rice, soups, etc.) -->
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Can Exotic</h3>
+
+                  <ul class="menu-items">
+                    <li>Can Exotic <span class="price">₦1,500</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Can Exotic', 1500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Vinurt</h3>
+
+                  <ul class="menu-items">
+                    <li>Vinurt <span class="price">---</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Vinurt', 0)">Order Now</button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Yoghurt</h3>
+
+                  <ul class="menu-items">
+                    <li>Yoghurt <span class="price">---</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Yoghurt', 0)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Hollandia (Big)</h3>
+
+                  <ul class="menu-items">
+                    <li>Hollandia (Big) <span class="price">₦3,000</span></li>
+                  </ul>
+
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Drinks:- Hollandia (Big) ', 3000)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Hollandia Milk</h3>
+
+                  <ul>
+                    <li>Hollandia Milk <span class="price">₦1,500</span></li>
+                  </ul>
+
+                  <button
+                    class="order-btn"
+                    onclick="openFoodModal('Drinks:- Hollandia Milk', 1500)"
+                  >
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Nutri Cho</h3>
+
+                  <ul class="menu-items">
+                    <li>Nutri Cho <span class="price">₦1,000</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Nutri Cho', 1000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Black Bullet</h3>
+
+                  <ul class="menu-items">
+                    <li>Black Bullet <span class="price">₦2,500</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Black Bullet', 2500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Hammer</h3>
+
+                  <ul class="menu-items">
+                    <li>Hammer <span class="price">₦1,500</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Hammer', 1500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Double Black</h3>
+
+                  <ul class="menu-items">
+                    <li>Double Black <span class="price">₦2,000</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Double Black', 2000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Coke</h3>
+
+                  <ul class="menu-items">
+                    <li>Coke <span class="price">₦800</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Coke', 800)">Order Now</button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Fanta</h3>
+
+                  <ul class="menu-items">
+                    <li>Fanta <span class="price">₦800</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Fanta', 800)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Malt</h3>
+
+                  <ul class="menu-items">
+                    <li>Malt <span class="price">₦1,500</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Malt', 1500)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Fayruz</h3>
+
+                  <ul class="menu-items">
+                    <li>Fayruz <span class="price">₦1,000</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Fayruz', 1000)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="image-gallery" data-gallery="drinks">
+                  <div class="gallery-container">
+                    <img
+                      src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"
+                      alt="Drinks"
+                      class="gallery-image active"
+                      data-description="Refreshing drinks selection"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/3819969/pexels-photo-3819969.jpeg"
+                      alt="Juices"
+                      class="gallery-image"
+                      data-description="Fresh fruit juices"
+                    />
+                    <img
+                      src="https://images.pexels.com/photos/1552630/pexels-photo-1552630.jpeg"
+                      alt="Alcohol"
+                      class="gallery-image"
+                      data-description="Alcoholic beverages"
+                    />
+                  </div>
+                  <button class="gallery-btn prev-btn" onclick="changeImage('drinks', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="gallery-btn next-btn" onclick="changeImage('drinks', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                  <div class="gallery-counter">
+                    <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                  </div>
+                  <div class="gallery-dots">
+                    <span class="dot active" onclick="currentImage('drinks', 1)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 2)"></span>
+                    <span class="dot" onclick="currentImage('drinks', 3)"></span>
+                  </div>
+                  <div class="image-description">
+                    <span class="description-text">Refreshing drinks selection</span>
+                  </div>
+                </div>
+                <div class="food-info">
+                  <h3>Sprite</h3>
+
+                  <ul class="menu-items">
+                    <li>Sprite <span class="price">₦800</span></li>
+                  </ul>
+
+                  <button class="order-btn" onclick="openFoodModal('Drinks:- Sprite', 800)">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1164,110 +3745,175 @@
 
     <!-- Services Section -->
     <section id="services" class="section">
-        <div class="container">
-            <h2 class="section-title">Premium Services</h2>
-            <div class="services-grid">
-                <!-- Event Center Hall -->
-                <div class="service-card">
-                    <div class="image-gallery" data-gallery="event-hall">
-                        <div class="gallery-container">
-                            <img src="images/event 1.jpg" alt="Event Hall" class="gallery-image active" data-description="Elegant event hall perfect for weddings, conferences, and special occasions">
-                            <img src="images/event 2.jpg" alt="Wedding Setup" class="gallery-image" data-description="Beautiful wedding setup with premium decorations and lighting">
-                            <img src="images/Event.jpg" alt="Conference Setup" class="gallery-image" data-description="Professional conference setup with modern AV equipment">
-                        </div>
-                        <button class="gallery-btn prev-btn" onclick="changeImage('event-hall', -1)">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="gallery-btn next-btn" onclick="changeImage('event-hall', 1)">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                        <div class="gallery-counter">
-                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
-                        </div>
-                        <div class="gallery-dots">
-                            <span class="dot active" onclick="currentImage('event-hall', 1)"></span>
-                            <span class="dot" onclick="currentImage('event-hall', 2)"></span>
-                            <span class="dot" onclick="currentImage('event-hall', 3)"></span>
-                        </div>
-                        <div class="image-description">
-                            <span class="description-text">Elegant event hall perfect for weddings, conferences, and special occasions</span>
-                        </div>
-                    </div>
-                    <div class="service-info">
-                        <h3>Event Center Hall</h3>
-                        <p>Spacious event hall perfect for weddings, conferences, and special celebrations with full catering service.</p>
-                        <div class="price">₦70,000 <span>per day</span></div>
-                        <button class="book-btn" onclick="openServiceModal('Event Center Hall', 70000)">Book Now</button>
-                    </div>
-                </div>
-               
-               <!-- Laundry Service -->
-<div class="service-card">
-    <div class="image-gallery" data-gallery="laundry">
-        <div class="gallery-container">
-            <img src="images/laundry1.jpg" alt="Laundry" class="gallery-image active" data-description="Professional laundry services with premium care">
-            <img src="images/Landry 2.jpeg" alt="Clean Clothes" class="gallery-image" data-description="Crisp, clean clothes with a fresh scent">
-            <img src="images/laundry3.jpg" alt="Folding Service" class="gallery-image" data-description="Neatly folded and packed laundry ready for pickup">
-        </div>
-        <button class="gallery-btn prev-btn" onclick="changeImage('laundry', -1)">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="gallery-btn next-btn" onclick="changeImage('laundry', 1)">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-        <div class="gallery-counter">
-            <span class="current-slide">1</span>/<span class="total-slides">3</span>
-        </div>
-        <div class="gallery-dots">
-            <span class="dot active" onclick="currentImage('laundry', 1)"></span>
-            <span class="dot" onclick="currentImage('laundry', 2)"></span>
-            <span class="dot" onclick="currentImage('laundry', 3)"></span>
-        </div>
-        <div class="image-description">
-            <span class="description-text">Professional laundry services with premium care</span>
-        </div>
-    </div>
-    <div class="service-info  ">
-        <h3>Laundry Service</h3>
-        <p>Reliable laundry care for your clothes, trousers, and bedsheets. Charged per set.</p>
-        <div class="price">₦1,000 <span>per set</span></div>
-        <button class="book-btn" onclick="openServiceModal('Laundry Service', 1000)">Book Now</button>
-    </div>
-</div>
- 
-                <!-- Salon -->
-                <div class="service-card">
-                    <div class="image-gallery" data-gallery="salon">
-                        <div class="gallery-container">
-                            <img src="images/Saloon 3.jpg" alt="Salon" class="gallery-image active" data-description="Modern unisex salon with professional stylists and premium treatments">
-                            <img src="images/saloon 2.jpg" alt="Hair Styling" class="gallery-image" data-description="Expert hair styling and coloring services for all hair types">
-                            <img src="images/Sloon 4.jpg" alt="Spa Treatment" class="gallery-image" data-description="Relaxing spa treatments and beauty services">
-                        </div>
-                        <button class="gallery-btn prev-btn" onclick="changeImage('salon', -1)">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="gallery-btn next-btn" onclick="changeImage('salon', 1)">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                        <div class="gallery-counter">
-                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
-                        </div>
-                        <div class="gallery-dots">
-                            <span class="dot active" onclick="currentImage('salon', 1)"></span>
-                            <span class="dot" onclick="currentImage('salon', 2)"></span>
-                            <span class="dot" onclick="currentImage('salon', 3)"></span>
-                        </div>
-                        <div class="image-description">
-                            <span class="description-text">Modern unisex salon with professional stylists and premium treatments</span>
-                        </div>
-                    </div>
-                    <div class="service-info">
-                        <h3>Salon (Unisex)</h3>
-                        <p>Professional hair styling, beauty treatments, and spa services for both men and women.</p>
-                        <div class="price">₦2,000 <span>per session</span></div>
-                        <button class="book-btn" onclick="openServiceModal('Salon (Unisex)', 2000)">Book Now</button>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Premium Services</h2>
+        <div class="services-grid">
+          <!-- Event Center Hall -->
+          <div class="service-card">
+            <div class="image-gallery" data-gallery="event-hall">
+              <div class="gallery-container">
+                <img
+                  src="images/event 1.jpg"
+                  alt="Event Hall"
+                  class="gallery-image active"
+                  data-description="Elegant event hall perfect for weddings, conferences, and special occasions"
+                />
+                <img
+                  src="images/event 2.jpg"
+                  alt="Wedding Setup"
+                  class="gallery-image"
+                  data-description="Beautiful wedding setup with premium decorations and lighting"
+                />
+                <img
+                  src="images/Event.jpg"
+                  alt="Conference Setup"
+                  class="gallery-image"
+                  data-description="Professional conference setup with modern AV equipment"
+                />
+              </div>
+              <button class="gallery-btn prev-btn" onclick="changeImage('event-hall', -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="gallery-btn next-btn" onclick="changeImage('event-hall', 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="gallery-counter">
+                <span class="current-slide">1</span>/<span class="total-slides">3</span>
+              </div>
+              <div class="gallery-dots">
+                <span class="dot active" onclick="currentImage('event-hall', 1)"></span>
+                <span class="dot" onclick="currentImage('event-hall', 2)"></span>
+                <span class="dot" onclick="currentImage('event-hall', 3)"></span>
+              </div>
+              <div class="image-description">
+                <span class="description-text"
+                  >Elegant event hall perfect for weddings, conferences, and special occasions</span
+                >
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Event Center Hall</h3>
+              <p>
+                Spacious event hall perfect for weddings, conferences, and special celebrations with
+                full catering service.
+              </p>
+              <div class="price">₦70,000 <span>per day</span></div>
+              <button class="book-btn" onclick="openServiceModal('Event Center Hall', 70000)">
+                Book Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Laundry Service -->
+          <div class="service-card">
+            <div class="image-gallery" data-gallery="laundry">
+              <div class="gallery-container">
+                <img
+                  src="images/laundry1.jpg"
+                  alt="Laundry"
+                  class="gallery-image active"
+                  data-description="Professional laundry services with premium care"
+                />
+                <img
+                  src="images/Landry 2.jpeg"
+                  alt="Clean Clothes"
+                  class="gallery-image"
+                  data-description="Crisp, clean clothes with a fresh scent"
+                />
+                <img
+                  src="images/laundry3.jpg"
+                  alt="Folding Service"
+                  class="gallery-image"
+                  data-description="Neatly folded and packed laundry ready for pickup"
+                />
+              </div>
+              <button class="gallery-btn prev-btn" onclick="changeImage('laundry', -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="gallery-btn next-btn" onclick="changeImage('laundry', 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="gallery-counter">
+                <span class="current-slide">1</span>/<span class="total-slides">3</span>
+              </div>
+              <div class="gallery-dots">
+                <span class="dot active" onclick="currentImage('laundry', 1)"></span>
+                <span class="dot" onclick="currentImage('laundry', 2)"></span>
+                <span class="dot" onclick="currentImage('laundry', 3)"></span>
+              </div>
+              <div class="image-description">
+                <span class="description-text"
+                  >Professional laundry services with premium care</span
+                >
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Laundry Service</h3>
+              <p>
+                Reliable laundry care for your clothes, trousers, and bedsheets. Charged per set.
+              </p>
+              <div class="price">₦1,000 <span>per set</span></div>
+              <button class="book-btn" onclick="openServiceModal('Laundry Service', 1000)">
+                Book Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Salon -->
+          <div class="service-card">
+            <div class="image-gallery" data-gallery="salon">
+              <div class="gallery-container">
+                <img
+                  src="images/Saloon 3.jpg"
+                  alt="Salon"
+                  class="gallery-image active"
+                  data-description="Modern unisex salon with professional stylists and premium treatments"
+                />
+                <img
+                  src="images/saloon 2.jpg"
+                  alt="Hair Styling"
+                  class="gallery-image"
+                  data-description="Expert hair styling and coloring services for all hair types"
+                />
+                <img
+                  src="images/Sloon 4.jpg"
+                  alt="Spa Treatment"
+                  class="gallery-image"
+                  data-description="Relaxing spa treatments and beauty services"
+                />
+              </div>
+              <button class="gallery-btn prev-btn" onclick="changeImage('salon', -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="gallery-btn next-btn" onclick="changeImage('salon', 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="gallery-counter">
+                <span class="current-slide">1</span>/<span class="total-slides">3</span>
+              </div>
+              <div class="gallery-dots">
+                <span class="dot active" onclick="currentImage('salon', 1)"></span>
+                <span class="dot" onclick="currentImage('salon', 2)"></span>
+                <span class="dot" onclick="currentImage('salon', 3)"></span>
+              </div>
+              <div class="image-description">
+                <span class="description-text"
+                  >Modern unisex salon with professional stylists and premium treatments</span
+                >
+              </div>
+            </div>
+            <div class="service-info">
+              <h3>Salon (Unisex)</h3>
+              <p>
+                Professional hair styling, beauty treatments, and spa services for both men and
+                women.
+              </p>
+              <div class="price">₦2,000 <span>per session</span></div>
+              <button class="book-btn" onclick="openServiceModal('Salon (Unisex)', 2000)">
+                Book Now
+              </button>
+            </div>
+          </div>
 
           <!-- Premium Bar
                 <div class="service-card">
@@ -1521,41 +4167,63 @@
             </div>
           </div>
 
-                <!-- Spa & Wellness -->
-                <div class="amenity-card">
-                    <div class="image-gallery" data-gallery="spa-wellness">
-                        <div class="gallery-container">
-                            <img src="/images/m_1 (1).jpeg" alt="Spa" class="gallery-image active" data-description="Tranquil spa environment with professional massage and wellness treatments">
-                            <img src="/images/m_1 (2).jpeg" alt="Massage Room" class="gallery-image" data-description="Private massage rooms with experienced therapists">
-                            <img src="/images/m_1 (3).jpeg" alt="Wellness Center" class="gallery-image" data-description="Complete wellness center with sauna and relaxation areas">
-                        </div>
-                        <button class="gallery-btn prev-btn" onclick="changeImage('spa-wellness', -1)">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="gallery-btn next-btn" onclick="changeImage('spa-wellness', 1)">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                        <div class="gallery-counter">
-                            <span class="current-slide">1</span>/<span class="total-slides">3</span>
-                        </div>
-                        <div class="gallery-dots">
-                            <span class="dot active" onclick="currentImage('spa-wellness', 1)"></span>
-                            <span class="dot" onclick="currentImage('spa-wellness', 2)"></span>
-                            <span class="dot" onclick="currentImage('spa-wellness', 3)"></span>
-                        </div>
-                        <div class="image-description">
-                            <span class="description-text">Tranquil spa environment with professional massage and wellness treatments</span>
-                        </div>
-                    </div>
-                    <div class="amenity-info">
-                        <h3>Spa & Wellness Center</h3>
-                        <p>Rejuvenate your body and mind with our comprehensive spa services, massages, and wellness treatments.</p>
-                        <div class="price">₦25,000 <span>per session</span></div>
-                        <button class="book-btn" onclick="openServiceModal('Spa & Wellness Center', 25000)">Book Session</button>
-                    </div>
-                </div>
+          <!-- Spa & Wellness -->
+          <div class="amenity-card">
+            <div class="image-gallery" data-gallery="spa-wellness">
+              <div class="gallery-container">
+                <img
+                  src="/images/m_1 (1).jpeg"
+                  alt="Spa"
+                  class="gallery-image active"
+                  data-description="Tranquil spa environment with professional massage and wellness treatments"
+                />
+                <img
+                  src="/images/m_1 (2).jpeg"
+                  alt="Massage Room"
+                  class="gallery-image"
+                  data-description="Private massage rooms with experienced therapists"
+                />
+                <img
+                  src="/images/m_1 (3).jpeg"
+                  alt="Wellness Center"
+                  class="gallery-image"
+                  data-description="Complete wellness center with sauna and relaxation areas"
+                />
+              </div>
+              <button class="gallery-btn prev-btn" onclick="changeImage('spa-wellness', -1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="gallery-btn next-btn" onclick="changeImage('spa-wellness', 1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="gallery-counter">
+                <span class="current-slide">1</span>/<span class="total-slides">3</span>
+              </div>
+              <div class="gallery-dots">
+                <span class="dot active" onclick="currentImage('spa-wellness', 1)"></span>
+                <span class="dot" onclick="currentImage('spa-wellness', 2)"></span>
+                <span class="dot" onclick="currentImage('spa-wellness', 3)"></span>
+              </div>
+              <div class="image-description">
+                <span class="description-text"
+                  >Tranquil spa environment with professional massage and wellness treatments</span
+                >
+              </div>
             </div>
+            <div class="amenity-info">
+              <h3>Spa & Wellness Center</h3>
+              <p>
+                Rejuvenate your body and mind with our comprehensive spa services, massages, and
+                wellness treatments.
+              </p>
+              <div class="price">₦25,000 <span>per session</span></div>
+              <button class="book-btn" onclick="openServiceModal('Spa & Wellness Center', 25000)">
+                Book Session
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- About Section -->
