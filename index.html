@@ -101,9 +101,7 @@
             </div>
             <div class="room-info">
               <h3>Standard Room(Grand Floor)</h3>
-              <p>
-                  Acces to sport & Complementary
-              </p>
+              <p>Acces to sport & Complementary</p>
               <p>Without Access to Sport Center</p>
               <div class="price">₦18,000 <span>per night</span></div>
               <button class="book-btn" onclick="openBookingModal('Standard Room', 18000)">
@@ -435,7 +433,9 @@
 
         <!-- View Full Kitche Menu Button -->
         <div class="big-btn">
-          <button class="view-menu-btn" onclick="openMenuModal()">View Our Full Kitchen Menu</button>
+          <button class="view-menu-btn" onclick="openMenuModal()">
+            View Our Full Kitchen Menu
+          </button>
         </div>
 
         <!-- Modal -->
@@ -3659,7 +3659,7 @@
         <div class="sports-grid">
           <div class="sport-card">
             <div class="sport-icon">
-              <i class="fas fa-futbol"></i>
+              <img src="images/about.jpg" alt="" class="sport-img" />
             </div>
             <h3>Football/Soccer</h3>
             <p>
@@ -3674,7 +3674,7 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <i class="fas fa-basketball-ball"></i>
+              <img src="images/about.jpg" alt="" class="sport-img" />
             </div>
             <h3>Basketball Court</h3>
             <p>
@@ -3689,7 +3689,7 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <i class="fas fa-table-tennis"></i>
+              <img src="images/about.jpg" alt="" class="sport-img" />
             </div>
             <h3>Table Tennis</h3>
             <p>
@@ -3704,7 +3704,7 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <i class="fas fa-dumbbell"></i>
+              <img src="images/about.jpg" alt="" class="sport-img" />
             </div>
             <h3>Fitness Center</h3>
             <p>
@@ -3718,7 +3718,7 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <i class="fas fa-gamepad"></i>
+              <img src="images/about.jpg" alt="" class="sport-img" />
             </div>
             <h3>Gaming Lounge</h3>
             <p>
@@ -3733,7 +3733,7 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <i class="fas fa-motorcycle"></i>
+              <img src="images/about.jpg" alt="" class="sport-img" />
             </div>
             <h3>Scooter</h3>
             <p>
@@ -3743,6 +3743,22 @@
             <div class="price">₦1,000 <span>per hour</span></div>
             <button class="book-btn" onclick="openSportsModal('Scooter', 1000)">Book Now</button>
           </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="sport-card" style="width: 100%">
+          <div class="sport-icon">
+            <img src="images/about.jpg" alt="" class="sport-img" />
+          </div>
+          <h3>Tournament</h3>
+          <p>
+            Enjoy a Professional-grade football field with premium turf and lighting for day and
+            night games.
+          </p>
+          <div class="price">₦50,000 <span>per hour</span></div>
+          <button class="book-btn" onclick="openSportsModal('Tournament', 50000)">Book Now</button>
         </div>
       </div>
     </section>
@@ -4243,10 +4259,12 @@
               elegantly appointed rooms to our world-class amenities.
             </p>
             <p>
-              Located in the heart of Keffi,Nasarawa State appromatilly three (3) mins drive to Nassarawa State university Keffi NSuk, we provide a complete hospitality ecosystem featuring
-              luxury accommodations, Recretional facilities, sports centre/facilities, entertainment/event centre,and Gym/fitness center, Exclusive beauty Salon (Unisex),Spa and mini mart etc.
-              Our 24/7 service are affordable, and we ensures every guest receives
-              exceptional care and Services.
+              Located in the heart of Keffi,Nasarawa State appromatilly three (3) mins drive to
+              Nassarawa State university Keffi NSuk, we provide a complete hospitality ecosystem
+              featuring luxury accommodations, Recretional facilities, sports centre/facilities,
+              entertainment/event centre,and Gym/fitness center, Exclusive beauty Salon (Unisex),Spa
+              and mini mart etc. Our 24/7 service are affordable, and we ensures every guest
+              receives exceptional care and Services.
             </p>
           </div>
           <div class="features-grid">
@@ -4760,5 +4778,19 @@
 
     <script src="Js/script.js"></script>
     <script src="Js/cart.js"></script>
+    <script>
+      const hero = document.getElementById('hero');
+      const images = ['/images/Hero.jpg', '/images/Event.jpg', '/images/about.jpg'];
+
+      let currentIndex = 0;
+
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length;
+        hero.style.backgroundImage = `
+      linear-gradient(rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3)),
+      url('${images[currentIndex]}')
+    `;
+      }, 5000); // changes every 5 seconds
+    </script>
   </body>
 </html>
