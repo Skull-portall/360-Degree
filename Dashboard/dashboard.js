@@ -114,7 +114,37 @@ async function fetchOrders() {
     // console.log('Carts and orders fetched:', ordersData);
     filterOrders();
 
-    console.log('Orders fetched:', ordersData);
+    // console.log('Orders fetched:', ordersData);
+
+    const standard = document.getElementById('standard');
+    const precious = document.getElementById('precious');
+    const golden = document.getElementById('golden');
+    standard.innerText = ordersData.filter(
+      (order) =>
+        order.service === 'rooms' &&
+        order.status === 'confirmed' &&
+        order.serviceName === 'Standard Room'
+    ).length;
+
+    precious.innerText = ordersData.filter(
+      (order) =>
+        order.service === 'rooms' &&
+        order.status === 'confirmed' &&
+        order.serviceName === 'Precious Room'
+    ).length;
+
+    golden.innerText = ordersData.filter(
+      (order) =>
+        order.service === 'rooms' &&
+        order.status === 'confirmed' &&
+        order.serviceName === 'Golden Room'
+    ).length;
+
+    // console.log('====================================');
+    // console.log(
+    //   ordersData.filter((order) => order.service === 'rooms' && order.status !== 'pending')
+    // );
+    // console.log('====================================');
     // refreshData()
   } catch (err) {
     console.error('Error fetching orders:', err.message);
@@ -146,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
   updateAnalytics();
   fetchOrders();
   refreshData();
+
   if (ordersData.length > 0) {
     // Call your function that displays orders in the UI
     renderOrdersTable();
@@ -305,6 +336,26 @@ function showSection(sectionName) {
   if (sectionName === 'analytics') {
     updateAnalytics();
   }
+}
+
+async function ofRoom(sectionName, active) {
+  const response = await fetch('https://three60hotel-n6u5.onrender.com/api/orders/roomStatus', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      active,
+      room: sectionName,
+    }),
+  });
+
+  if (!response.ok) {
+    console.error('Failed to update room status:', response.statusText);
+    alert('Failed to update room status. Please try again.');
+    return;
+  }
+  alert('Room status updated successfully!');
 }
 
 function filterOrders() {

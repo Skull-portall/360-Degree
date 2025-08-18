@@ -86,6 +86,10 @@
           <i class="fas fa-list"></i>
           <span>Manage Orders</span>
         </button>
+        <button class="action-btn" onclick="showSection('rooms')">
+          <i class="fas fa-list"></i>
+          <span>Manage Rooms</span>
+        </button>
         <button class="action-btn" onclick="showSection('analytics')">
           <i class="fas fa-chart-bar"></i>
           <span>Analytics</span>
@@ -142,6 +146,50 @@
               <tbody id="ordersTableBody"></tbody>
             </table>
             <div id="paginationControls" class="pagination-controls"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="roomsSection" class="content-section active">
+        <div class="section-header">
+          <h2>Rooms Management</h2>
+        </div>
+        <div class="roomsection">
+          <div class="roomDivNumber">
+            <p class="">Standard Room</p>
+            <span id="standard">1</span>
+            <div class="newFlex">
+              <button class="action-btn-2" onclick="ofRoom('Standard Room(Grand Floor)', 'false')">
+                Out of Room
+              </button>
+              <button class="action-btn-2" onclick="ofRoom('Standard Room(Grand Floor)', 'true')">
+                Room Availabe
+              </button>
+            </div>
+          </div>
+          <div class="roomDivNumber">
+            <p class="">Precious (First Floor):</p>
+            <span id="precious">2</span>
+            <div class="newFlex">
+              <button class="action-btn-2" onclick="ofRoom('Precious (First Floor)', 'false')">
+                Out of Room
+              </button>
+              <button class="action-btn-2" onclick="ofRoom('Precious (First Floor)', 'true')">
+                Room Availabe
+              </button>
+            </div>
+          </div>
+          <div class="roomDivNumber">
+            <p class="">Golden Apartment:</p>
+            <span id="golden">3</span>
+            <div class="newFlex">
+              <button class="action-btn-2" onclick="ofRoom('Golden Apartment', 'false')">
+                Out of Room
+              </button>
+              <button class="action-btn-2" onclick="ofRoom('Golden Apartment', 'true')">
+                Room Availabe
+              </button>
+            </div>
           </div>
         </div>
       </section>
