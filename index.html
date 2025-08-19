@@ -42,6 +42,10 @@
       </div>
     </nav>
 
+    <div class="customer" id="feedbackBtn">
+      <i class="fas fa-comment-dots"></i>
+    </div>
+
     <!-- Hero Section -->
     <section id="hero" class="hero">
       <div class="hero-content">
@@ -104,7 +108,10 @@
               <p>Acces to sport & Complementary</p>
               <p>Without Access to Sport Center</p>
               <div class="price">₦18,000 <span>per night</span></div>
-              <button class="book-btn" onclick="openBookingModal('Standard Room', 18000)">
+              <button
+                class="book-btn"
+                onclick="openBookingModal('Standard Room(Grand Floor)', 18000)"
+              >
                 Book Now
               </button>
             </div>
@@ -160,7 +167,7 @@
               </p>
               <p>Acces to sport & Complementary</p>
               <div class="price">₦20,000 <span>per night</span></div>
-              <button class="book-btn" onclick="openBookingModal('Standard Room', 20000)">
+              <button class="book-btn" onclick="openBookingModal('Precious (First Floor)', 20000)">
                 Book Now
               </button>
             </div>
@@ -217,7 +224,7 @@
               </p>
               <p>Access to Sport Without Complimentary</p>
               <div class="price">₦25,000 <span>per night</span></div>
-              <button class="book-btn" onclick="openBookingModal('Apartment', 25000)">
+              <button class="book-btn" onclick="openBookingModal('Golden Apartment', 25000)">
                 Book Now
               </button>
             </div>
@@ -4796,7 +4803,20 @@
       </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal" id="feedbackModal">
+      <div class="modal-content">
+        <div class="modal-header">Send Feedback</div>
+        <textarea id="feedbackText" placeholder="Write your feedback here..."></textarea>
+        <div class="modal-buttons">
+          <button class="btn-close" id="closeModal">Close</button>
+          <button class="btn-send" id="sendFeedback">Send</button>
+        </div>
+      </div>
+    </div>
+
     <script src="Js/script.js"></script>
+
     <script src="Js/cart.js"></script>
     <script>
       const hero = document.getElementById('hero');

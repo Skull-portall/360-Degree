@@ -123,21 +123,21 @@ async function fetchOrders() {
       (order) =>
         order.service === 'rooms' &&
         order.status === 'confirmed' &&
-        order.serviceName === 'Standard Room'
+        order.serviceName === 'Standard Room(Grand Floor)'
     ).length;
 
     precious.innerText = ordersData.filter(
       (order) =>
         order.service === 'rooms' &&
         order.status === 'confirmed' &&
-        order.serviceName === 'Precious Room'
+        order.serviceName === 'Precious (First Floor)'
     ).length;
 
     golden.innerText = ordersData.filter(
       (order) =>
         order.service === 'rooms' &&
         order.status === 'confirmed' &&
-        order.serviceName === 'Golden Room'
+        order.serviceName === 'Golden Apartment'
     ).length;
 
     // console.log('====================================');

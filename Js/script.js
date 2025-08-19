@@ -596,6 +596,52 @@ document.addEventListener('DOMContentLoaded', function () {
     nightsInput.addEventListener('input', calculateRoomTotal);
   }
 
+  const feedbackBtn = document.getElementById('feedbackBtn');
+  const feedbackModal = document.getElementById('feedbackModal');
+  const closeModal = document.getElementById('closeModal');
+  const sendFeedback = document.getElementById('sendFeedback');
+  const feedbackText = document.getElementById('feedbackText');
+
+  const phoneNumber = '2349154222729'; // Replace with your WhatsApp number
+  const message = `${feedbackText.value.trim()}`;
+
+  // Open modal
+  feedbackBtn.addEventListener('click', () => {
+    feedbackModal.style.display = 'flex';
+  });
+
+  // Close modal
+  closeModal.addEventListener('click', () => {
+    feedbackModal.style.display = 'none';
+  });
+
+  // Send feedback to backend
+  sendFeedback.addEventListener('click', async () => {
+    const message = feedbackText.value.trim();
+    if (!message) {
+      alert('Please enter feedback before sending.');
+      return;
+    }
+
+    try {
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+      window.open(whatsappUrl, '_blank');
+      feedbackModal.style.display = 'none';
+      feedbackText.value = ''; // Clear the textarea after sending
+    } catch (err) {
+      console.error(err);
+      alert('Error sending feedback.');
+    }
+  });
+
+  // Close modal if user clicks outside
+  window.addEventListener('click', (e) => {
+    if (e.target === feedbackModal) {
+      feedbackModal.style.display = 'none';
+    }
+  });
   // Food ordering listeners
   const foodQuantityInput = document.getElementById('foodQuantity');
   if (foodQuantityInput) {
