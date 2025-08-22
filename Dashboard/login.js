@@ -281,7 +281,7 @@ async function handleLogin() {
 
       // Redirect after short delay
       setTimeout(() => {
-        redirectToDashboard();
+        redirectToDashboard(username);
       }, 1000);
     } else {
       console.log('❌ Invalid credentials provided');
@@ -370,7 +370,7 @@ function clearSession() {
   }
 }
 
-function redirectToDashboard() {
+function redirectToDashboard(username) {
   console.log('🚀 Redirecting to dashboard...');
 
   // Add exit animation
@@ -381,7 +381,13 @@ function redirectToDashboard() {
 
   setTimeout(() => {
     try {
-      window.location.href = 'dashboard.html';
+      if (username === 'room360degree@gmail.com') {
+        window.location.href = 'foodService.html';
+      } else if (username === 'services360degree@gmail.com') {
+        window.location.href = 'services.html';
+      } else {
+        window.location.href = 'dashboard.html';
+      }
     } catch (error) {
       console.error('❌ Redirect failed:', error);
       showToast('Redirect failed. Please navigate manually.', 'error');

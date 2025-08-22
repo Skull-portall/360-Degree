@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/Logo.jpg" />
+    <title>360° Hotel - Management Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="dashboard-header">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="/images/Logo.jpg" alt="360 Degree Hotel" class="dashboard-logo" />
+          <h1>Dashboard</h1>
+        </div>
+        <div class="header-actions">
+          <div class="notification-bell" id="notificationBell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count" id="notificationCount">0</span>
+          </div>
+          <div id="notificationModal" class="notification-modal hidden">
+            <ul id="notifications"></ul>
+          </div>
+          <div class="admin-profile">
+            <i class="fas fa-user-circle"></i>
+            <span>Admin</span>
+          </div>
+          <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard-main">
+      <!-- Stats Overview -->
+      <section class="stats-overview">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="pendingOrders">0</h3>
+            <p>Pending Orders</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="confirmedOrders">0</h3>
+            <p>Confirmed Today</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-naira-sign"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="todayRevenue">₦0</h3>
+            <p>Today's Revenue</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="stat-info">
+            <h3 id="monthlyRevenue">₦0</h3>
+            <p>Monthly Revenue</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <button class="action-btn" onclick="showSection('orders')">
+          <i class="fas fa-list"></i>
+          <span>Manage Orders</span>
+        </button>
+
+        <button class="action-btn" onclick="refreshData()">
+          <i class="fas fa-sync-alt"></i>
+          <span>Refresh</span>
+        </button>
+      </section>
+
+      <!-- Orders Management Section -->
+      <section id="ordersSection" class="content-section active">
+        <div class="section-header">
+          <h2>Order Management</h2>
+          <div class="filter-controls">
+            <select id="orderFilter" onchange="filterOrders()">
+              <option value="all">All Orders</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+            </select>
+            <select id="serviceFilter" onchange="filterOrders()">
+              <option value="all">All Services</option>
+
+              <option value="sports">Sports Booking</option>
+              <option value="gateTicket">Gate Tickets</option>
+              <option value="services">Services</option>
+              <option value="nightclub">Nightclub</option>
+
+              <option value="pool">Swimming Pool</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="orders-container">
+          <div class="orders-table">
+            <table id="ordersTable">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Service</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+            <div id="paginationControls" class="pagination-controls"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="roomsSection" class="content-section active">
+        <div class="section-header">
+          <h2>Rooms Management</h2>
+        </div>
+        <div class="roomsection">
+          <div class="roomDivNumber">
+            <p class="">Standard Room</p>
+            <span id="standard">1</span>
+            <div class="newFlex">
+              <button class="action-btn-2" onclick="ofRoom('Standard Room(Grand Floor)', 'false')">
+                Out of Room
+              </button>
+              <button class="action-btn-2" onclick="ofRoom('Standard Room(Grand Floor)', 'true')">
+                Room Availabe
+              </button>
+            </div>
+          </div>
+          <div class="roomDivNumber">
+            <p class="">Precious (First Floor):</p>
+            <span id="precious">2</span>
+            <div class="newFlex">
+              <button class="action-btn-2" onclick="ofRoom('Precious (First Floor)', 'false')">
+                Out of Room
+              </button>
+              <button class="action-btn-2" onclick="ofRoom('Precious (First Floor)', 'true')">
+                Room Availabe
+              </button>
+            </div>
+          </div>
+          <div class="roomDivNumber">
+            <p class="">Golden Apartment:</p>
+            <span id="golden">3</span>
+            <div class="newFlex">
+              <button class="action-btn-2" onclick="ofRoom('Golden Apartment', 'false')">
+                Out of Room
+              </button>
+              <button class="action-btn-2" onclick="ofRoom('Golden Apartment', 'true')">
+                Room Availabe
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics Section -->
+      <section id="analyticsSection" class="content-section">
+        <div class="section-header">
+          <h2>Analytics & Reports</h2>
+          <div class="date-filters">
+            <input type="date" id="startDate" onchange="updateAnalytics()" />
+            <input type="date" id="endDate" onchange="updateAnalytics()" />
+            <select id="periodFilter" onchange="updateAnalytics()">
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month" selected>This Month</option>
+              <option value="year">This Year</option>
+              <option value="custom">Custom Range</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <h3>Revenue by Service</h3>
+            <div class="chart-container">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <h3>Orders Trend</h3>
+            <div class="chart-container">
+              <canvas id="ordersChart"></canvas>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <h3>Service Performance</h3>
+            <div class="service-stats" id="serviceStats">
+              <!-- Service statistics will be populated here -->
+            </div>
+          </div>
+          <div class="analytics-card">
+            <h3>Quick Stats</h3>
+            <div class="quick-stats">
+              <div class="quick-stat">
+                <span class="stat-label">Total Orders:</span>
+                <span class="stat-value" id="totalOrders">0</span>
+              </div>
+              <div class="quick-stat">
+                <span class="stat-label">Average Order:</span>
+                <span class="stat-value" id="avgOrder">₦0</span>
+              </div>
+              <div class="quick-stat">
+                <span class="stat-label">Top Service:</span>
+                <span class="stat-value" id="topService">-</span>
+              </div>
+              <div class="quick-stat">
+                <span class="stat-label">Completion Rate:</span>
+                <span class="stat-value" id="completionRate">0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reports Section -->
+      <section id="reportsSection" class="content-section">
+        <div class="section-header">
+          <h2>Generate Reports</h2>
+        </div>
+
+        <div class="reports-grid">
+          <div class="report-card">
+            <h3>Daily Report</h3>
+            <p>Generate daily sales and booking report</p>
+            <button class="report-btn" onclick="generateReport('daily')">
+              <i class="fas fa-download"></i>
+              Generate
+            </button>
+          </div>
+          <div class="report-card">
+            <h3>Monthly Report</h3>
+            <p>Comprehensive monthly performance report</p>
+            <button class="report-btn" onclick="generateReport('monthly')">
+              <i class="fas fa-download"></i>
+              Generate
+            </button>
+          </div>
+          <!-- <div class="report-card">
+                    <h3>Service Report</h3>
+                    <p>Service-wise performance analysis</p>
+                    <button class="report-btn" onclick="generateReport('service')">
+                        <i class="fas fa-download"></i>
+                        Generate
+                    </button>
+                </div> -->
+          <!-- <div class="report-card">
+                    <h3>Customer Report</h3>
+                    <p>Customer booking patterns and preferences</p>
+                    <button class="report-btn" onclick="generateReport('customer')">
+                        <i class="fas fa-download"></i>
+                        Generate
+                    </button>
+                </div> -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div id="orderModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeOrderModal()">&times;</span>
+        <h2>Order Details</h2>
+        <div id="orderDetails">
+          <!-- Order details will be populated here -->
+        </div>
+        <div class="modal-actions">
+          <button class="confirm-btn" onclick="confirmOrder()">
+            <i class="fas fa-check"></i>
+            Confirm Payment
+          </button>
+          <button class="complete-btn" onclick="completeOrder()">
+            <i class="fas fa-check-double"></i>
+            Mark Complete
+          </button>
+          <button class="cancel-btn" onclick="cancelOrder()">
+            <i class="fas fa-times"></i>
+            Cancel Order
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+      <div class="toast-content">
+        <i class="toast-icon"></i>
+        <span class="toast-message"></span>
+      </div>
+    </div>
+    <script src="services.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </body>
+</html>
