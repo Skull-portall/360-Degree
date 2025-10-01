@@ -87,17 +87,17 @@ function parseAmount(amount) {
 }
 
 const downloadReport = (range) => {
-  window.open(`https://three60hotel-n6u5.onrender.com/api/reports/pdf-report/${range}`, '_blank');
+  window.open(`https://three60hotel-4hsm.onrender.com/api/reports/pdf-report/${range}`, '_blank');
 };
 
 async function fetchOrders() {
   try {
-    const response = await fetch('https://three60hotel-n6u5.onrender.com/api/orders'); // replace with your deployed URL if needed
+    const response = await fetch('https://three60hotel-4hsm.onrender.com/api/orders'); // replace with your deployed URL if needed
     if (!response.ok) throw new Error('Failed to fetch orders');
 
     const data = await response.json();
 
-    const cartresponse = await fetch('https://three60hotel-n6u5.onrender.com/api/carts'); // replace with your deployed URL if needed
+    const cartresponse = await fetch('https://three60hotel-4hsm.onrender.com/api/carts'); // replace with your deployed URL if needed
     if (!cartresponse.ok) throw new Error('Failed to fetch carts');
     // http://localhost:5000/api/carts
 
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
     renderOrdersTable();
   }
 
-  const socket = io('https://three60hotel-n6u5.onrender.com'); // update to your backend URL
+  const socket = io('https://three60hotel-4hsm.onrender.com'); // update to your backend URL
   const notificationCount = document.getElementById('notificationCount');
   const notificationList = document.getElementById('notifications');
   const bell = document.getElementById('notificationBell');
@@ -346,7 +346,7 @@ function showSection(sectionName) {
 }
 
 async function ofRoom(sectionName, active) {
-  const response = await fetch('https://three60hotel-n6u5.onrender.com/api/orders/roomStatus', {
+  const response = await fetch('https://three60hotel-4hsm.onrender.com/api/orders/roomStatus', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -594,7 +594,7 @@ function formatOrderDetails(order) {
 async function quickConfirmOrder(orderId) {
   try {
     const response = await fetch(
-      `https://three60hotel-n6u5.onrender.com/api/orders/${orderId}/status`,
+      `https://three60hotel-4hsm.onrender.com/api/orders/${orderId}/status`,
       {
         method: 'PUT',
         headers: {
@@ -627,7 +627,7 @@ async function quickConfirmOrder(orderId) {
 async function quickCompleteOrder(orderId) {
   try {
     const response = await fetch(
-      `https://three60hotel-n6u5.onrender.com/api/orders/${orderId}/status`,
+      `https://three60hotel-4hsm.onrender.com/api/orders/${orderId}/status`,
       {
         method: 'PUT',
         headers: {
@@ -675,7 +675,7 @@ async function cancelOrder() {
 
   try {
     const response = await fetch(
-      `https://three60hotel-n6u5.onrender.com/api/orders/${currentOrderId}/status`,
+      `https://three60hotel-4hsm.onrender.com/api/orders/${currentOrderId}/status`,
       {
         method: 'PUT',
         headers: {

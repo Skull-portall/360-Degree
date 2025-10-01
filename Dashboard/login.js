@@ -8,7 +8,7 @@ const DEMO_CREDENTIALS = {
 
 async function fetchOrders(username, password) {
   try {
-    const response = await fetch('https://three60hotel-n6u5.onrender.com/api/auth/login', {
+    const response = await fetch('https://three60hotel-4hsm.onrender.com/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

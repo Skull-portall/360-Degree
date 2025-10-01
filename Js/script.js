@@ -9,7 +9,7 @@ const galleries = {};
 const autoSlideIntervals = {};
 
 function createOrderAndSendWhatsApp(orderData, messageCategory, messageContent) {
-  fetch('https://three60hotel-n6u5.onrender.com/api/orders', {
+  fetch('https://three60hotel-4hsm.onrender.com/api/orders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
