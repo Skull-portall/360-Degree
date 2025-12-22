@@ -68,14 +68,24 @@ if (hamburger && navMenu) {
   });
 }
 
-// Smooth scrolling function
+// Enhanced smooth scrolling function with offset
 function scrollToSection(sectionId) {
   const element = document.getElementById(sectionId);
   if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
+    const headerOffset = 80;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
     });
   }
+}
+
+// Add smooth scroll to HTML element
+if (document.documentElement.style.scrollBehavior === '') {
+  document.documentElement.style.scrollBehavior = 'smooth';
 }
 
 function openMenuModal() {
@@ -1328,8 +1338,182 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+// Performance: Enhanced image lazy loading with better optimization
+function initImageLazyLoading() {
+  const images = document.querySelectorAll('img[src]');
+  
+  // Handle image load events for fade-in effect
+  const handleImageLoad = (img) => {
+    img.classList.add('loaded');
+    // Remove loading placeholder if exists
+    const placeholder = img.parentElement.querySelector('.image-placeholder');
+    if (placeholder) {
+      placeholder.style.opacity = '0';
+      setTimeout(() => placeholder.remove(), 300);
+    }
+  };
+  
+  // Handle image errors gracefully
+  const handleImageError = (img) => {
+    img.style.opacity = '0.5';
+    console.warn('Image failed to load:', img.src);
+  };
+  
+  // Set up load/error handlers for all images
+  images.forEach(img => {
+    if (img.complete && img.naturalHeight !== 0) {
+      // Image already loaded
+      handleImageLoad(img);
+    } else {
+      img.addEventListener('load', () => handleImageLoad(img), { once: true });
+      img.addEventListener('error', () => handleImageError(img), { once: true });
+    }
+  });
+  
+  // Use IntersectionObserver for images that need lazy loading
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          
+          // Preload image if it's close to viewport
+          if (img.dataset.src && !img.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          
+          // Add decoding if not present for better performance
+          if (!img.hasAttribute('decoding')) {
+            img.decoding = 'async';
+          }
+          
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '100px', // Start loading 100px before entering viewport
+      threshold: 0.01
+    });
+
+    images.forEach(img => {
+      // Only observe images that are not critical (below the fold)
+      if (!img.hasAttribute('fetchpriority') && 
+          !img.classList.contains('logo-img') && 
+          !img.closest('#hero')) {
+        imageObserver.observe(img);
+      }
+    });
+  }
+  
+  // Preload critical images
+  const criticalImages = document.querySelectorAll('img[fetchpriority="high"]');
+  criticalImages.forEach(img => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = img.src;
+    if (img.crossOrigin) link.crossOrigin = img.crossOrigin;
+    document.head.appendChild(link);
+  });
+}
+
+// Performance: Optimize icon loading with better Font Awesome handling
+function optimizeIcons() {
+  // Check if Font Awesome is already loaded
+  const checkFontAwesome = () => {
+    const testIcon = document.createElement('i');
+    testIcon.className = 'fas fa-check';
+    testIcon.style.position = 'absolute';
+    testIcon.style.visibility = 'hidden';
+    testIcon.style.fontSize = '1px';
+    document.body.appendChild(testIcon);
+    
+    const computedStyle = window.getComputedStyle(testIcon, ':before');
+    const fontFamily = computedStyle.getPropertyValue('font-family');
+    const isLoaded = fontFamily.includes('Font Awesome') || fontFamily.includes('FontAwesome');
+    
+    document.body.removeChild(testIcon);
+    return isLoaded;
+  };
+  
+  // Wait for Font Awesome to load
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      // Double check Font Awesome is actually loaded
+      if (checkFontAwesome()) {
+        document.body.classList.add('icons-loaded');
+      } else {
+        // Retry after a short delay
+        setTimeout(() => {
+          document.body.classList.add('icons-loaded');
+        }, 500);
+      }
+    });
+  } else {
+    // Fallback: Check periodically if Font Awesome loaded
+    let attempts = 0;
+    const checkInterval = setInterval(() => {
+      attempts++;
+      if (checkFontAwesome() || attempts > 10) {
+        document.body.classList.add('icons-loaded');
+        clearInterval(checkInterval);
+      }
+    }, 200);
+    
+    // Fallback timeout
+    setTimeout(() => {
+      clearInterval(checkInterval);
+      document.body.classList.add('icons-loaded');
+    }, 2000);
+  }
+  
+  // Add loading state class immediately
+  document.body.classList.add('icons-loading');
+}
+
+// Performance: Throttle function for scroll events
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+// Performance: Debounce function
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Performance: Optimize scroll events
+const optimizedScrollHandler = throttle(() => {
+  // Add any scroll-based functionality here
+}, 16); // ~60fps
+
+window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+
 // Enhanced accessibility for mobile
 document.addEventListener('DOMContentLoaded', function () {
+  // Initialize performance optimizations
+  initImageLazyLoading();
+  optimizeIcons();
+  
+  // Remove loading class from body
+  document.body.classList.remove('loading');
+  document.body.style.opacity = '1';
+  
   // Add keyboard support for gallery navigation
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {

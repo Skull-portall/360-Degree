@@ -85,12 +85,80 @@
   border-radius: 7px;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Icon loading states */
+body.icons-loading .fas,
+body.icons-loading .far,
+body.icons-loading .fab {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+body.icons-loaded .fas,
+body.icons-loaded .far,
+body.icons-loaded .fab {
+  opacity: 1;
+}
+
+/* Image container optimization */
+.image-gallery,
+.sport-icon {
+  contain: layout style paint;
+  will-change: contents;
+}
+
+/* Prevent layout shift during image load */
+.gallery-container::before {
+  content: '';
+  display: block;
+  padding-top: 66.67%; /* 3:2 aspect ratio */
+}
+
+.gallery-container {
+  position: relative;
+}
+
+.gallery-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.gallery-container:has(.gallery-image.loaded)::before {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.loading {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+body:not(.loading) {
+  opacity: 1;
 }
 
 .customer {
@@ -564,10 +632,46 @@ button {
   object-fit: cover;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+  will-change: opacity;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .gallery-image.active {
   opacity: 1;
+}
+
+/* Image loading optimization */
+.gallery-image[loading="lazy"] {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.gallery-image.loaded {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Sport images optimization */
+.sport-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  will-change: transform, opacity;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.sport-img[loading="lazy"] {
+  opacity: 0;
+}
+
+.sport-img.loaded {
+  opacity: 1;
+}
+
+.sport-img:hover {
+  transform: scale(1.05);
 }
 
 .gallery-btn {

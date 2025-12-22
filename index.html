@@ -3,21 +3,108 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="360 Degree Hotel - Experience luxury hospitality with world-class amenities and exceptional service" />
+    
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://three60hotel-n6u5.onrender.com" />
+    <link rel="dns-prefetch" href="https://three60hotel-n6u5.onrender.com" />
+    
+    <!-- Preconnect to image CDN if using external images -->
+    <link rel="dns-prefetch" href="https://images.pexels.com" />
+    
     <link rel="icon" type="image/png" href="/images/Logo.jpg" />
     <title>360 Degree Hotel</title>
-    <link rel="stylesheet" href="Css/styles.css" />
-    <link rel="stylesheet" href="Css/cart.css" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" as="style" href="Css/styles.css" />
+    <link rel="preload" as="style" href="Css/cart.css" />
+    <link rel="preload" as="image" href="images/Logo.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="images/Hero.jpg" fetchpriority="high" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="Css/styles.css" media="all" />
+    <link rel="stylesheet" href="Css/cart.css" media="all" />
+    
+    <!-- Font Awesome with optimized async loading and preconnect -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    
+    <!-- Load Font Awesome asynchronously to prevent render blocking -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      media="print"
+      onload="this.media='all'; this.onload=null;"
+      crossorigin="anonymous"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        crossorigin="anonymous"
+      />
+    </noscript>
+    
+    <!-- Inline critical CSS for icons to prevent FOUT and improve performance -->
+    <style>
+      /* Prevent icon flash while Font Awesome loads */
+      .fas, .far, .fab, .fa {
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        width: 1em;
+        height: 1em;
+      }
+      
+      /* Smooth page load */
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+      
+      /* Image loading optimization */
+      img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+      
+      img[loading="lazy"] {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      
+      img[loading="lazy"].loaded {
+        opacity: 1;
+      }
+      
+      /* Prevent layout shift during image load */
+      .gallery-image, .sport-img, .room-card img {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 200px;
+      }
+    </style>
   </head>
-  <body>
+  <body style="opacity: 0; transition: opacity 0.3s ease;" class="loading">
     <!-- Navigation -->
     <nav class="navbar">
       <div class="nav-container">
         <div class="nav-logo">
-          <img src="images/Logo.jpg" alt="360 Degree Hotel" class="logo-img" />
+          <img 
+            src="images/Logo.jpg" 
+            alt="360 Degree Hotel" 
+            class="logo-img"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            width="60"
+            height="60"
+          />
           <h2>360° Global Estate Ltd.</h2>
         </div>
         <ul class="nav-menu" id="nav-menu">
@@ -69,18 +156,24 @@
                   alt="Standard Room"
                   class="gallery-image active"
                   data-description="Spacious standard room with modern amenities and city view"
+                  loading="eager"
+                  decoding="async"
                 />
                 <img
                   src="images/Standartd Room.jpg"
                   alt="Standard Room Bathroom"
                   class="gallery-image"
                   data-description="Luxurious bathroom with marble finishes and premium fixtures"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/Standartd Room.jpg"
                   alt="Standard Room View"
                   class="gallery-image"
                   data-description="Stunning city view from the standard room balcony"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <button class="gallery-btn prev-btn" onclick="changeImage('deluxe-room', -1)">
@@ -125,18 +218,24 @@
                   alt="Standard Room"
                   class="gallery-image active"
                   data-description="Spacious standard room with modern amenities and city view"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/p pakage 2.jpg"
                   alt="Standard Room Bathroom"
                   class="gallery-image"
                   data-description="Luxurious bathroom with marble finishes and premium fixtures"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/p pakage 3.jpg"
                   alt="Standard Room View"
                   class="gallery-image"
                   data-description="Stunning city view from the standard room balcony"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <button class="gallery-btn prev-btn" onclick="changeImage('deluxe-room', -1)">
@@ -182,18 +281,24 @@
                   alt="Apartment"
                   class="gallery-image active"
                   data-description="Opulent apartment with panoramic city views and luxury amenities"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/partment  22.jpg"
                   alt="Apartment Dining"
                   class="gallery-image"
                   data-description="Private dining area with crystal chandelier and fine dining setup"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/partmentt 3.jpg"
                   alt="Apartment Spa"
                   class="gallery-image"
                   data-description="Private spa bathroom with jacuzzi and premium marble finishes"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <button class="gallery-btn prev-btn" onclick="changeImage('presidential-suite', -1)">
@@ -248,24 +353,32 @@
                   alt="Professional Kitchen"
                   class="gallery-image active"
                   data-description="State-of-the-art professional kitchen with modern equipment and expert chefs"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/ch  3.jpg"
                   alt="Chef Preparation"
                   class="gallery-image"
                   data-description="Master chefs preparing gourmet dishes with fresh, premium ingredients"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/chek 4.jpg"
                   alt="Food Plating"
                   class="gallery-image"
                   data-description="Artistic food presentation and plating by our culinary experts"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/chek 1.jpg"
                   alt="Kitchen Team"
                   class="gallery-image"
                   data-description="Professional kitchen team working together to deliver exceptional dining experiences"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <button class="gallery-btn prev-btn" onclick="changeImage('kitchen-overview', -1)">
@@ -329,18 +442,24 @@
                   alt="Continental Breakfast"
                   class="gallery-image active"
                   data-description="Fresh continental breakfast with pastries, fruits, and premium coffee"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/Breakfast two.jpeg"
                   alt="Fresh Pastries"
                   class="gallery-image"
                   data-description="Freshly baked croissants and pastries made daily by our bakers"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <img
                   src="images/Breakfast three.jpeg"
                   alt="Coffee Selection"
                   class="gallery-image"
                   data-description="Premium coffee selection and fresh fruit arrangements"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <button
@@ -3666,7 +3785,15 @@
         <div class="sports-grid">
           <div class="sport-card">
             <div class="sport-icon">
-              <img src="images/FootballSoccer.jpeg" alt="" class="sport-img" />
+              <img 
+                src="images/FootballSoccer.jpeg" 
+                alt="Football/Soccer Field" 
+                class="sport-img"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="200"
+              />
             </div>
             <h3>Football/Soccer</h3>
             <p>
@@ -3681,7 +3808,15 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <img src="images/Basketball Court.jpg" alt="" class="sport-img" />
+              <img 
+                src="images/Basketball Court.jpg" 
+                alt="Basketball Court" 
+                class="sport-img"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="200"
+              />
             </div>
             <h3>Basketball Court</h3>
             <p>
@@ -3696,7 +3831,15 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <img src="images/Table tanis.jpg" alt="" class="sport-img" />
+              <img 
+                src="images/Table tanis.jpg" 
+                alt="Table Tennis" 
+                class="sport-img"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="200"
+              />
             </div>
             <h3>Table Tennis</h3>
             <p>
@@ -3711,7 +3854,15 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <img src="images/Fitness Center.jpg" alt="" class="sport-img" />
+              <img 
+                src="images/Fitness Center.jpg" 
+                alt="Fitness Center" 
+                class="sport-img"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="200"
+              />
             </div>
             <h3>Fitness Center</h3>
             <p>
@@ -3725,7 +3876,15 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <img src="images/Gaming Lounge.jpg" alt="" class="sport-img" />
+              <img 
+                src="images/Gaming Lounge.jpg" 
+                alt="Gaming Lounge" 
+                class="sport-img"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="200"
+              />
             </div>
             <h3>Gaming Lounge</h3>
             <p>
@@ -3740,7 +3899,15 @@
 
           <div class="sport-card">
             <div class="sport-icon">
-              <img src="images/Scooter.jpg" alt="" class="sport-img" />
+              <img 
+                src="images/Scooter.jpg" 
+                alt="Scooter" 
+                class="sport-img"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="200"
+              />
             </div>
             <h3>Scooter</h3>
             <p>
@@ -3752,7 +3919,15 @@
           </div>
           <div class="sport-card">
             <div class="sport-icon">
-              <img src="images/Scooter.jpg" alt="" class="sport-img" />
+              <img 
+                src="images/Scooter.jpg" 
+                alt="Snooker" 
+                class="sport-img"
+                loading="lazy"
+                decoding="async"
+                width="300"
+                height="200"
+              />
             </div>
             <h3>Snooker</h3>
             <p>
@@ -3852,18 +4027,30 @@
                   alt="Laundry"
                   class="gallery-image active"
                   data-description="Professional laundry services with premium care"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="400"
                 />
                 <img
                   src="images/Landry 2.jpeg"
                   alt="Clean Clothes"
                   class="gallery-image"
                   data-description="Crisp, clean clothes with a fresh scent"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="400"
                 />
                 <img
                   src="images/laundry3.jpg"
                   alt="Folding Service"
                   class="gallery-image"
                   data-description="Neatly folded and packed laundry ready for pickup"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="400"
                 />
               </div>
               <button class="gallery-btn prev-btn" onclick="changeImage('laundry', -1)">
@@ -3907,18 +4094,30 @@
                   alt="Salon"
                   class="gallery-image active"
                   data-description="Modern unisex salon with professional stylists and premium treatments"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="400"
                 />
                 <img
                   src="images/Saloon view.jpg"
                   alt="Hair Styling"
                   class="gallery-image"
                   data-description="Expert hair styling and coloring services for all hair types"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="400"
                 />
                 <img
                   src="images/Sloon 4.jpg"
                   alt="Spa Treatment"
                   class="gallery-image"
                   data-description="Relaxing spa treatments and beauty services"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="400"
                 />
               </div>
               <button class="gallery-btn prev-btn" onclick="changeImage('salon', -1)">
@@ -4433,7 +4632,15 @@
         <div class="footer-content">
           <div class="footer-section">
             <div class="footer-logo">
-              <img src="images/Logo.jpg" alt="360 Degree Hotel" class="footer-logo-img" />
+              <img 
+                src="images/Logo.jpg" 
+                alt="360 Degree Hotel" 
+                class="footer-logo-img"
+                loading="lazy"
+                decoding="async"
+                width="60"
+                height="60"
+              />
               <h3>360° Global Estate Ltd.</h3>
             </div>
             <p>
@@ -4815,7 +5022,7 @@
       </div>
     </div>
 
-    <script src="Js/script.js"></script>
+    <script src="Js/script.js" defer></script>
 
     <script src="Js/cart.js"></script>
     <script>
