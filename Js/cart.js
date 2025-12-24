@@ -345,7 +345,7 @@ class HotelShoppingCart {
     const cartFooter = document.getElementById('cartFooter');
     const cartItemCount = document.getElementById('cartItemCount');
 
-    //three60hotel-n6u5.onrender.com
+    //three60hotel-4hsm.onrender.com
 
     https: if (this.cart.length === 0) {
       cartBody.innerHTML = `
@@ -547,7 +547,7 @@ class HotelShoppingCart {
         service: 'multiple services',
       };
 
-      const res = await fetch('https://three60hotel-n6u5.onrender.com/api/carts', {
+      const res = await fetch('https://three60hotel-4hsm.onrender.com/api/carts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
