@@ -41,14 +41,27 @@ const whatsappNumbers = {
   gateTickets: '2349150861906', // Gate tickets
 };
 
-// Mobile menu toggle
+// Mobile menu toggle with enhanced animations
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
+const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
 
 if (hamburger && navMenu) {
-  hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isActive = navMenu.classList.toggle('active');
     hamburger.classList.toggle('active');
+    
+    // Toggle backdrop
+    if (mobileMenuBackdrop) {
+      if (isActive) {
+        mobileMenuBackdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenuBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
   });
 
   // Close mobile menu when clicking on a link
@@ -56,17 +69,106 @@ if (hamburger && navMenu) {
     link.addEventListener('click', () => {
       navMenu.classList.remove('active');
       hamburger.classList.remove('active');
+      if (mobileMenuBackdrop) {
+        mobileMenuBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     });
   });
 
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+  // Close mobile menu when clicking on backdrop
+  if (mobileMenuBackdrop) {
+    mobileMenuBackdrop.addEventListener('click', () => {
       navMenu.classList.remove('active');
       hamburger.classList.remove('active');
+      mobileMenuBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('active')) {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+      if (mobileMenuBackdrop) {
+        mobileMenuBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+  // Close mobile menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+      if (mobileMenuBackdrop) {
+        mobileMenuBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     }
   });
 }
+
+// Admin Link Toggle - Hidden by default, show with Ctrl+Shift+A
+(function() {
+  const adminLink = document.getElementById('adminLink');
+  let adminVisible = false;
+
+  // Toggle admin link visibility
+  function toggleAdminLink() {
+    if (adminLink) {
+      adminVisible = !adminVisible;
+      if (adminVisible) {
+        adminLink.style.display = 'block';
+        adminLink.style.animation = 'fadeInSlide 0.3s ease forwards';
+        // Auto-hide after 30 seconds
+        setTimeout(() => {
+          if (adminVisible) {
+            adminLink.style.animation = 'fadeOutSlide 0.3s ease forwards';
+            setTimeout(() => {
+              adminLink.style.display = 'none';
+              adminVisible = false;
+            }, 300);
+          }
+        }, 30000);
+      } else {
+        adminLink.style.animation = 'fadeOutSlide 0.3s ease forwards';
+        setTimeout(() => {
+          adminLink.style.display = 'none';
+        }, 300);
+      }
+    }
+  }
+
+  // Keyboard shortcut: Ctrl+Shift+A to toggle admin link
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+      e.preventDefault();
+      toggleAdminLink();
+    }
+  });
+
+  // Alternative: Triple-click on logo to show admin link
+  const navLogo = document.querySelector('.nav-logo');
+  let clickCount = 0;
+  let clickTimer;
+
+  if (navLogo) {
+    navLogo.addEventListener('click', (e) => {
+      clickCount++;
+      clearTimeout(clickTimer);
+      
+      clickTimer = setTimeout(() => {
+        if (clickCount === 3) {
+          toggleAdminLink();
+        }
+        clickCount = 0;
+      }, 500);
+    });
+  }
+})();
 
 // Enhanced smooth scrolling function with offset
 function scrollToSection(sectionId) {
@@ -87,6 +189,27 @@ function scrollToSection(sectionId) {
 if (document.documentElement.style.scrollBehavior === '') {
   document.documentElement.style.scrollBehavior = 'smooth';
 }
+
+// Navbar scroll effect enhancement
+(function() {
+  const navbar = document.querySelector('.navbar');
+  
+  if (navbar) {
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
+    });
+  }
+})();
 
 function openMenuModal() {
   document.getElementById('menuModal').style.display = 'block';
@@ -1565,3 +1688,71 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+
+// Christmas Popup Advertisement Functionality
+(function() {
+  const christmasPopup = document.getElementById('christmasPopup');
+  const christmasClose = document.getElementById('christmasClose');
+  const POPUP_DISPLAY_DURATION = 120000; // 2 minutes (120 seconds)
+  const POPUP_DELAY = 1000; // Show after 1 second of page load
+
+  // Show Christmas popup (shows on every page refresh)
+  function showChristmasPopup() {
+    if (christmasPopup) {
+      // Show popup with animation
+      setTimeout(() => {
+        christmasPopup.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // Auto-hide after duration
+        setTimeout(() => {
+          hideChristmasPopup();
+        }, POPUP_DISPLAY_DURATION);
+      }, POPUP_DELAY);
+    }
+  }
+
+  // Hide Christmas popup
+  function hideChristmasPopup() {
+    if (christmasPopup) {
+      christmasPopup.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Close button event
+  if (christmasClose) {
+    christmasClose.addEventListener('click', hideChristmasPopup);
+  }
+
+  // Close on backdrop click
+  if (christmasPopup) {
+    christmasPopup.addEventListener('click', (e) => {
+      if (e.target === christmasPopup) {
+        hideChristmasPopup();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && christmasPopup.classList.contains('show')) {
+        hideChristmasPopup();
+      }
+    });
+  }
+
+  // Reset popup on every page load to ensure it can show again
+  if (christmasPopup) {
+    // Remove any inline styles that might prevent showing
+    christmasPopup.style.display = '';
+    christmasPopup.classList.remove('show');
+  }
+
+  // Show popup when page loads (shows on every page refresh)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', showChristmasPopup);
+  } else {
+    showChristmasPopup();
+  }
+})();
+

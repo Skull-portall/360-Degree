@@ -21,7 +21,7 @@
     <link rel="preload" as="style" href="Css/styles.css" />
     <link rel="preload" as="style" href="Css/cart.css" />
     <link rel="preload" as="image" href="images/Logo.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="images/Hero.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="images/Hero1.jpg" fetchpriority="high" />
     
     <!-- CSS -->
     <link rel="stylesheet" href="Css/styles.css" media="all" />
@@ -119,7 +119,7 @@
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#location" class="nav-link">Location</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
-          <li><a href="/Dashboard/login.html" class="nav-link">Admin</a></li>
+          <li><a href="/Dashboard/login.html" class="nav-link admin-link" id="adminLink" style="display: none;">Admin</a></li>
         </ul>
         <div class="hamburger" id="hamburger">
           <span class="bar"></span>
@@ -131,6 +131,47 @@
 
     <div class="customer" id="feedbackBtn">
       <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Mobile Menu Backdrop -->
+    <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+    <!-- Christmas Popup Advertisement -->
+    <div class="christmas-popup" id="christmasPopup">
+      <div class="christmas-popup-content">
+        <button class="christmas-close" id="christmasClose">&times;</button>
+        <div class="christmas-header">
+          <div class="snowflakes">
+            <span class="snowflake">❄</span>
+            <span class="snowflake">❄</span>
+            <span class="snowflake">❄</span>
+            <span class="snowflake">❄</span>
+            <span class="snowflake">❄</span>
+            <span class="snowflake">❄</span>
+          </div>
+          <div class="logo-container">
+            <img 
+              src="images/Logo.jpg" 
+              alt="360° Global Estate Ltd." 
+              class="christmas-logo"
+              loading="eager"
+            />
+          </div>
+          <h2 class="christmas-title">🎄 Merry Christmas & Happy New Year! 🎄</h2>
+          <p class="christmas-message">
+            As we celebrate this joyous season, we extend our heartfelt gratitude to you, our valued guests and partners. 
+            May this Christmas bring you peace, happiness, and cherished moments with your loved ones.
+          </p>
+          <p class="christmas-message-secondary">
+            We look forward to serving you with excellence in the coming year. 
+            Thank you for being part of the 360° Global Estate family.
+          </p>
+        </div>
+        <div class="christmas-footer">
+          <p class="footer-main">Wishing you a wonderful holiday season!</p>
+          <p class="footer-company">360° Global Estate Ltd.</p>
+        </div>
+      </div>
     </div>
 
     <!-- Hero Section -->
