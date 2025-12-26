@@ -395,10 +395,7 @@ function resumeAutoSlide(galleryId) {
 
 // Google Maps Direction Function
 function openDirections() {
-  const hotelAddress =
-    '360Degree Global Estate Second gate Nassarawa State university keffi, Behind Princess Sarah Hotel';
-  const encodedAddress = encodeURIComponent(hotelAddress);
-  const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+  const mapsUrl = 'https://maps.app.goo.gl/m6Nm2XKgKKo1NZuT6';
   window.open(mapsUrl, '_blank');
 }
 
