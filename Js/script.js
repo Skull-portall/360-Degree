@@ -395,7 +395,7 @@ function resumeAutoSlide(galleryId) {
 
 // Google Maps Direction Function
 function openDirections() {
-  const mapsUrl = 'https://maps.app.goo.gl/m6Nm2XKgKKo1NZuT6';
+  const mapsUrl = 'https://maps.app.goo.gl/XYnH1YLqZB6Y6m7i7';
   window.open(mapsUrl, '_blank');
 }
 
